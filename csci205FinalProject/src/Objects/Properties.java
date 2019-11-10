@@ -17,6 +17,8 @@ package Objects;
  * ****************************************
  */
 
+import javafx.scene.paint.Paint;
+
 public class Properties
 {
     //Property name
