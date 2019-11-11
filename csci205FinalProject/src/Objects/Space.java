@@ -31,4 +31,12 @@ public abstract class Space {
         this.position = position;
         this.name = name;
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

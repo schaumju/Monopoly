@@ -18,12 +18,28 @@
  */
 package Objects;
 
+import java.util.ArrayList;
+
 public class cornerSpaceJAIL extends Space
 {
-    //Prisoner
+    //ArrayList of prisoners
+    public ArrayList<Prisoner> inmates;
+
     public cornerSpaceJAIL()
     {
         super(9, "JAIL");
+        inmates = new ArrayList<Prisoner>();
+    }
 
+    //Adds a prisoner to an arrayList of prisoners
+    public void addInmates(Prisoner prisoner)
+    {
+        inmates.add(prisoner);
+    }
+
+    //Removes a prisoner from the arrayList
+    public void removeInmates(Prisoner prisoner)
+    {
+        inmates.remove(prisoner);
     }
 }

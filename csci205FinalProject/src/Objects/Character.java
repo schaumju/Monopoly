@@ -108,6 +108,13 @@ public class Character
 
 
     /**
+     * Setter methods
+     */
+    public void setPosition(int position)
+    {
+        this.position = position;
+    }
+    /**
      * Getter methods
      */
     public int getPosition()
