@@ -52,38 +52,70 @@ public class BoardView {
     private void addBoardSpaces() {
         for (int i = 0; i < NUM_SPACES; i++) {
             Rectangle square = createSquare();
-            Rectangle colorRectangle = createColorRectangle();
+            Rectangle colorRectangle = createColorRectangle(i);
+            String spaceNum = String.valueOf(i);
             if (i < 11) {
-                root.addColumn(i);
-                root.addRow(i);
-                root.add(square, i, 0);
-                if (i%10 != 0) {
-                    root.add(colorRectangle, i, 0);
-                }
-                root.add(new Label(String.valueOf(i)),i,0);
+                addRowCol(i);
+                handleRow(square, colorRectangle, i, 0, 0, spaceNum);
             } else if (i < 21) {
-                root.add(square, 10, i-10);
-                if (i%10 != 0) {
-                    root.add(colorRectangle, 10, i-10);
-                    colorRectangle.setRotate(90);
-                }
-                root.add(new Label(String.valueOf(i)),10,i-10);
+                handleColumn(square, colorRectangle, 10, 10, 90, spaceNum);
             } else if (i < 31) {
-                root.add(square, 30-i, 10);
-                if (i%10 != 0) {
-                    root.add(colorRectangle, 30-i, 10);
-                    colorRectangle.setRotate(180);
-                }
-                root.add(new Label(String.valueOf(i)),30-i,10);
+                handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
             } else {
-                root.add(square, 0, 40-i);
-                if (i%10 != 0) {
-                    root.add(colorRectangle, 0, 40-i);
-                    colorRectangle.setRotate(270);
-                }
-                root.add(new Label(String.valueOf(i)),0,40-i);
+                handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
             }
         }
+    }
+
+    /**
+     * adds all the rows and columns in the gridpane
+     * @param i - the number row/column the for loop is on
+     * @author kerri
+     */
+    private void addRowCol(int i) {
+        root.addColumn(i);
+        root.addRow(i);
+    }
+
+    /**
+     * handles creating a row on the board
+     * @param square - a square to add into the gridpane
+     * @param colorRectangle - the colored rectangle to put on the square
+     * @param colIndex - the column the square will be put at
+     * @param rowIndex - the row the square will be put at
+     * @param angleToRotate - how much the colored rectangle will be rotated
+     * @param spaceNum - where the space is on the board
+     * @author kerri
+     */
+    private void handleRow(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
+        root.add(square, colIndex, rowIndex);
+        if (Integer.parseInt(spaceNum)%10 != 0) {
+            root.add(colorRectangle, colIndex, rowIndex);
+            colorRectangle.setRotate(angleToRotate);
+        }
+        root.add(new Label(spaceNum), colIndex, rowIndex);
+    }
+
+    /**
+     * handles creating a column on the board
+     * @param square - a square to add into the gridpane
+     * @param colorRectangle - the colored rectangle to put on the square
+     * @param colIndex - the column the square will be put at
+     * @param rowIndex - the row the square will be put at
+     * @param angleToRotate - how much the colored rectangle will be rotated
+     * @param spaceNum - where the space is on the board
+     * @author kerri
+     */
+    private void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
+        if (Integer.parseInt(spaceNum) > 29) { rowIndex = 40 - Integer.parseInt(spaceNum); }
+        else { rowIndex = Integer.parseInt(spaceNum) - rowIndex; }
+
+        root.add(square, colIndex, rowIndex);
+        if (Integer.parseInt(spaceNum)%10 != 0) {
+            root.add(colorRectangle, colIndex, rowIndex);
+            colorRectangle.setRotate(angleToRotate);
+        }
+        root.add(new Label(spaceNum), colIndex,  rowIndex);
     }
 
     /**
@@ -101,13 +133,31 @@ public class BoardView {
         return square;
     }
 
-    private Rectangle createColorRectangle() {
+    /**
+     * creates a colored rectangle to put on the board
+     * @return - the rectangle
+     * @author kerri
+     */
+    private Rectangle createColorRectangle(int spaceNum) {
         Rectangle colorRectangle = new Rectangle();
-        colorRectangle.setFill(Color.RED);
+        setColor(colorRectangle, spaceNum);
         colorRectangle.setWidth(50);
         colorRectangle.setHeight(18);
 
         return colorRectangle;
+    }
+
+    private void setColor(Rectangle colorRectangle, int spaceNum) {
+        if (spaceNum == 1 || spaceNum == 3) { colorRectangle.setFill(Color.BROWN); }
+        else if (spaceNum == 6 || spaceNum == 8 || spaceNum == 9) { colorRectangle.setFill(Color.LIGHTBLUE); }
+        else if (spaceNum == 11 || spaceNum == 13 || spaceNum == 14) { colorRectangle.setFill(Color.PINK); }
+        else if (spaceNum == 16 || spaceNum == 18 || spaceNum == 19) { colorRectangle.setFill(Color.ORANGE); }
+        else if (spaceNum == 21 || spaceNum == 23 || spaceNum == 24) { colorRectangle.setFill(Color.RED); }
+        else if (spaceNum == 26 || spaceNum == 27 || spaceNum == 29) { colorRectangle.setFill(Color.YELLOW); }
+        else if (spaceNum == 31 || spaceNum == 32 || spaceNum == 34) { colorRectangle.setFill(Color.GREEN); }
+        else if (spaceNum == 39 || spaceNum == 37) { colorRectangle.setFill(Color.DARKBLUE); }
+        else  { colorRectangle.setFill(Color.WHITE); }
+
     }
 
     /**
