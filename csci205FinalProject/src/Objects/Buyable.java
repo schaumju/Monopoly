@@ -1,12 +1,16 @@
 package Objects;
 
+/**
+ * Interface for Spaces on the board that can be bought
+ * @author Justin
+ */
 public interface Buyable {
 
     /**
-     * Gets the rent of the property
-     * @return the rent of the property
+     * Gets the cost to buy property
+     * @return the cost of the Property
      */
-    public double getRent();
+    public double getCost();
 
     /**
      * Gets the ID of the owner
