@@ -18,7 +18,7 @@ package Objects;
  */
 
 import javafx.scene.paint.Paint;
-
+//test
 public class Properties
 {
     //Property name
