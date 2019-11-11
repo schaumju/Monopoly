@@ -10,7 +10,7 @@
  *
  * Project: csci205FinalProject
  * Package: Objects
- * Class: cornerSpaceGO
+ * Class: GoSpace
  *
  * Description:
  *
@@ -18,7 +18,7 @@
  */
 package Objects;
 
-public class cornerSpaceGO extends Space
+public class GoSpace extends Space
 {
     //Money you get for passing GO
     private static final double CASH_MONEY = 200.00;
@@ -26,7 +26,7 @@ public class cornerSpaceGO extends Space
     //Reward money for passing go
     private double rewardMoney;
 
-    public cornerSpaceGO()
+    public GoSpace()
     {
         super(0, "GO");
         this.rewardMoney = CASH_MONEY;

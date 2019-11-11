@@ -1,4 +1,7 @@
 package Objects;
 
-public class Chance {
+public class Chance extends Space {
+    public Chance(int position) {
+        super(position, "Chance");
+    }
 }

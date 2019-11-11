@@ -22,9 +22,23 @@ public class Property extends Space implements Buyable  {
 
     int numHouses;
 
+    public Property(int position, String name) {
+        super(position, name);
+    }
 
-    @Override
+
+
     public double getRent() {
+        return 0;
+    }
+
+    /**
+     * Gets the cost to buy property
+     *
+     * @return the cost of the Property
+     */
+    @Override
+    public double getCost() {
         return 0;
     }
 

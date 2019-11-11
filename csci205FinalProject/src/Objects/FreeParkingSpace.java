@@ -10,7 +10,7 @@
  *
  * Project: csci205FinalProject
  * Package: Objects
- * Class: cornerSpacePARKING
+ * Class: FreeParkingSpace
  *
  * Description:
  *
@@ -18,9 +18,9 @@
  */
 package Objects;
 
-public class cornerSpacePARKING extends Space
+public class FreeParkingSpace extends Space
 {
-    public cornerSpacePARKING()
+    public FreeParkingSpace()
     {
         super(19, "FREE PARKING");
     }

@@ -10,7 +10,7 @@
  *
  * Project: csci205FinalProject
  * Package: Objects
- * Class: cornerSpaceJAIL
+ * Class: JailSpace
  *
  * Description:
  *
@@ -20,12 +20,12 @@ package Objects;
 
 import java.util.ArrayList;
 
-public class cornerSpaceJAIL extends Space
+public class JailSpace extends Space
 {
     //ArrayList of prisoners
     public ArrayList<Prisoner> inmates;
 
-    public cornerSpaceJAIL()
+    public JailSpace()
     {
         super(9, "JAIL");
         inmates = new ArrayList<Prisoner>();

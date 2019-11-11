@@ -39,4 +39,12 @@ public abstract class Space {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Space{" +
+                "position=" + position +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
