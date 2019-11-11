@@ -26,7 +26,7 @@ import java.io.IOException;
 
 /**
  * Andrew Lee
- * References: https://i3.cpcache.com/image/112154097_150x150.png 
+ * References: https://i3.cpcache.com/image/112154097_150x150.png
  */
 public enum Tax
 {
