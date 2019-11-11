@@ -20,10 +20,6 @@ package Objects;
 
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-
 /**
  * Andrew Lee
  * References: https://i3.cpcache.com/image/112154097_150x150.png
