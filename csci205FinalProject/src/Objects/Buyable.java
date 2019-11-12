@@ -18,4 +18,5 @@ public interface Buyable {
      */
     public int getOwner();
 
+
 }
