@@ -147,6 +147,12 @@ public class BoardView {
         return colorRectangle;
     }
 
+    /**
+     * sets the color of the rectangle depending on the space it is on
+     * @param colorRectangle - the rectangle that will be set a color
+     * @param spaceNum - the position it is on the board
+     * @author kerri
+     */
     private void setColor(Rectangle colorRectangle, int spaceNum) {
         if (spaceNum == 1 || spaceNum == 3) { colorRectangle.setFill(Color.BROWN); }
         else if (spaceNum == 6 || spaceNum == 8 || spaceNum == 9) { colorRectangle.setFill(Color.LIGHTBLUE); }
@@ -157,7 +163,6 @@ public class BoardView {
         else if (spaceNum == 31 || spaceNum == 32 || spaceNum == 34) { colorRectangle.setFill(Color.GREEN); }
         else if (spaceNum == 39 || spaceNum == 37) { colorRectangle.setFill(Color.DARKBLUE); }
         else  { colorRectangle.setFill(Color.WHITE); }
-
     }
 
     /**
