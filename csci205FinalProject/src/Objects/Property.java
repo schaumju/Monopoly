@@ -18,6 +18,8 @@
  */
 package Objects;
 
+import java.util.ArrayList;
+
 /**
  * A property class that represents a property on the board.
  * @author Ashlyn Ramos
@@ -25,24 +27,86 @@ package Objects;
  */
 public class Property extends Space implements Buyable  {
 
-    int numHouses;
-    int rent;
-    int owner;
-    int buyCost;
-    int costOfHouses;
-    PropertyColor color;
+    /**
+     * The number of houses on the property
+     */
+    private int numHouses;
+    /**
+     * The rent of this property (contains the rent for every number of houses)
+     */
+    private double[] rent;
+    /**
+     * The owner of the property
+     */
+    private int owner;
+    /**
+     * The price of the property to buy
+     */
+    private int price;
+    /**
+     * The cost of a house on the property
+     */
+    private int costOfHouses;
+    /**
+     * The color of the property
+     */
+    private PropertyColor color;
+    /**
+     * boolean to determine if the property is mortgaged
+     */
+    private boolean isMortgaged;
 
-    public Property(int position, String name) {
+    public Property(int position, String name, PropertyColor color, int price, double[] rent, int costOfHouses) {
         super(position, name);
+        this.color=color;
+        this.price=price;
+        this.rent=rent;
+        this.costOfHouses=costOfHouses;
+        // The property is originally unowned
+        owner=-1;
     }
 
     /**
-     * Gets the rent of the property
-     * @return
+     * Mortgages the property and returns the amount of money the user gets
+     * @return the price of the property divided by 2 (mortgage value)
+     */
+    private int mortgage() {
+        isMortgaged=true;
+        return price/2;
+    }
+    /**
+     * UnMortgages the property and returns the amount of money the user has to pay
+     * @return the price of the property
+     */
+    private double unMortgage() {
+        isMortgaged=false;
+        return getCost();
+    }
+
+    /**
+     * Returns the rent that is owed depending on the number of houses on it.
+     * If there are no houses and it is part of a monopoly the rent is doubled
+     * @param isMonopoly boolean value denoting whether the property is part of an owned monopoly
+     * @return the rent that is owed
+     */
+    public double getRent(boolean isMonopoly) {
+        if (isMortgaged) {
+            return 0;
+        }
+        if (isMonopoly && numHouses == 0) {
+            return rent[numHouses]*2;
+        }
+        return rent[numHouses];
+    }
+
+    /**
+     * Gets the cost to buy property
+     *
+     * @return the cost of the Property
      */
     @Override
-    public double getRent() {
-        return 0;
+    public double getCost() {
+        return price;
     }
 
     /**
@@ -52,20 +116,15 @@ public class Property extends Space implements Buyable  {
      */
     @Override
     public int getOwner() {
-        // if the property is owned
-        if(){
-            // set int owner equal to user id
-        }
-        else{
-            this.owner = -1;
-        }
+        return owner;
     }
 
     /**
      * Sets the owner of the property to the player that purchases the property.
+     * @param playerID the id of the player who is buying the property
      */
-    public void setOwner(){
-        // set owner of the property
+    public void buyProperty(int playerID) {
+        owner = playerID;
     }
 
     /**
@@ -73,12 +132,7 @@ public class Property extends Space implements Buyable  {
      * @return boolean true or false
      */
     public boolean isOwned(){
-        if (getOwner()==-1){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return getOwner() != -1;
     }
 
     /**
@@ -104,13 +158,6 @@ public class Property extends Space implements Buyable  {
         return color;
     }
 
-    /**
-     * Returns the cost of the property.
-     * @return int buyCost
-     */
-    public int getBuyCost() {
-        return buyCost;
-    }
 
     /**
      * Returns the cost of a house on the property.
