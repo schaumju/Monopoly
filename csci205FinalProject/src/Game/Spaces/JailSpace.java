@@ -16,7 +16,9 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
+
+import Game.Prisoner;
 
 import java.util.ArrayList;
 

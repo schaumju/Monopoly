@@ -16,16 +16,18 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
 
-import java.util.ArrayList;
+import Game.Spaces.Buyable;
+import Game.Spaces.PropertyColor;
+import Game.Spaces.Space;
 
 /**
  * A property class that represents a property on the board.
  * @author Ashlyn Ramos
  * Reference : https://github.com/BenPollock/Monopoly/blob/master/Property.java
  */
-public class Property extends Space implements Buyable  {
+public class Property extends Space implements Buyable {
 
     /**
      * The number of houses on the property

@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
+package Game;
 
 public class Prisoner
 {

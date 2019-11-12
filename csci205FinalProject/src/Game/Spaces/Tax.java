@@ -16,9 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
-
-import javafx.scene.image.Image;
+package Game.Spaces;
 
 /**
  * Andrew Lee

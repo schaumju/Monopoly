@@ -1,4 +1,6 @@
-package Objects;
+package Game;
+
+import Game.Spaces.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +30,7 @@ public class Board {
      */
     private void sort() {
         // This may need to be reversed we will see
-        Comparator<Space> positionSort = (s1, s2) -> Integer.compare(s1.position,s2.position);
+        Comparator<Space> positionSort = (s1, s2) -> Integer.compare(s1.getPosition(),s2.getPosition());
         Collections.sort(board, positionSort);
         Collections.sort(buyableProperties,positionSort);
 
@@ -52,7 +54,7 @@ public class Board {
      */
     private void initProperties() {
 
-        Property property = new Property(1,"Vedder",PropertyColor.BROWN, 60, new double[]{2,10,30,90,160,250},50);
+        Property property = new Property(1,"Vedder", PropertyColor.BROWN, 60, new double[]{2,10,30,90,160,250},50);
         board.add(property);
         buyableProperties.add(property);
         property = new Property(3,"The Mods",PropertyColor.BROWN, 60, new double[]{4,20,60,180,3250,450},50);

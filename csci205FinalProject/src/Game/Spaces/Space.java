@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
 
 /**
  * An abstract class that represents a space on the board
@@ -24,8 +24,8 @@ package Objects;
  */
 public abstract class Space {
 
-    int position;
-    String name;
+    protected int position;
+    protected String name;
 
     public Space(int position, String name) {
         this.position = position;
@@ -47,4 +47,5 @@ public abstract class Space {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }
