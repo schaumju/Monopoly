@@ -1,6 +1,7 @@
 package Game.Cards;
 
 import Game.Character;
+import Game.Spaces.GoToJailSpace;
 import Game.Spaces.Space;
 
 /**
@@ -78,11 +79,29 @@ public class Card {
             streetRepairs(player);
         } else if (type == CardType.MOVE_NEAREST) {
             moveNearest(player);
+        } else if (type==CardType.GO_TO_JAIL) {
+            moveToJail(player);
         } else {
             System.out.println("We have an issue");
         }
     }
 
+    /**
+     * Moves the player to jail
+     * @param player the player that has to move
+     */
+    private void moveToJail(Character player) {
+        if (player.getPosition() > 10) {
+            player.addToBalance(-200);
+        }
+        GoToJailSpace space = new GoToJailSpace();
+        space.goToJail(player);
+    }
+
+    /**
+     * Moves the player to the nearest space of a certain type
+     * @param player the player to be moved
+     */
     private void moveNearest(Character player) {
         int curPosition = player.getPosition();
         if (moveNearest.equalsIgnoreCase("Railroad")) {
@@ -95,6 +114,12 @@ public class Card {
 
     }
 
+    /**
+     * Finds the closest space of a certain type
+     * @param curPosition the position of the player currently
+     * @param spaceArray the array containing the spaces of the specified type
+     * @return
+     */
     private int findClosest(int curPosition, int[] spaceArray) {
         int closestPosition = Math.abs(curPosition-spaceArray[0])%40;
         for (int i = 1; i <spaceArray.length ; i++) {
@@ -177,7 +202,7 @@ public class Card {
      */
     public enum CardType {
 
-        BANK_TRANSACTION, MOVE_TO, MOVE_NEAREST, STREET_REPAIRS, PLAYER_TRANSACTION, MOVE
+        BANK_TRANSACTION, MOVE_TO, MOVE_NEAREST, STREET_REPAIRS, PLAYER_TRANSACTION, MOVE, GO_TO_JAIL
     }
 
 }

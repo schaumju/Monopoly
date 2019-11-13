@@ -148,6 +148,9 @@ public class Board {
         board.add(space2);
         FreeParkingSpace space3 = new FreeParkingSpace();
         board.add(space3);
+        GoToJailSpace space4 = new GoToJailSpace();
+        board.add(space4);
+
 
     }
     /**
