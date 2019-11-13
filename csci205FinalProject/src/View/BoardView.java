@@ -61,22 +61,24 @@ public class BoardView {
 
             ArrayList theBoard = Board.getBoard();
             Space curSpace = (Space) theBoard.get(i);
+            Label spaceName = new Label(curSpace.getName());
+            spaceName.setPrefWidth(70);
+            spaceName.setAlignment(Pos.CENTER);
 
-            System.out.println(curSpace.getName());
 
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
-                //root.add(new Label(curSpace.getName()), i, 0);
+                root.add(spaceName, i, 0);
             } else if (i < 21) {
                 handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
-                //root.add(new Label(curSpace.getName()), 10, i - 10);
+                root.add(spaceName, 10, i - 10);
             } else if (i < 31) {
                 handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
-                //root.add(new Label(curSpace.getName()), 30 - i, 10);
+                root.add(spaceName, 30 - i, 10);
             } else {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
-                //root.add(new Label(curSpace.getName()), 0, 40 - i);
+                root.add(spaceName, 0, 40 - i);
             }
         }
     }
@@ -107,7 +109,6 @@ public class BoardView {
             root.add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
-        root.add(new Label(spaceNum), colIndex, rowIndex);
     }
 
     /**
@@ -127,7 +128,6 @@ public class BoardView {
             root.add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
-        root.add(new Label(spaceNum), colIndex,  rowIndex);
     }
 
     /**
@@ -139,8 +139,8 @@ public class BoardView {
         Rectangle square = new Rectangle();
         square.setStroke(Color.BLACK);
         square.setFill(Color.WHITE);
-        square.setWidth(50);
-        square.setHeight(50);
+        square.setWidth(70);
+        square.setHeight(70);
 
         return square;
     }
@@ -153,8 +153,8 @@ public class BoardView {
     private Rectangle createColorRectangle(int spaceNum) {
         Rectangle colorRectangle = new Rectangle();
         setColor(colorRectangle, spaceNum);
-        colorRectangle.setWidth(50);
-        colorRectangle.setHeight(18);
+        colorRectangle.setWidth(70);
+        colorRectangle.setHeight(30);
 
         return colorRectangle;
     }
