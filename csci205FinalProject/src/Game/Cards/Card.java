@@ -1,6 +1,7 @@
 package Game.Cards;
 
 import Game.Character;
+import Game.Spaces.Space;
 
 /**
  * Class that represents a Card (Community Chest or Chance)
@@ -24,11 +25,22 @@ public class Card {
      * The space that the player should be moved to
      */
     private int moveToSpace;
+    /**
+     * The space that the player has to move to (for CardType.MOVE_NEAREST)
+     */
+    private String moveNearest;
 
     /**
      * The type of the card
      */
-    protected CardType type;
+    private CardType type;
+
+    /**
+     *
+     */
+    private final int[] railRoadSpaces = new int[]{5,15,25,35};
+
+    private final int[] utilitySpaces = new int[]{12,28};
 
     /**
      * Constructor
@@ -38,12 +50,13 @@ public class Card {
      * @param moveToSpace the space that the player should be moved to
      * @param type the type of the card (ENUM value)
      */
-    public Card(String description, int moneyValue, int moveSpaces, int moveToSpace, CardType type) {
+    public Card(String description, int moneyValue, int moveSpaces, int moveToSpace, String moveNearest, CardType type) {
         this.description=description;
         this.moneyValue=moneyValue;
         this.moveSpaces=moveSpaces;
         this.type=type;
         this.moveToSpace=moveToSpace;
+        this.moveNearest=moveNearest;
 
     }
 
@@ -61,9 +74,35 @@ public class Card {
             moveTo(player);
         } else if (type == CardType.PLAYER_TRANSACTION) {
             playerTransaction(player, playerList);
-        } else {
+        } else if (type == CardType.STREET_REPAIRS) {
             streetRepairs(player);
+        } else if (type == CardType.MOVE_NEAREST) {
+            moveNearest(player);
+        } else {
+            System.out.println("We have an issue");
         }
+    }
+
+    private void moveNearest(Character player) {
+        int curPosition = player.getPosition();
+        if (moveNearest.equalsIgnoreCase("Railroad")) {
+            player.move(findClosest(curPosition,railRoadSpaces));
+
+        } else {
+            findClosest(curPosition,utilitySpaces);
+            player.move(findClosest(curPosition,utilitySpaces));
+        }
+
+    }
+
+    private int findClosest(int curPosition, int[] spaceArray) {
+        int closestPosition = Math.abs(curPosition-spaceArray[0])%40;
+        for (int i = 1; i <spaceArray.length ; i++) {
+            if (closestPosition >Math.abs(curPosition-spaceArray[i])%40) {
+                closestPosition=Math.abs(curPosition-spaceArray[i])%40;
+            }
+        }
+        return closestPosition;
     }
 
     /**
