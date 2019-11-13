@@ -18,9 +18,9 @@
  */
 package View;
 
+import Game.Board;
+import Game.Spaces.Space;
 import Model.MonopolyModel;
-import Objects.Board;
-import Objects.Space;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
