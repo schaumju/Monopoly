@@ -10,7 +10,7 @@ import java.util.Comparator;
  */
 public class Board {
 
-    private ArrayList<Space> board;
+    private static ArrayList<Space> board;
     private ArrayList<Space> buyableProperties;
 
     /**
@@ -196,5 +196,7 @@ public class Board {
         Board board = new Board();
     }
 
-
+    public static ArrayList<Space> getBoard() {
+        return board;
+    }
 }

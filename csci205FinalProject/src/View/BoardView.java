@@ -19,11 +19,15 @@
 package View;
 
 import Model.MonopolyModel;
+import Objects.Board;
+import Objects.Space;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 public class BoardView {
 
@@ -54,15 +58,25 @@ public class BoardView {
             Rectangle square = createSquare();
             Rectangle colorRectangle = createColorRectangle(i);
             String spaceNum = String.valueOf(i);
+
+            ArrayList theBoard = Board.getBoard();
+            Space curSpace = (Space) theBoard.get(i);
+
+            System.out.println(curSpace.getName());
+
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
+                //root.add(new Label(curSpace.getName()), i, 0);
             } else if (i < 21) {
-                handleColumn(square, colorRectangle, 10, 10, 90, spaceNum);
+                handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
+                //root.add(new Label(curSpace.getName()), 10, i - 10);
             } else if (i < 31) {
                 handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
+                //root.add(new Label(curSpace.getName()), 30 - i, 10);
             } else {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
+                //root.add(new Label(curSpace.getName()), 0, 40 - i);
             }
         }
     }
@@ -107,8 +121,6 @@ public class BoardView {
      * @author kerri
      */
     private void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
-        if (Integer.parseInt(spaceNum) > 29) { rowIndex = 40 - Integer.parseInt(spaceNum); }
-        else { rowIndex = Integer.parseInt(spaceNum) - rowIndex; }
 
         root.add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
