@@ -1,4 +1,4 @@
-package Objects;
+package Game.Spaces;
 
 /**
  * Class that represents the 4 railroads on the board

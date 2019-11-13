@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
+package Game;
 
 import javafx.scene.paint.Color;
 

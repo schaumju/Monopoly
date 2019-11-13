@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
 
 /**
  * Class that represents the Utilities

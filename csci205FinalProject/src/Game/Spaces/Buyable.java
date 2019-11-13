@@ -1,4 +1,4 @@
-package Objects;
+package Game.Spaces;
 
 /**
  * Interface for Spaces on the board that can be bought

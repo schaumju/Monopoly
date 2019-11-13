@@ -16,7 +16,9 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
+
+import Game.Character;
 
 public class GoSpace extends Space
 {

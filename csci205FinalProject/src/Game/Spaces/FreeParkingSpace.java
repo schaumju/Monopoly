@@ -16,7 +16,7 @@
  *
  * ****************************************
  */
-package Objects;
+package Game.Spaces;
 
 public class FreeParkingSpace extends Space
 {
