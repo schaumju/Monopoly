@@ -151,6 +151,7 @@ public class Board {
         GoToJailSpace space4 = new GoToJailSpace();
         board.add(space4);
 
+
     }
     /**
      * Initializes the Chance Spaces
