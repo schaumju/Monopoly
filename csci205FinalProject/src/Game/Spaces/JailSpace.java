@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class JailSpace extends Space
 {
-    //ArrayList of prisoners
+
     public ArrayList<Prisoner> inmates;
 
     public JailSpace()
     {
-        super(9, "JAIL");
+        super(10, "JAIL");
         inmates = new ArrayList<Prisoner>();
     }
 
