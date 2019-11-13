@@ -15,7 +15,7 @@ public class ChanceCard extends Card
      * @param moveToSpace the space the player needs to move to for the card
      * @param type        the type of the card (ENUM value)
      */
-    public ChanceCard(String description, int moneyValue, int moveSpaces, int moveToSpace, CardType type) {
-        super(description, moneyValue, moveSpaces, moveToSpace, type);
+    public ChanceCard(String description, int moneyValue, int moveSpaces, int moveToSpace,String moveNearest, CardType type) {
+        super(description, moneyValue, moveSpaces, moveToSpace, moveNearest, type);
     }
 }

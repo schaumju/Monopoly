@@ -33,6 +33,11 @@ public class Board {
         Comparator<Space> positionSort = (s1, s2) -> Integer.compare(s1.getPosition(),s2.getPosition());
         Collections.sort(board, positionSort);
         Collections.sort(buyableProperties,positionSort);
+        for (Space space:board) {
+            System.out.println(space);
+        } {
+
+        }
 
     }
 
@@ -196,6 +201,7 @@ public class Board {
 
     public static void main(String[] args) {
         Board board = new Board();
+
     }
 
 
