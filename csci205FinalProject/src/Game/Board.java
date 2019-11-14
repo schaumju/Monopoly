@@ -83,7 +83,7 @@ public class Board {
         property = new Property(14,"Affinity Housing",PropertyColor.PURPLE, 160, new double[]{12,60,180,500,700,900},100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(16," Vaughan Lit",PropertyColor.ORANGE, 180, new double[]{14,70,200,550,750,950},100);
+        property = new Property(16,"Vaughan Lit",PropertyColor.ORANGE, 180, new double[]{14,70,200,550,750,950},100);
         board.add(property);
         buyableProperties.add(property);
         property = new Property(18,"Coleman",PropertyColor.ORANGE, 180, new double[]{14,70,200,550,750,950},100);
@@ -212,7 +212,6 @@ public class Board {
 
     public static void main(String[] args) {
         Board board = new Board();
-
     }
 
     public static ArrayList<Space> getBoard() {

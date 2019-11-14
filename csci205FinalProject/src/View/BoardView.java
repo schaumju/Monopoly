@@ -26,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -62,8 +64,18 @@ public class BoardView {
             ArrayList theBoard = Board.getBoard();
             Space curSpace = (Space) theBoard.get(i);
             Label spaceName = new Label(curSpace.getName());
-            spaceName.setPrefWidth(70);
+
+            if (curSpace.getName().contains(" ")) {
+                for (int j = 0; j < curSpace.getName().length(); j++) {
+                    spaceName.setText(spaceName.getText().replace(" ", "\n"));
+//                    if (String.valueOf(curSpace.getName().charAt(j)) == " ") {
+//                        spaceName.setText(curSpace.getName().substring(0,j) + "\n" + curSpace.getName().substring(j+1));
+//                    }
+                }
+            }
             spaceName.setAlignment(Pos.CENTER);
+            spaceName.setMaxSize(70, 70);
+            spaceName.setFont(new Font(12));
 
 
             if (i < 11) {
