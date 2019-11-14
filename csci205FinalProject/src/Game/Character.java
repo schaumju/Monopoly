@@ -152,4 +152,25 @@ public class Character
     {
         return numHouses;
     }
+
+    /**
+     * Increases the number of railroads the player owns by 1
+     */
+    public void buyRailroad() {
+        this.numRailroads += 1;
+    }
+
+    /**
+     * Increases the number of Utilities the player owns by 1
+     */
+    public void buyUtility() {
+        this.numUtilities += 1;
+    }
+
+    /**
+     * Increases the number of houses the player owns by 1
+     */
+    public void setNumHouses() {
+        this.numHouses += 1;
+    }
 }

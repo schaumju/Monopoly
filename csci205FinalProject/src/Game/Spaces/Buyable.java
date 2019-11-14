@@ -10,13 +10,20 @@ public interface Buyable {
      * Gets the cost to buy property
      * @return the cost of the Property
      */
-    public double getCost();
+    double getCost();
 
     /**
      * Gets the ID of the owner
      * @return the ID of the owner
      */
-    public int getOwner();
+    int getOwner();
+
+    /**
+     * Sets the owner id to the input
+     *
+     * @param id the id of the player buying the property
+     */
+    void buyProperty(int id);
 
 
 }

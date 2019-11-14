@@ -202,6 +202,14 @@ public class Board {
          board.add(space);
     }
 
+    public ArrayList<Space> getBoard() {
+        return board;
+    }
+
+    public ArrayList<Space> getBuyableProperties() {
+        return buyableProperties;
+    }
+
     public static void main(String[] args) {
         Board board = new Board();
 

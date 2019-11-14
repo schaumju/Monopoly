@@ -2,7 +2,6 @@ package Game.Cards;
 
 import Game.Character;
 import Game.Spaces.GoToJailSpace;
-import Game.Spaces.Space;
 
 /**
  * Class that represents a Card (Community Chest or Chance)
