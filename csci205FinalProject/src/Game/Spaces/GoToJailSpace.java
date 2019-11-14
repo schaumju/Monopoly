@@ -39,4 +39,6 @@ public class GoToJailSpace extends Space
         newPrisoner = new Prisoner(thisChar);
     }
 
+
+
 }

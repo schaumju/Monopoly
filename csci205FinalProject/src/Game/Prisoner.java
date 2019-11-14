@@ -18,6 +18,8 @@
  */
 package Game;
 
+import Game.Spaces.JailSpace;
+
 public class Prisoner
 {
     //Turns in jail
@@ -27,7 +29,7 @@ public class Prisoner
     private Character thisChar;
 
     //Position of the jail space
-    private static final int JAIL_POSITION = 9;
+    private static final int JAIL_POSITION = 10;
 
     //Get out of jail fine
     private static final double JAIL_FINE = 50.00;
@@ -40,6 +42,7 @@ public class Prisoner
         this.turnsInJail = 0;
         this.thisChar = thisChar;
         this.thisChar.setPosition(JAIL_POSITION);
+        this.thisChar.setJailed(true);
     }
 
     //Gets the player out of jail and moves numMoves steps
@@ -49,7 +52,7 @@ public class Prisoner
         if (diceRollOne == diceRollTwo)
         {
             thisChar.move(diceRollOne + diceRollTwo);
-            //Remove the prisoners from the array
+            this.thisChar.setJailed(false);
         }
         else
         {
@@ -57,7 +60,7 @@ public class Prisoner
             {
                 thisChar.move(diceRollOne+diceRollTwo);
                 thisChar.subtractFromBalance(JAIL_FINE);
-                //Remove the prisoners from the array
+                this.thisChar.setJailed(false);
             }
             else
             {

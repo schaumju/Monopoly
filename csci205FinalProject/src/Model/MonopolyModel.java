@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.BoardController;
+import Game.Board;
 import View.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,10 +12,9 @@ public class MonopolyModel extends Application {
     private BoardView theView;
     private BoardController theController;
     private MonopolyModel theModel;
+    private Board theBoard;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
 
     /**
      * starts the graphic
@@ -46,6 +46,7 @@ public class MonopolyModel extends Application {
     public void init() throws Exception {
         super.init();
         this.theModel = new MonopolyModel();
+        this.theBoard = new Board();
         this.theView = new BoardView(theModel);
     }
 }

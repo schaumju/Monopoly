@@ -57,6 +57,9 @@ public class Character
     //Num houses
     private int numHouses;
 
+    //Jailed?
+    private boolean isInJail;
+
     public Character(String name, Color color)
     {
         this.name = name;
@@ -66,6 +69,7 @@ public class Character
         this.numUtilities = 0;
         this.balance = STARTING_BALANCE;
         this.numHouses = 0;
+        this.isInJail = false;
     }
 
     /**
@@ -74,7 +78,19 @@ public class Character
      */
     public void move(int turnsToMove)
     {
+        if(this.position + turnsToMove >= TOTAL_BOARD_SPACES)
+        {
+            //They passed Go
+            this.balance += 200.00;
+            this.position = (this.position + turnsToMove)%TOTAL_BOARD_SPACES;
+        }
+        else
+        {
+            //They no passed Go
+            this.position = this.position+turnsToMove;
+        }
         this.position += turnsToMove;
+
     }
 
     /**
@@ -104,6 +120,13 @@ public class Character
         return this.balance <= 0;
     }
 
+    /**
+     * Sets player to jailed
+     */
+    public void setJailed(boolean trueFalse)
+    {
+        this.isInJail = trueFalse;
+    }
     //Add more methods here as needed
 
 
@@ -114,13 +137,18 @@ public class Character
     {
         this.position = position;
     }
+
+    public boolean isInJail() {
+        return isInJail;
+    }
+
     /**
      * Getter methods
      */
+
     public int getPosition()
     {
-        //RETURNS TOTAL % BOARD SPACES
-        return this.position%TOTAL_BOARD_SPACES;
+        return this.position;
     }
 
     public String getName()

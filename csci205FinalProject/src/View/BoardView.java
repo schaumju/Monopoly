@@ -18,12 +18,16 @@
  */
 package View;
 
+import Game.Board;
+import Game.Spaces.Space;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 public class BoardView {
 
@@ -54,15 +58,27 @@ public class BoardView {
             Rectangle square = createSquare();
             Rectangle colorRectangle = createColorRectangle(i);
             String spaceNum = String.valueOf(i);
+
+            ArrayList theBoard = Board.getBoard();
+            Space curSpace = (Space) theBoard.get(i);
+            Label spaceName = new Label(curSpace.getName());
+            spaceName.setPrefWidth(70);
+            spaceName.setAlignment(Pos.CENTER);
+
+
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
+                root.add(spaceName, i, 0);
             } else if (i < 21) {
-                handleColumn(square, colorRectangle, 10, 10, 90, spaceNum);
+                handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
+                root.add(spaceName, 10, i - 10);
             } else if (i < 31) {
                 handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
+                root.add(spaceName, 30 - i, 10);
             } else {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
+                root.add(spaceName, 0, 40 - i);
             }
         }
     }
@@ -93,7 +109,6 @@ public class BoardView {
             root.add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
-        root.add(new Label(spaceNum), colIndex, rowIndex);
     }
 
     /**
@@ -107,15 +122,12 @@ public class BoardView {
      * @author kerri
      */
     private void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
-        if (Integer.parseInt(spaceNum) > 29) { rowIndex = 40 - Integer.parseInt(spaceNum); }
-        else { rowIndex = Integer.parseInt(spaceNum) - rowIndex; }
 
         root.add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
             root.add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
-        root.add(new Label(spaceNum), colIndex,  rowIndex);
     }
 
     /**
@@ -127,8 +139,8 @@ public class BoardView {
         Rectangle square = new Rectangle();
         square.setStroke(Color.BLACK);
         square.setFill(Color.WHITE);
-        square.setWidth(50);
-        square.setHeight(50);
+        square.setWidth(70);
+        square.setHeight(70);
 
         return square;
     }
@@ -141,8 +153,8 @@ public class BoardView {
     private Rectangle createColorRectangle(int spaceNum) {
         Rectangle colorRectangle = new Rectangle();
         setColor(colorRectangle, spaceNum);
-        colorRectangle.setWidth(50);
-        colorRectangle.setHeight(18);
+        colorRectangle.setWidth(70);
+        colorRectangle.setHeight(30);
 
         return colorRectangle;
     }
