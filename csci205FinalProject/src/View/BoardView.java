@@ -65,17 +65,7 @@ public class BoardView {
             Space curSpace = (Space) theBoard.get(i);
             Label spaceName = new Label(curSpace.getName());
 
-            if (curSpace.getName().contains(" ")) {
-                for (int j = 0; j < curSpace.getName().length(); j++) {
-                    spaceName.setText(spaceName.getText().replace(" ", "\n"));
-//                    if (String.valueOf(curSpace.getName().charAt(j)) == " ") {
-//                        spaceName.setText(curSpace.getName().substring(0,j) + "\n" + curSpace.getName().substring(j+1));
-//                    }
-                }
-            }
-            spaceName.setAlignment(Pos.CENTER);
-            spaceName.setMaxSize(70, 70);
-            spaceName.setFont(new Font(12));
+            formatSpaceName(curSpace, spaceName);
 
 
             if (i < 11) {
@@ -93,6 +83,22 @@ public class BoardView {
                 root.add(spaceName, 0, 40 - i);
             }
         }
+    }
+
+    /**
+     * formats the space name so it fits in the square
+     * @param curSpace - the current space we are on
+     * @param spaceName - the name of the space
+     * @author - kerri
+     */
+    private void formatSpaceName(Space curSpace, Label spaceName) {
+        if (curSpace.getName().contains(" ")) {
+            spaceName.setText(spaceName.getText().replace(" ", "\n"));
+        }
+
+        spaceName.setAlignment(Pos.CENTER);
+        spaceName.setMaxSize(70, 70);
+        spaceName.setFont(new Font(12));
     }
 
     /**
@@ -185,7 +191,7 @@ public class BoardView {
         else if (spaceNum == 21 || spaceNum == 23 || spaceNum == 24) { colorRectangle.setFill(Color.RED); }
         else if (spaceNum == 26 || spaceNum == 27 || spaceNum == 29) { colorRectangle.setFill(Color.YELLOW); }
         else if (spaceNum == 31 || spaceNum == 32 || spaceNum == 34) { colorRectangle.setFill(Color.GREEN); }
-        else if (spaceNum == 39 || spaceNum == 37) { colorRectangle.setFill(Color.DARKBLUE); }
+        else if (spaceNum == 39 || spaceNum == 37) { colorRectangle.setFill(Color.BLUE); }
         else  { colorRectangle.setFill(Color.WHITE); }
     }
 
