@@ -202,7 +202,6 @@ public class Board {
          board.add(space);
     }
 
-
     public ArrayList<Space> getBuyableProperties() {
         return buyableProperties;
     }
