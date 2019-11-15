@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 
-public abstract class  Deck {
+public abstract class Deck {
 
 
     /**

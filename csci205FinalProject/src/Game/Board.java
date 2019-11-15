@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Cards.ChanceDeck;
+import Game.Cards.CommunityChestDeck;
 import Game.Spaces.*;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ public class Board {
 
     private static ArrayList<Space> board;
     private ArrayList<Space> buyableProperties;
+    private CommunityChestDeck communityChestDeck;
+    private ChanceDeck chanceDeck;
 
     /**
      * Default Constructor
@@ -21,6 +25,8 @@ public class Board {
     public Board() {
         board = new ArrayList<>();
         buyableProperties = new ArrayList<>();
+        chanceDeck = new ChanceDeck();
+        communityChestDeck = new CommunityChestDeck();
         init();
         sort();
     }
@@ -33,11 +39,7 @@ public class Board {
         Comparator<Space> positionSort = (s1, s2) -> Integer.compare(s1.getPosition(),s2.getPosition());
         Collections.sort(board, positionSort);
         Collections.sort(buyableProperties,positionSort);
-        for (Space space:board) {
-            System.out.println(space);
-        } {
 
-        }
 
     }
 
@@ -59,70 +61,70 @@ public class Board {
      */
     private void initProperties() {
 
-        Property property = new Property(1,"Vedder", PropertyColor.BROWN, 60, new double[]{2,10,30,90,160,250},50);
+        Property property = new Property(1, "Vedder", PropertyColor.BROWN, 60, new int[]{2, 10, 30, 90, 160, 250}, 50);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(3,"The Mods",PropertyColor.BROWN, 60, new double[]{4,20,60,180,3250,450},50);
+        property = new Property(3, "The Mods", PropertyColor.BROWN, 60, new int[]{4, 20, 60, 180, 3250, 450}, 50);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(6,"Smith",PropertyColor.LIGHT_BLUE, 100, new double[]{6,30,90,270,400,550},50);
+        property = new Property(6, "Smith", PropertyColor.LIGHT_BLUE, 100, new int[]{6, 30, 90, 270, 400, 550}, 50);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(8,"Swartz",PropertyColor.LIGHT_BLUE, 100, new double[]{6,30,90,270,400,550},50);
+        property = new Property(8, "Swartz", PropertyColor.LIGHT_BLUE, 100, new int[]{6, 30, 90, 270, 400, 550}, 50);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(9,"McDonnell Hall",PropertyColor.LIGHT_BLUE, 120, new double[]{8,40,100,300,450,600},50);
+        property = new Property(9, "McDonnell Hall", PropertyColor.LIGHT_BLUE, 120, new int[]{8, 40, 100, 300, 450, 600}, 50);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(11,"Larison",PropertyColor.PURPLE, 140, new double[]{10,50,150,450,625,750},100);
+        property = new Property(11, "Larison", PropertyColor.PURPLE, 140, new int[]{10, 50, 150, 450, 625, 750}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(13,"Harris",PropertyColor.PURPLE, 140, new double[]{10,50,150,450,625,750},100);
+        property = new Property(13, "Harris", PropertyColor.PURPLE, 140, new int[]{10, 50, 150, 450, 625, 750}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(14,"Affinity Housing",PropertyColor.PURPLE, 160, new double[]{12,60,180,500,700,900},100);
+        property = new Property(14, "Affinity Housing", PropertyColor.PURPLE, 160, new int[]{12, 60, 180, 500, 700, 900}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(16,"Vaughan Lit",PropertyColor.ORANGE, 180, new double[]{14,70,200,550,750,950},100);
+        property = new Property(16, "Vaughan Lit", PropertyColor.ORANGE, 180, new int[]{14, 70, 200, 550, 750, 950}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(18,"Coleman",PropertyColor.ORANGE, 180, new double[]{14,70,200,550,750,950},100);
+        property = new Property(18, "Coleman", PropertyColor.ORANGE, 180, new int[]{14, 70, 200, 550, 750, 950}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(19,"Bertrand Library",PropertyColor.ORANGE, 200, new double[]{16,80,220,600,800,1000},100);
+        property = new Property(19, "Bertrand Library", PropertyColor.ORANGE, 200, new int[]{16, 80, 220, 600, 800, 1000}, 100);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(21,"Olin",PropertyColor.RED, 220, new double[]{18,90,250,700,875,1050},150);
+        property = new Property(21, "Olin", PropertyColor.RED, 220, new int[]{18, 90, 250, 700, 875, 1050}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(23,"Rooke",PropertyColor.RED, 220, new double[]{18,90,250,700,875,1050},150);
+        property = new Property(23, "Rooke", PropertyColor.RED, 220, new int[]{18, 90, 250, 700, 875, 1050}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(24,"Dana",PropertyColor.RED, 240, new double[]{20,100,300,750,925,1100},150);
+        property = new Property(24, "Dana", PropertyColor.RED, 240, new int[]{20, 100, 300, 750, 925, 1100}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(26,"Kress",PropertyColor.YELLOW, 260, new double[]{22,110,330,800,975,1150},150);
+        property = new Property(26, "Kress", PropertyColor.YELLOW, 260, new int[]{22, 110, 330, 800, 975, 1150}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(27,"Trax",PropertyColor.YELLOW, 260, new double[]{22,110,330,800,975,1150},150);
+        property = new Property(27, "Trax", PropertyColor.YELLOW, 260, new int[]{22, 110, 330, 800, 975, 1150}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(29,"Roberts",PropertyColor.YELLOW, 280, new double[]{24,120,360,850,1025,1200},150);
+        property = new Property(29, "Roberts", PropertyColor.YELLOW, 280, new int[]{24, 120, 360, 850, 1025, 1200}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(31,"Off-campus housing",PropertyColor.GREEN, 300, new double[]{26,130,390,900,1100,1275},200);
+        property = new Property(31, "Off-campus housing", PropertyColor.GREEN, 300, new int[]{26, 130, 390, 900, 1100, 1275}, 200);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(32,"Gateways",PropertyColor.GREEN, 300, new double[]{26,130,390,900,1100,1275},200);
+        property = new Property(32, "Gateways", PropertyColor.GREEN, 300, new int[]{26, 130, 390, 900, 1100, 1275}, 200);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(34,"Senior Apartments",PropertyColor.GREEN, 320, new double[]{26,130,390,900,1100,1275},200);
+        property = new Property(34, "Senior Apartments", PropertyColor.GREEN, 320, new int[]{26, 130, 390, 900, 1100, 1275}, 200);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(37,"Academic West",PropertyColor.DARK_BLUE, 350, new double[]{35,175,500,1100,1300,1500},200);
+        property = new Property(37, "Academic West", PropertyColor.DARK_BLUE, 350, new int[]{35, 175, 500, 1100, 1300, 1500}, 200);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(39,"Academic East",PropertyColor.DARK_BLUE, 400, new double[]{50,200,600,1400,1700,2000},200);
+        property = new Property(39, "Academic East", PropertyColor.DARK_BLUE, 400, new int[]{50, 200, 600, 1400, 1700, 2000}, 200);
         board.add(property);
         buyableProperties.add(property);
     }
@@ -212,5 +214,13 @@ public class Board {
 
     public static ArrayList<Space> getBoard() {
         return board;
+    }
+
+    public CommunityChestDeck getCommunityChestDeck() {
+        return communityChestDeck;
+    }
+
+    public ChanceDeck getChanceDeck() {
+        return chanceDeck;
     }
 }

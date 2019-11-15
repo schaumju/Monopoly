@@ -59,6 +59,8 @@ public class Character
 
     //Jailed?
     private boolean isInJail;
+    // Player id
+    private int iD;
 
     public Character(String name, Color color)
     {
@@ -89,7 +91,7 @@ public class Character
             //They no passed Go
             this.position = this.position+turnsToMove;
         }
-        this.position += turnsToMove;
+        //this.position += turnsToMove;
 
     }
 
@@ -200,6 +202,30 @@ public class Character
      */
     public void setNumHouses() {
         this.numHouses += 1;
+    }
+
+    /**
+     * Allows a player to pay another player a set amount of monye
+     *
+     * @param player the player receiving the money
+     * @param amount the amount of money that is owed
+     */
+    public void payPlayer(Character player, int amount) {
+        player.addToBalance(amount);
+        subtractFromBalance(amount);
+    }
+
+    public int getID() {
+        return iD;
+    }
+
+    /**
+     * Sets the id
+     *
+     * @param id the player's id
+     */
+    public void setID(int id) {
+        this.iD = id;
     }
 
 

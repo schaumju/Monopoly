@@ -73,8 +73,8 @@ public class Utilities extends Space implements Buyable {
      * @param diceRoll the value of the player's roll
      * @return the rent owed
      */
-    public double getRent(int numOwned, int diceRoll) {
-        double rent=0;
+    public int getRent(int numOwned, int diceRoll) {
+        int rent = 0;
         if (getOwner() == -1) {
             return 0;
         }
@@ -88,5 +88,14 @@ public class Utilities extends Space implements Buyable {
 
         }
         return rent;
+    }
+
+    /**
+     * Determines if the Utility is owned
+     *
+     * @return true if the utility is owned and false if it is unowned
+     */
+    public boolean isOwned() {
+        return getOwner() != -1;
     }
 }

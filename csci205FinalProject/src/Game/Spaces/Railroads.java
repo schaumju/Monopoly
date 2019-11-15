@@ -24,6 +24,14 @@ public class Railroads extends Space implements Buyable {
         ownerID=-1;
     }
 
+    /**
+     * Determines if the railroad is owned
+     *
+     * @return true if the railroad is owned and false if it is unowned
+     */
+    public boolean isOwned() {
+        return getOwner() != -1;
+    }
 
     /**
      * Gets the cost to buy property
@@ -61,8 +69,8 @@ public class Railroads extends Space implements Buyable {
      * @param numOwned the number of railroads the player owns
      * @return the price of the railroad
      */
-    public double getRent(int numOwned) {
-        double rent=0;
+    public int getRent(int numOwned) {
+        int rent=0;
         switch (numOwned) {
             case 1:
                 rent=25;
