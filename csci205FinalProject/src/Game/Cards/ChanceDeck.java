@@ -1,5 +1,10 @@
 package Game.Cards;
 
+/**
+ * Class to represent a deck of ChanceCard objects
+ *
+ * @author Justin
+ */
 public class ChanceDeck extends Deck {
     /**
      * Initializes the deck with Cards

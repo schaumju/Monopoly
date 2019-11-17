@@ -20,16 +20,25 @@ package Game;
 
 import java.util.Random;
 
+/**
+ * Representation of a dice roll
+ *
+ * @author Kerri
+ */
 public class Dice {
-
+    /**
+     * The value of the first dice roll
+     */
     int die1;
+    /**
+     * The value of the second dice roll
+     */
     int die2;
 
-    public Dice()
-    {
-
-    }
-
+    /**
+     * Rolls the two dice and returns the result
+     * @return the sum of the dice roll
+     */
     public Integer rollDice() {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
@@ -37,8 +46,11 @@ public class Dice {
         return die1 + die2;
     }
 
+    /**
+     * Returns whether the dice are doubles or not (doubles means the dice are the same number
+     * @return true if the dice are doubles and false otherwise
+     */
     public boolean isDoubles() {
-        if (die1 == die2) { return true; }
-        else { return false; }
+        return die1 == die2;
     }
 }

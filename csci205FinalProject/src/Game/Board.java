@@ -210,6 +210,7 @@ public class Board {
 
     public static void main(String[] args) {
         Board board = new Board();
+        board.getChanceDeck().draw();
     }
 
     public static ArrayList<Space> getBoard() {
@@ -223,4 +224,5 @@ public class Board {
     public ChanceDeck getChanceDeck() {
         return chanceDeck;
     }
+
 }

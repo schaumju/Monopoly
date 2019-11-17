@@ -35,10 +35,12 @@ public class Card {
     private CardType type;
 
     /**
-     *
+     * Position of the railroad spaces on the board
      */
     private final int[] railRoadSpaces = new int[]{5,15,25,35};
-
+    /**
+     * Position of the utility spaces on the board
+     */
     private final int[] utilitySpaces = new int[]{12,28};
 
     /**
@@ -190,20 +192,13 @@ public class Card {
 
     }
 
+    /**
+     * Getter for the description on the card
+     *
+     * @return the String description on the card
+     */
     public String getDescription() {
         return description;
-    }
-
-    public int getMoneyValue() {
-        return moneyValue;
-    }
-
-    public int getMoveSpaces() {
-        return moveSpaces;
-    }
-
-    public CardType getType() {
-        return type;
     }
 
     /**

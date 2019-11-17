@@ -1,5 +1,8 @@
 package Game.Cards;
 
+/**
+ * Class to represent a deck of CommunityChestCard objects
+ */
 public class CommunityChestDeck extends Deck {
     /**
      * Initializes the deck with Cards

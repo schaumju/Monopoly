@@ -2,7 +2,6 @@ package Game;
 
 import Game.Cards.Card;
 import Game.Spaces.*;
-import javafx.scene.paint.Color;
 
 import java.util.Scanner;
 
@@ -30,7 +29,9 @@ public class Turn {
      * The sum of the user's roll
      */
     private int roll;
-
+    /**
+     * The list of the players in the game
+     */
     private Character[] playerList;
 
 
@@ -48,24 +49,7 @@ public class Turn {
     }
 
 
-    public static void main(String[] args) {
-        Board board = new Board();
-        Character player = new Character("Joe", Color.RED);
-        Character[] characterList = new Character[1];
-        characterList[0] = player;
-        player.setID(0);
 
-
-        Scanner in = new Scanner(System.in);
-        do {
-            System.out.println("BEFORE: " + player.getPosition());
-            Turn turn = new Turn(player, board, characterList);
-            System.out.println("AFTER: " + player.getPosition());
-            System.err.println("TURN OVER");
-            System.out.println();
-        } while (true);
-
-    }
 
     /**
      * Determines what space the player landed on and performs the appropriate action
@@ -94,7 +78,8 @@ public class Turn {
     }
 
     /**
-     * Allows the player to interact with the Utility
+     * Allows the user to interact with a Utility space
+     * @param space the Utility space they are currently on
      */
     private void interactUtilities(Utilities space) {
         if (space.isOwned()) {
@@ -161,6 +146,7 @@ public class Turn {
 
     /**
      * Allows the player to interact with the chance space
+     * @param space the Chance space they are currently on
      */
     private void interactChance(Chance space) {
         Card card = board.getChanceDeck().draw();
@@ -175,7 +161,8 @@ public class Turn {
     }
 
     /**
-     * Allows the player to interact with the community chest space
+     * Allows the player to interact with a Community Chest space
+     * @param space the Community Chest space they are currently on
      */
     private void interactCommunityChest(CommunityChest space) {
         Card card = board.getCommunityChestDeck().draw();
@@ -189,14 +176,17 @@ public class Turn {
     }
 
     /**
-     * Allows the player to interact with the tax space
+     * Allows the player to interact with a tax space
+     * @param space the Tax space they are currently on
      */
     private void interactTax(Tax space) {
         player.subtractFromBalance(space.getTax());
+        System.out.println(player.getName() + " paid " + space.getTax());
     }
 
     /**
-     * Allows the player to interact with the railroad space
+     * Allows the player to interact with a Railroad space
+     * @param space the Railroad space they are currently on
      */
     private void interactRailroad(Railroads space) {
         if (space.isOwned()) {
@@ -218,7 +208,8 @@ public class Turn {
     }
 
     /**
-     * Allows the player to interact with a property
+     * Allows the player to interact with a property space
+     * @param space the Property space they are currently on
      */
     private void interactProperty(Property space) {
 
@@ -255,10 +246,12 @@ public class Turn {
         } else if (space instanceof Railroads) {
             ((Railroads) space).buyProperty(player.getID());
             player.subtractFromBalance(((Railroads) space).getCost());
+            player.buyRailroad();
 
         } else if (space instanceof Utilities) {
             ((Utilities) space).buyProperty(player.getID());
             player.subtractFromBalance(((Utilities) space).getCost());
+            player.buyUtility();
 
         }
 
@@ -321,5 +314,6 @@ public class Turn {
         System.out.println(player.getName() + " is done rolling this turn");
 
     }
+
 
 }
