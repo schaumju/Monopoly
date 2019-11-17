@@ -85,14 +85,17 @@ public class Turn {
             player.move(roll);
             //interact with square
             interactSpace();
+            if (player.isBankrupt()) {
+                break;
+            }
 
         } while (dice.isDoubles());
 
-        if (numRolls == 3) {
+        if (numRolls == 3 && dice.isDoubles()) {
             //Move the player to jail because they rolled 3 doubles in a row
             System.out.println(player.getName() + " rolled 3 doubles in a row and got put in jail");
 
-            GoToJailSpace jailSpace = (GoToJailSpace)board.getBoard().get(30);
+            GoToJailSpace jailSpace = (GoToJailSpace) Board.getBoard().get(30);
             player.goToJail();
         }
 
@@ -197,9 +200,14 @@ public class Turn {
      */
     private void interactChance(Chance space) {
         Card card = board.getChanceDeck().draw();
+        int beforePosition = player.getPosition();
         System.out.println("You drew the Chance card " + card.getDescription());
         card.preformAction(player, playerList);
-        interactSpace();
+        // If the player moved as a result of the chance card
+        if (beforePosition != player.getPosition()) {
+            interactSpace();
+        }
+
     }
 
     /**
@@ -207,9 +215,13 @@ public class Turn {
      */
     private void interactCommunityChest(CommunityChest space) {
         Card card = board.getCommunityChestDeck().draw();
+        int beforePosition = player.getPosition();
         System.out.println("You drew the Community Chest card " + card.getDescription());
         card.preformAction(player, playerList);
-        interactSpace();
+        // If the player moved as a result of the Community chest card
+        if (beforePosition != player.getPosition()) {
+            interactSpace();
+        }
     }
 
     /**
@@ -288,6 +300,24 @@ public class Turn {
 
         System.out.println("You have bought this property from the bank");
         System.out.println("Your new balance is " + player.getBalance());
+    }
+
+    /**
+     * Called only if a player is bankrupted. Returns all his properties to unowned
+     */
+    private void bankrupt() {
+        int id = player.getID();
+
+        for (Space space : board.getBuyableProperties()) {
+            Buyable property = (Buyable) space;
+            // If it is the player who went bankrupt's property
+            if (property.getOwner() == id) {
+                // set the property to unowned
+                property.buyProperty(-1);
+                // How to handle monopolies here?
+            }
+        }
+
     }
 
 }

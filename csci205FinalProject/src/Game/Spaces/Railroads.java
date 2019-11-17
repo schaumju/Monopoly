@@ -61,7 +61,6 @@ public class Railroads extends Space implements Buyable {
     @Override
     public void buyProperty(int id) {
         ownerID = id;
-
     }
 
     /**

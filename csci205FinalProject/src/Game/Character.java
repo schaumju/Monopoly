@@ -148,7 +148,14 @@ public class Character
      */
     public void subtractFromBalance(double subtractedMoney)
     {
-        this.balance -= subtractedMoney;
+        if (this.getBalance() < subtractedMoney) {
+            this.balance = 0;
+
+        } else {
+            this.balance -= subtractedMoney;
+        }
+
+
     }
 
     /**
@@ -246,8 +253,14 @@ public class Character
      * @param amount the amount of money that is owed
      */
     public void payPlayer(Character player, int amount) {
-        player.addToBalance(amount);
-        subtractFromBalance(amount);
+        if (this.getBalance() < amount) {
+            player.addToBalance(this.getBalance());
+            subtractFromBalance(this.getBalance());
+        } else {
+            player.addToBalance(amount);
+            subtractFromBalance(amount);
+        }
+
     }
 
     public int getID() {
