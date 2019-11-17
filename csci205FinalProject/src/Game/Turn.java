@@ -47,6 +47,7 @@ public class Turn {
         playTurn();
     }
 
+
     public static void main(String[] args) {
         Board board = new Board();
         Character player = new Character("Joe", Color.RED);
@@ -63,43 +64,6 @@ public class Turn {
             System.err.println("TURN OVER");
             System.out.println();
         } while (true);
-
-    }
-
-    /**
-     * Method that runs the player's turn
-     */
-    private void playTurn() {
-        Dice dice;
-        do {
-            //Create a new Dice object
-            dice = new Dice();
-            //Roll the dice
-            int roll = dice.rollDice();
-            System.out.println(player.getName() + " rolled " + roll + " isDoubles= " + dice.isDoubles());
-            numRolls++;
-            if (numRolls == 3 && dice.isDoubles()) {
-                break;
-            }
-            //move spaces
-            player.move(roll);
-            //interact with square
-            interactSpace();
-            if (player.isBankrupt()) {
-                break;
-            }
-
-        } while (dice.isDoubles());
-
-        if (numRolls == 3 && dice.isDoubles()) {
-            //Move the player to jail because they rolled 3 doubles in a row
-            System.out.println(player.getName() + " rolled 3 doubles in a row and got put in jail");
-
-            GoToJailSpace jailSpace = (GoToJailSpace) Board.getBoard().get(30);
-            player.goToJail();
-        }
-
-        System.out.println(player.getName() + " is done rolling this turn");
 
     }
 
@@ -317,6 +281,44 @@ public class Turn {
                 // How to handle monopolies here?
             }
         }
+
+    }
+
+    /**
+     * Method that runs the player's turn
+     */
+    private void playTurn() {
+        Dice dice;
+        do {
+            //Create a new Dice object
+            dice = new Dice();
+            //Roll the dice
+            int roll = dice.rollDice();
+            System.out.println(player.getName() + " rolled " + roll + " isDoubles= " + dice.isDoubles());
+            numRolls++;
+            if (numRolls == 3 && dice.isDoubles()) {
+                break;
+            }
+            //move spaces
+            player.move(roll);
+            //interact with square
+            interactSpace();
+            if (player.isBankrupt()) {
+                bankrupt();
+                break;
+            }
+
+        } while (dice.isDoubles());
+
+        if (numRolls == 3 && dice.isDoubles()) {
+            //Move the player to jail because they rolled 3 doubles in a row
+            System.out.println(player.getName() + " rolled 3 doubles in a row and got put in jail");
+
+            GoToJailSpace jailSpace = (GoToJailSpace) Board.getBoard().get(30);
+            player.goToJail();
+        }
+
+        System.out.println(player.getName() + " is done rolling this turn");
 
     }
 
