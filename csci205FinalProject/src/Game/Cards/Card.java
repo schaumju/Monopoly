@@ -1,7 +1,6 @@
 package Game.Cards;
 
 import Game.Character;
-import Game.Spaces.GoToJailSpace;
 
 /**
  * Class that represents a Card (Community Chest or Chance)
@@ -90,11 +89,7 @@ public class Card {
      * @param player the player that has to move
      */
     private void moveToJail(Character player) {
-        if (player.getPosition() > 10) {
-            player.addToBalance(-200);
-        }
-        GoToJailSpace space = new GoToJailSpace();
-        space.goToJail(player);
+        player.goToJail();
     }
 
     /**
@@ -146,7 +141,7 @@ public class Card {
      * @param player The player who drew the card
      */
     private void streetRepairs(Character player) {
-        player.addToBalance(25*player.getNumHouses());
+        player.subtractFromBalance(25 * player.getNumHouses());
     }
 
     /**
@@ -154,7 +149,13 @@ public class Card {
      * @param player the player who drew the card
      */
     private void bankTransaction(Character player) {
-        player.addToBalance(this.moneyValue);
+
+        if (this.moneyValue > 0) {
+            player.subtractFromBalance(this.moneyValue);
+
+        } else {
+            player.addToBalance(this.moneyValue);
+        }
     }
 
     /**
@@ -171,12 +172,22 @@ public class Card {
      * @param playerList the list of the all the players in the game
      */
     private void playerTransaction(Character player, Character[] playerList) {
-        for (Character character:playerList) {
-            if (player != character) {
-                character.addToBalance(moneyValue);
-                player.addToBalance(-moneyValue);
+        if (moneyValue > 0) {
+            for (Character character : playerList) {
+                if (player != character) {
+                    character.addToBalance(moneyValue);
+                    player.subtractFromBalance(moneyValue);
+                }
+            }
+        } else {
+            for (Character character : playerList) {
+                if (player != character) {
+                    character.subtractFromBalance(moneyValue);
+                    player.addToBalance(moneyValue);
+                }
             }
         }
+
     }
 
     public String getDescription() {
