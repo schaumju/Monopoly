@@ -25,7 +25,9 @@ public class Dice {
     int die1;
     int die2;
 
-    public Dice() {
+    public Dice()
+    {
+
     }
 
     public Integer rollDice() {

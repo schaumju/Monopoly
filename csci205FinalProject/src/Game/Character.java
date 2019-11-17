@@ -35,7 +35,6 @@ public class Character
     //Total board spaces
     private static final int TOTAL_BOARD_SPACES = 40;
 
-
     //Name of the character
     private String name;
 
@@ -59,8 +58,12 @@ public class Character
 
     //Jailed?
     private boolean isInJail;
-    // Player id
+
+    //Player id
     private int iD;
+
+    //Turns the player has been in jail for
+    private int turnsInJail;
 
     public Character(String name, Color color)
     {
@@ -72,6 +75,7 @@ public class Character
         this.balance = STARTING_BALANCE;
         this.numHouses = 0;
         this.isInJail = false;
+        this.turnsInJail = 0;
     }
 
     /**
@@ -93,6 +97,40 @@ public class Character
         }
         //this.position += turnsToMove;
 
+    }
+
+    /**
+     * Increments turns in jail
+     */
+    public void incrementTurnsInJail()
+    {
+        turnsInJail+=1;
+    }
+
+    /**
+     * Resets turnsInJail attribute to 0
+     */
+    public void resetJailTurn()
+    {
+        turnsInJail = 0;
+    }
+
+    /**
+     * Places player into jail
+     */
+    public void goToJail()
+    {
+        this.position = 10;
+        this.isInJail = true;
+    }
+
+    /**
+     * Leaves jail
+     */
+    public void leaveJail()
+    {
+        this.isInJail = false;
+        resetJailTurn();
     }
 
     /**
@@ -122,13 +160,6 @@ public class Character
         return this.balance <= 0;
     }
 
-    /**
-     * Sets player to jailed
-     */
-    public void setJailed(boolean trueFalse)
-    {
-        this.isInJail = trueFalse;
-    }
     //Add more methods here as needed
 
 
@@ -140,13 +171,17 @@ public class Character
         this.position = position;
     }
 
-    public boolean isInJail() {
-        return isInJail;
-    }
 
     /**
      * Getter methods
      */
+    public int getTurnsInJail() {
+        return turnsInJail;
+    }
+
+    public boolean isInJail() {
+        return isInJail;
+    }
 
     public int getPosition()
     {

@@ -18,27 +18,13 @@
  */
 package Game.Spaces;
 
-import Game.Prisoner;
 import Game.Character;
 
 public class GoToJailSpace extends Space
 {
-    //Prisoner object
-    private Prisoner newPrisoner;
 
     public GoToJailSpace() {
         super(30, "GO TO JAIL!");
     }
-
-    /**
-     * Go to jail
-     * @param thisChar - jailed inmate
-     */
-    public void goToJail(Character thisChar)
-    {
-        newPrisoner = new Prisoner(thisChar);
-    }
-
-
 
 }

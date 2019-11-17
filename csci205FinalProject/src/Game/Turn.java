@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class Turn {
 
+    private static final int JAIL_FINE = 50;
     /**
      * The player whose turn it is currently
      */
@@ -90,6 +91,9 @@ public class Turn {
         if (numRolls == 3) {
             //Move the player to jail because they rolled 3 doubles in a row
             System.out.println(player.getName() + " rolled 3 doubles in a row and got put in jail");
+
+            GoToJailSpace jailSpace = (GoToJailSpace)board.getBoard().get(30);
+            player.goToJail();
         }
 
         System.out.println(player.getName() + " is done rolling this turn");
@@ -111,7 +115,7 @@ public class Turn {
         } else if (space instanceof Utilities) {
             interactUtilities((Utilities) space);
         } else if (space instanceof GoToJailSpace) {
-            interactGoToJail((GoToJailSpace) space);
+            interactGoToJail();
         } else if (space instanceof Chance) {
             interactChance((Chance) space);
         } else if (space instanceof CommunityChest) {
@@ -145,10 +149,47 @@ public class Turn {
     }
 
     /**
+     * Get out of jail attempt
+     */
+    public void getOutOfJailAttempt()
+    {
+        Dice dice = new Dice();
+        int numRolls = dice.rollDice();
+        //If they successfully get out
+        if (dice.isDoubles())
+        {
+            player.move(numRolls);
+            player.leaveJail();
+        }
+        else
+        {
+            if(player.getTurnsInJail() == 3)
+            {
+                player.move(numRolls);
+
+                //TODO
+                //Add case for if they're bankrupt
+
+                player.subtractFromBalance(JAIL_FINE);
+                player.leaveJail();
+            }
+            else
+            {
+
+                //TODO
+                //Ask user if he wants to pay $50 and get out or not and show them the turn in jail they are at
+
+                player.incrementTurnsInJail();
+            }
+        }
+    }
+
+    /**
      * Allows the player to interact with the go to jail space
      */
-    private void interactGoToJail(GoToJailSpace space) {
-        space.goToJail(player);
+    private void interactGoToJail()
+    {
+        player.goToJail();
     }
 
     /**
