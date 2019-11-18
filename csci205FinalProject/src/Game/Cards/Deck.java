@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
 
-
-public abstract class  Deck {
+/**
+ * Representation of a deck
+ */
+public abstract class Deck {
 
 
     /**
@@ -49,6 +51,11 @@ public abstract class  Deck {
      * Shuffles the discard deck and then adds it back to the deck
      */
     protected void shuffle() {
+        // Make sure the deck is empty
+        while (deck.size() != 0) {
+            draw();
+        }
+        // Shuffle the deck
         Collections.shuffle(Arrays.asList(discard));
         for (Card card:discard) {
             deck.push(card);

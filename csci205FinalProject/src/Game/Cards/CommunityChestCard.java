@@ -18,4 +18,6 @@ public class CommunityChestCard extends Card
     public CommunityChestCard(String description, int moneyValue, int moveSpaces, int moveToSpace, String moveNearest, CardType type) {
         super(description, moneyValue, moveSpaces, moveToSpace, moveNearest, type);
     }
+
+
 }

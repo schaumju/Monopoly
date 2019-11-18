@@ -18,10 +18,6 @@
  */
 package Game.Spaces;
 
-import Game.Spaces.Buyable;
-import Game.Spaces.PropertyColor;
-import Game.Spaces.Space;
-
 /**
  * A property class that represents a property on the board.
  * @author Ashlyn Ramos
@@ -36,7 +32,7 @@ public class Property extends Space implements Buyable {
     /**
      * The rent of this property (contains the rent for every number of houses)
      */
-    private double[] rent;
+    private int[] rent;
     /**
      * The owner of the property
      */
@@ -57,8 +53,12 @@ public class Property extends Space implements Buyable {
      * boolean to determine if the property is mortgaged
      */
     private boolean isMortgaged;
+    /**
+     * Boolean that determines if the property is part of a monopoly
+     */
+    private boolean isMonopoly;
 
-    public Property(int position, String name, PropertyColor color, int price, double[] rent, int costOfHouses) {
+    public Property(int position, String name, PropertyColor color, int price, int[] rent, int costOfHouses) {
         super(position, name);
         this.color=color;
         this.price=price;
@@ -66,6 +66,7 @@ public class Property extends Space implements Buyable {
         this.costOfHouses=costOfHouses;
         // The property is originally unowned
         owner=-1;
+        isMonopoly = false;
     }
 
     /**
@@ -88,10 +89,9 @@ public class Property extends Space implements Buyable {
     /**
      * Returns the rent that is owed depending on the number of houses on it.
      * If there are no houses and it is part of a monopoly the rent is doubled
-     * @param isMonopoly boolean value denoting whether the property is part of an owned monopoly
      * @return the rent that is owed
      */
-    public double getRent(boolean isMonopoly) {
+    public int getRent() {
         if (isMortgaged) {
             return 0;
         }
@@ -169,4 +169,19 @@ public class Property extends Space implements Buyable {
         return costOfHouses;
     }
 
+    /**
+     * Returns true or false is a property is mortgaged
+     * @return boolean isMortgaged
+     */
+    public boolean isMortgaged() {
+        return isMortgaged;
+    }
+
+    /**
+     * Returns true or false if there is a monopoly
+     * @return boolean isMonopoly
+     */
+    public boolean isMonopoly() {
+        return isMonopoly;
+    }
 }

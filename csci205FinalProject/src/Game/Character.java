@@ -18,7 +18,11 @@
  */
 package Game;
 
+import Game.Spaces.Property;
 import javafx.scene.paint.Color;
+
+import java.io.PrintStream;
+import java.util.ArrayList;
 
 /**
  *  Methods:
@@ -30,11 +34,10 @@ import javafx.scene.paint.Color;
 public class Character
 {
     //Balance of the character
-    private static final double STARTING_BALANCE = 1500.00;
+    private static final int STARTING_BALANCE = 1500;
 
     //Total board spaces
     private static final int TOTAL_BOARD_SPACES = 40;
-
 
     //Name of the character
     private String name;
@@ -49,7 +52,7 @@ public class Character
     private int numRailroads;
 
     //Balance of the character
-    private double balance;
+    private int balance;
 
     //Utilities owned
     private int numUtilities;
@@ -59,6 +62,15 @@ public class Character
 
     //Jailed?
     private boolean isInJail;
+
+    //Player id
+    private int iD;
+
+    //Turns the player has been in jail for
+    private int turnsInJail;
+
+    //ArrayList of property objects that the player owns
+    private ArrayList<Property> ownedProperties;
 
     public Character(String name, Color color)
     {
@@ -70,6 +82,8 @@ public class Character
         this.balance = STARTING_BALANCE;
         this.numHouses = 0;
         this.isInJail = false;
+        this.turnsInJail = 0;
+        this.ownedProperties = new ArrayList<>();
     }
 
     /**
@@ -89,8 +103,42 @@ public class Character
             //They no passed Go
             this.position = this.position+turnsToMove;
         }
-        this.position += turnsToMove;
+        //this.position += turnsToMove;
 
+    }
+
+    /**
+     * Increments turns in jail
+     */
+    public void incrementTurnsInJail()
+    {
+        turnsInJail+=1;
+    }
+
+    /**
+     * Resets turnsInJail attribute to 0
+     */
+    public void resetJailTurn()
+    {
+        turnsInJail = 0;
+    }
+
+    /**
+     * Places player into jail
+     */
+    public void goToJail()
+    {
+        this.position = 10;
+        this.isInJail = true;
+    }
+
+    /**
+     * Leaves jail
+     */
+    public void leaveJail()
+    {
+        this.isInJail = false;
+        resetJailTurn();
     }
 
     /**
@@ -108,7 +156,14 @@ public class Character
      */
     public void subtractFromBalance(double subtractedMoney)
     {
-        this.balance -= subtractedMoney;
+        if (this.getBalance() < subtractedMoney) {
+            this.balance = 0;
+
+        } else {
+            this.balance -= subtractedMoney;
+        }
+
+
     }
 
     /**
@@ -121,14 +176,26 @@ public class Character
     }
 
     /**
-     * Sets player to jailed
+     * Adds a property
      */
-    public void setJailed(boolean trueFalse)
+    public void addProperty(Property prop)
     {
-        this.isInJail = trueFalse;
+        this.ownedProperties.add(prop);
     }
-    //Add more methods here as needed
 
+    /**
+     * Remove a property
+     */
+    public void removeProperty(Property prop)
+    {
+        if (ownedProperties.contains(prop)) {
+            this.ownedProperties.remove(prop);
+        } else {
+            System.out.println(prop.getName()+" is not owned by "+this.getName());
+        }
+    }
+
+    //Add more methods here as needed
 
     /**
      * Setter methods
@@ -138,13 +205,21 @@ public class Character
         this.position = position;
     }
 
-    public boolean isInJail() {
-        return isInJail;
-    }
 
     /**
      * Getter methods
      */
+    public ArrayList<Property> getOwnedProperties()
+    {
+        return ownedProperties;
+    }
+    public int getTurnsInJail() {
+        return turnsInJail;
+    }
+
+    public boolean isInJail() {
+        return isInJail;
+    }
 
     public int getPosition()
     {
@@ -171,7 +246,7 @@ public class Character
         return numUtilities;
     }
 
-    public double getBalance()
+    public int getBalance()
     {
         return balance;
     }
@@ -201,4 +276,36 @@ public class Character
     public void setNumHouses() {
         this.numHouses += 1;
     }
+
+    /**
+     * Allows a player to pay another player a set amount of monye
+     *
+     * @param player the player receiving the money
+     * @param amount the amount of money that is owed
+     */
+    public void payPlayer(Character player, int amount) {
+        if (this.getBalance() < amount) {
+            player.addToBalance(this.getBalance());
+            subtractFromBalance(this.getBalance());
+        } else {
+            player.addToBalance(amount);
+            subtractFromBalance(amount);
+        }
+
+    }
+
+    public int getID() {
+        return iD;
+    }
+
+    /**
+     * Sets the id
+     *
+     * @param id the player's id
+     */
+    public void setID(int id) {
+        this.iD = id;
+    }
+
+
 }
