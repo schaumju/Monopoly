@@ -169,4 +169,19 @@ public class Property extends Space implements Buyable {
         return costOfHouses;
     }
 
+    /**
+     * Returns true or false is a property is mortgaged
+     * @return boolean isMortgaged
+     */
+    public boolean isMortgaged() {
+        return isMortgaged;
+    }
+
+    /**
+     * Returns true or false if there is a monopoly
+     * @return boolean isMonopoly
+     */
+    public boolean isMonopoly() {
+        return isMonopoly;
+    }
 }
