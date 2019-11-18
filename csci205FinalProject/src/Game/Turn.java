@@ -298,7 +298,7 @@ public class Turn {
             //Create a new Dice object
             dice = new Dice();
             //Roll the dice
-            int roll = 30;//dice.rollDice();
+            int roll = dice.rollDice();
             System.out.println(player.getName() + " rolled " + roll + " isDoubles= " + dice.isDoubles());
             numRolls++;
             if (numRolls == 3 && dice.isDoubles()) {
