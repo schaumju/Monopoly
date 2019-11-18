@@ -19,6 +19,7 @@
 package View;
 
 import Game.Board;
+import Game.Dice;
 import Game.Spaces.Space;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
@@ -49,6 +50,37 @@ public class BoardView {
         setUpRoot();
 
         addBoardSpaces();
+
+        addDice();
+    }
+
+    /**
+     * adds the view of dice to the gridpane
+     * @author - kerri
+     */
+    private void addDice() {
+        int die1 = 5; //Dice.getDie1();
+        int die2 = 3; //Dice.getDie2();
+
+        Label die1Label = new Label(String.valueOf(die1));
+        die1Label.setAlignment(Pos.CENTER);
+
+        Label die2Label = new Label(String.valueOf(die2));
+        die2Label.setAlignment(Pos.CENTER);
+
+        Rectangle rect1 = new Rectangle(15,15);
+        rect1.setFill(Color.WHITE);
+        rect1.setStroke(Color.BLACK);
+
+        Rectangle rect2 = new Rectangle(15,15);
+        rect2.setFill(Color.WHITE);
+        rect2.setStroke(Color.BLACK);
+
+        root.add(rect1, root.getColumnCount()/2, root.getRowCount()/2);
+        root.add(die1Label, root.getColumnCount()/2, root.getRowCount()/2);
+
+        root.add(rect2, root.getColumnCount()/2 + 1, root.getRowCount()/2);
+        root.add(die2Label, root.getColumnCount()/2 + 1, root.getRowCount()/2);
     }
 
     /**
