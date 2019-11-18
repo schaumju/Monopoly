@@ -21,6 +21,7 @@ package Game;
 import Game.Spaces.Property;
 import javafx.scene.paint.Color;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -179,9 +180,21 @@ public class Character
      */
     public void addProperty(Property prop)
     {
-        assert prop.isOwned() == false;
         this.ownedProperties.add(prop);
     }
+
+    /**
+     * Remove a property
+     */
+    public void removeProperty(Property prop)
+    {
+        if (ownedProperties.contains(prop)) {
+            this.ownedProperties.remove(prop);
+        } else {
+            System.out.println(prop.getName()+" is not owned by "+this.getName());
+        }
+    }
+
     //Add more methods here as needed
 
     /**
