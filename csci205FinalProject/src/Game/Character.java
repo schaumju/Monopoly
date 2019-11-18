@@ -18,7 +18,10 @@
  */
 package Game;
 
+import Game.Spaces.Property;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 /**
  *  Methods:
@@ -65,6 +68,9 @@ public class Character
     //Turns the player has been in jail for
     private int turnsInJail;
 
+    //ArrayList of property objects that the player owns
+    private ArrayList<Property> ownedProperties;
+
     public Character(String name, Color color)
     {
         this.name = name;
@@ -76,6 +82,7 @@ public class Character
         this.numHouses = 0;
         this.isInJail = false;
         this.turnsInJail = 0;
+        this.ownedProperties = new ArrayList<>();
     }
 
     /**
@@ -167,8 +174,15 @@ public class Character
         return this.balance <= 0;
     }
 
+    /**
+     * Adds a property
+     */
+    public void addProperty(Property prop)
+    {
+        assert prop.isOwned() == false;
+        this.ownedProperties.add(prop);
+    }
     //Add more methods here as needed
-
 
     /**
      * Setter methods
@@ -182,6 +196,10 @@ public class Character
     /**
      * Getter methods
      */
+    public ArrayList<Property> getOwnedProperties()
+    {
+        return ownedProperties;
+    }
     public int getTurnsInJail() {
         return turnsInJail;
     }
