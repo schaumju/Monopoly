@@ -26,18 +26,23 @@ import java.util.Random;
  * @author Kerri
  */
 public class Dice {
+
     /**
      * The value of the first dice roll
      */
-    int die1;
+    static int die1;
     /**
      * The value of the second dice roll
      */
-    int die2;
+    static int die2;
+
+    public Dice() {
+    }
 
     /**
-     * Rolls the two dice and returns the result
-     * @return the sum of the dice roll
+     * rolls the dice by generating 2 random numbers
+     * @return - the total dice roll
+     * @author - kerri
      */
     public Integer rollDice() {
         Random rand = new Random();
@@ -49,8 +54,17 @@ public class Dice {
     /**
      * Returns whether the dice are doubles or not (doubles means the dice are the same number
      * @return true if the dice are doubles and false otherwise
+     * @author - kerri
      */
     public boolean isDoubles() {
-        return die1 == die2;
+        return getDie1() == getDie2();
+    }
+
+    public static int getDie1() {
+        return die1;
+    }
+
+    public static int getDie2() {
+        return die2;
     }
 }
