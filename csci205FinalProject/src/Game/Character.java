@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class Character
 {
     //Balance of the character
-    private static final double STARTING_BALANCE = 1500.00;
+    private static final int STARTING_BALANCE = 1500;
 
     //Total board spaces
     private static final int TOTAL_BOARD_SPACES = 40;
@@ -52,7 +52,7 @@ public class Character
     private int numRailroads;
 
     //Balance of the character
-    private double balance;
+    private int balance;
 
     //Utilities owned
     private int numUtilities;
@@ -246,7 +246,7 @@ public class Character
         return numUtilities;
     }
 
-    public double getBalance()
+    public int getBalance()
     {
         return balance;
     }

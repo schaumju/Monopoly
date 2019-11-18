@@ -256,7 +256,7 @@ public class Turn {
         }
 
         System.out.println("You have bought this property from the bank");
-        System.out.println("Your new balance is " + player.getBalance());
+        System.out.println("Your new balance is $" + player.getBalance());
     }
 
     /**
