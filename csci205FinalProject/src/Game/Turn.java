@@ -45,7 +45,13 @@ public class Turn {
         numRolls = 0;
         this.board = board;
         this.playerList = playerList;
-        playTurn();
+        if (player.isInJail()) {
+            getOutOfJailAttempt();
+
+        } else {
+            playTurn();
+        }
+
     }
 
 
