@@ -9,16 +9,21 @@ import javafx.scene.paint.Paint;
  */
 public enum PropertyColor {
 
-    BROWN(Color.BROWN), LIGHT_BLUE(Color.LIGHTBLUE), PURPLE(Color.PURPLE), ORANGE(Color.ORANGE), RED(Color.RED), YELLOW(Color.YELLOW), GREEN(Color.GREEN),DARK_BLUE(Color.DARKBLUE);
+    BROWN(Color.BROWN, 2), LIGHT_BLUE(Color.LIGHTBLUE, 3), PURPLE(Color.PURPLE, 3), ORANGE(Color.ORANGE, 3), RED(Color.RED, 3), YELLOW(Color.YELLOW, 3), GREEN(Color.GREEN, 3), DARK_BLUE(Color.DARKBLUE, 3);
 
     /**
      * The color
      */
     private Paint color;
+    /**
+     * The number of properties of the color in a monopoly
+     */
+    private int numberOfProperties;
 
 
-    PropertyColor(Paint color) {
+    PropertyColor(Paint color, int numberOfProperties) {
         this.color = color;
+        this.numberOfProperties = numberOfProperties;
     }
 
 
@@ -31,4 +36,12 @@ public enum PropertyColor {
         return color;
     }
 
+    /**
+     * Gets the number of properties in the monopoly
+     *
+     * @return
+     */
+    public int getNumberOfProperties() {
+        return numberOfProperties;
+    }
 }

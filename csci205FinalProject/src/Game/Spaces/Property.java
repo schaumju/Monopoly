@@ -95,9 +95,7 @@ public class Property extends Space implements Buyable {
         if (isMortgaged) {
             return 0;
         }
-        if (isMonopoly && numHouses == 0) {
-            return rent[numHouses]*2;
-        }
+
         return rent[numHouses];
     }
 

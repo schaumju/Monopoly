@@ -221,8 +221,14 @@ public class Turn {
 
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
-            System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent());
-            player.payPlayer(owner, space.getRent());
+            if (player.isMonopoly(space.getPropertyColor()) && space.getNumHouses() == 0) {
+                System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                player.payPlayer(owner, 2 * space.getRent());
+            } else {
+                System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                player.payPlayer(owner, space.getRent());
+            }
+
         } else if (player.getBalance() < space.getCost()) {
             System.out.println("You do not have enough money to buy this property");
         } else {

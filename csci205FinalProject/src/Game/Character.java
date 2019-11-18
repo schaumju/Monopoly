@@ -19,9 +19,9 @@
 package Game;
 
 import Game.Spaces.Property;
+import Game.Spaces.PropertyColor;
 import javafx.scene.paint.Color;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -305,6 +305,23 @@ public class Character
      */
     public void setID(int id) {
         this.iD = id;
+    }
+
+    /**
+     * Checks to see if the Player has a Monopoly in the specific color
+     *
+     * @param propertyColor the color of the property being checked
+     * @return true if the player has a monopoly in the color and false otherwise
+     */
+    public boolean isMonopoly(PropertyColor propertyColor) {
+
+        int count = 0;
+        for (Property property : ownedProperties) {
+            if (property.getPropertyColor() == propertyColor) {
+                count++;
+            }
+        }
+        return count == propertyColor.getNumberOfProperties();
     }
 
 
