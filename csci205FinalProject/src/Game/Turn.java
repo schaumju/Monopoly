@@ -113,31 +113,37 @@ public class Turn {
     {
         Dice dice = new Dice();
         int numRolls = dice.rollDice();
+        System.out.println(player.getName() + " rolled a " + numRolls);
         //If they successfully get out
         if (dice.isDoubles())
         {
+            System.out.println("Its doubles! You're out!");
             player.move(numRolls);
             player.leaveJail();
+            interactSpace();
+
         }
         else
         {
-            if(player.getTurnsInJail() == 3)
+            if(player.getTurnsInJail() == 2)
             {
                 player.move(numRolls);
-
-                //TODO
-                //Add case for if they're bankrupt
-
+                System.out.println("You've served your sentence! Pay $50 and leave!");
                 player.subtractFromBalance(JAIL_FINE);
+
+                //CHECK BANKRUPT
+
                 player.leaveJail();
+                interactSpace();
             }
             else
             {
-
+                System.out.println("Its not a double! Stay in jail");
                 //TODO
                 //Ask user if he wants to pay $50 and get out or not and show them the turn in jail they are at
 
                 player.incrementTurnsInJail();
+                System.out.println("Turns in jail: " + player.getTurnsInJail());
             }
         }
     }
@@ -310,6 +316,10 @@ public class Turn {
             interactSpace();
             if (player.isBankrupt()) {
                 bankrupt();
+                break;
+            }
+            if (player.isInJail())
+            {
                 break;
             }
 
