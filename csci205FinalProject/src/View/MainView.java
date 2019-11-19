@@ -34,7 +34,9 @@ public class MainView {
 
         BoardView.addBoardSpaces();
 
-        DiceView.addDice();
+        //DiceView.addDice();
+        DiceView view = new DiceView();
+        view.addDice();
 
         CharacterView.addCharacters();
     }

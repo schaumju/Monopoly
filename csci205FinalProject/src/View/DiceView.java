@@ -18,20 +18,21 @@
  */
 package View;
 
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import Game.Dice;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.Button;
 
 public class DiceView {
 
+    private SimpleIntegerProperty target = new SimpleIntegerProperty();
 
     /**
      * adds the view of dice to the gridpane
      * @author - kerri
      */
-    protected static void addDice() {
-        int die1 = 5; //Dice.getDie1();
+    protected void addDice() {
+        /*int die1 = 5; //Dice.getDie1();
         int die2 = 3; //Dice.getDie2();
 
         Label die1Label = new Label("  " + String.valueOf(die1));
@@ -54,7 +55,33 @@ public class DiceView {
         MainView.getRoot().add(die1Label, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2);
 
         MainView.getRoot().add(rect2, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
-        MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
+        MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);*/
+
+        DiceAnimation dice1 = new DiceAnimation();
+        DiceAnimation dice2 = new DiceAnimation();
+
+        dice1.setTranslateX(400);
+        dice1.setTranslateY(600);
+
+        dice2.setTranslateX(460);
+        dice2.setTranslateY(600);
+
+
+        Button btn = new Button("Roll dice");
+        btn.setOnAction(event -> {
+            Dice dice = new Dice();
+            dice.rollDice();
+            dice1.roll(Dice.getDie1());
+            dice2.roll(Dice.getDie2());
+        });
+        btn.setTranslateX(600);
+        btn.setTranslateY(600);
+
+        SimpleBooleanProperty bool = new SimpleBooleanProperty();
+        bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));
+
+        MainView.getRoot().getChildren().addAll(dice1, dice2, btn);
+
     }
 
 }
