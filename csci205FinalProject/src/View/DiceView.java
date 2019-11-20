@@ -30,7 +30,7 @@ import javafx.scene.shape.Rectangle;
 
 public class DiceView {
 
-    private SimpleIntegerProperty target = new SimpleIntegerProperty();
+    private static SimpleIntegerProperty target = new SimpleIntegerProperty();
     static Button rollDiceBtn;
     private static DiceAnimation dice1;
     private static DiceAnimation dice2;
@@ -39,7 +39,7 @@ public class DiceView {
      * adds the view of dice to the gridpane
      * @author - kerri
      */
-    protected void addDice() {
+    protected static void addDice() {
         /*int die1 = 5; //Dice.getDie1();
         int die2 = 3; //Dice.getDie2();
 
@@ -85,7 +85,7 @@ public class DiceView {
      * @param dice2
      * @author justin
      */
-    private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
+    private static void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
         rollDiceBtn = new Button("Roll dice");
 
         rollDiceBtn.setTranslateX(600);
