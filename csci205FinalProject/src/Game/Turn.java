@@ -51,10 +51,7 @@ public class Turn {
         } else {
             playTurn();
         }
-
     }
-
-
 
 
     /**
@@ -63,7 +60,7 @@ public class Turn {
     private void interactSpace() {
 
         Space space = Board.getBoard().get(player.getPosition());
-        System.out.println(player.getName() + " landed on " + space.getName());
+        System.out.println(player.getName() + " landed on space " + space.getPosition() + ": " + space.getName());
 
         if (space instanceof Property) {
             interactProperty((Property) space);
@@ -113,7 +110,7 @@ public class Turn {
     {
         Dice dice = new Dice();
         int numRolls = dice.rollDice();
-        System.out.println(player.getName() + " rolled a " + numRolls);
+        System.out.println(player.getName() + " rolled a " + dice.getDie1() + " and a " + dice.getDie2());
         //If they successfully get out
         if (dice.isDoubles())
         {
@@ -130,8 +127,14 @@ public class Turn {
                 player.move(numRolls);
                 System.out.println("You've served your sentence! Pay $50 and leave!");
                 player.subtractFromBalance(JAIL_FINE);
+                System.out.println(player.getName() + " paid $50");
 
                 //CHECK BANKRUPT
+                if(player.isBankrupt())
+                {
+                    System.out.println("PLAYER IS BANKRUPT!");
+                    //TODO
+                }
 
                 player.leaveJail();
                 interactSpace();
@@ -146,6 +149,7 @@ public class Turn {
                 System.out.println("Turns in jail: " + player.getTurnsInJail());
             }
         }
+        System.out.println("-----------------------------------");
     }
 
     /**
@@ -193,7 +197,8 @@ public class Turn {
      */
     private void interactTax(Tax space) {
         player.subtractFromBalance(space.getTax());
-        System.out.println(player.getName() + " paid " + space.getTax());
+        System.out.println("You must pay your dues!");
+        System.out.println(player.getName() + " paid $" + space.getTax());
     }
 
     /**
@@ -303,15 +308,19 @@ public class Turn {
         do {
             //Create a new Dice object
             dice = new Dice();
+
             //Roll the dice
             int roll = dice.rollDice();
-            System.out.println(player.getName() + " rolled " + roll + " isDoubles= " + dice.isDoubles());
+            System.out.println(player.getName() + " rolled a " + dice.getDie1() + " and a " + dice.getDie2());
             numRolls++;
+
+            //Check for doubles
             if (numRolls == 3 && dice.isDoubles()) {
                 break;
             }
             //move spaces
             player.move(roll);
+
             //interact with square
             interactSpace();
             if (player.isBankrupt()) {
@@ -329,11 +338,11 @@ public class Turn {
             //Move the player to jail because they rolled 3 doubles in a row
             System.out.println(player.getName() + " rolled 3 doubles in a row and got put in jail");
 
-            GoToJailSpace jailSpace = (GoToJailSpace) Board.getBoard().get(30);
             player.goToJail();
         }
 
         System.out.println(player.getName() + " is done rolling this turn");
+        System.out.println("-----------------------------------");
 
     }
 

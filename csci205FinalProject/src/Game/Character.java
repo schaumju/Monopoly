@@ -96,6 +96,7 @@ public class Character
         {
             //They passed Go
             this.balance += 200.00;
+            System.out.println(this.getName() + " PASSED GO! COLLECT $200");
             this.position = (this.position + turnsToMove)%TOTAL_BOARD_SPACES;
         }
         else
