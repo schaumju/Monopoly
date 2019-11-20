@@ -37,6 +37,8 @@ public class Dice {
     static int die2;
 
     public Dice() {
+        this.die1 = 0;
+        this.die2 = 0;
     }
 
     /**

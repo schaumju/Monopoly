@@ -20,6 +20,10 @@ public class DiceAnimation extends StackPane {
 
     public final SimpleIntegerProperty valueProperty = new SimpleIntegerProperty();
 
+    /**
+     * sets up the dice animation
+     * @author justin
+     */
     public DiceAnimation() {
 
         Rectangle rect = new Rectangle(50, 50);
@@ -34,6 +38,11 @@ public class DiceAnimation extends StackPane {
 
     }
 
+    /**
+     * does the rolling of the dice
+     * @param roll
+     * @author - justin
+     */
     public void roll(int roll) {
         RotateTransition rt = new RotateTransition(Duration.seconds(.9), this);
         rt.setFromAngle(0);
