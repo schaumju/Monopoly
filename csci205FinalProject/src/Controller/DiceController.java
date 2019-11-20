@@ -5,12 +5,12 @@
  *
  * Name: Kerri Palphreyman
  * Section: 11am
- * Date: 11/8/19
- * Time: 4:14 PM
+ * Date: 11/18/19
+ * Time: 8:30 PM
  *
  * Project: csci205FinalProject
  * Package: Controller
- * Class: BoardControl
+ * Class: DiceController
  *
  * Description:
  *
@@ -18,8 +18,16 @@
  */
 package Controller;
 
+import View.DiceView;
 
-public class BoardController {
+public class DiceController {
 
+    protected static void handleRollDice() {
+
+        DiceView.getRollDiceBtn().setOnMouseClicked(mouseEvent -> {
+            System.out.println("roll dice button");
+        });
+
+    }
 
 }
