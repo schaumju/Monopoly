@@ -18,6 +18,7 @@
  */
 package View;
 
+import Game.Dice;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -35,6 +36,7 @@ public class MainView {
         BoardView.addBoardSpaces();
 
         DiceView.addDice();
+        DiceView.addRollDiceBtn();
 
         CharacterView.addCharacters();
     }

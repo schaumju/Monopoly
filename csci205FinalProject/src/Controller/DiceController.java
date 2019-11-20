@@ -18,6 +18,16 @@
  */
 package Controller;
 
+import View.DiceView;
+
 public class DiceController {
+
+    protected static void handleRollDice() {
+
+        DiceView.getRollDiceBtn().setOnMouseClicked(mouseEvent -> {
+            System.out.println("roll dice button");
+        });
+
+    }
 
 }

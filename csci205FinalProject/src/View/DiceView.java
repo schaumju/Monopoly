@@ -19,12 +19,16 @@
 package View;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+
+
 public class DiceView {
 
+    static Button rollDiceBtn;
 
     /**
      * adds the view of dice to the gridpane
@@ -57,4 +61,16 @@ public class DiceView {
         MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
     }
 
+    /**
+     * adds the roll dice button to the view
+     * @author kerri
+     */
+    public static void addRollDiceBtn() {
+        rollDiceBtn = new Button("Roll Dice");
+        MainView.getRoot().add(rollDiceBtn, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2 + 1);
+    }
+
+    public static Button getRollDiceBtn() {
+        return rollDiceBtn;
+    }
 }
