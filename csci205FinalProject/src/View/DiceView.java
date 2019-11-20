@@ -32,6 +32,8 @@ public class DiceView {
 
     private SimpleIntegerProperty target = new SimpleIntegerProperty();
     static Button rollDiceBtn;
+    private static DiceAnimation dice1;
+    private static DiceAnimation dice2;
 
     /**
      * adds the view of dice to the gridpane
@@ -63,8 +65,8 @@ public class DiceView {
         MainView.getRoot().add(rect2, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
         MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);*/
 
-        DiceAnimation dice1 = new DiceAnimation();
-        DiceAnimation dice2 = new DiceAnimation();
+        dice1 = new DiceAnimation();
+        dice2 = new DiceAnimation();
 
         dice1.setTranslateX(400);
         dice1.setTranslateY(600);
@@ -73,21 +75,37 @@ public class DiceView {
         dice2.setTranslateY(600);
 
 
-        Button btn = new Button("Roll dice");
-        btn.setOnAction(event -> {
-            Dice dice = new Dice();
-            dice.rollDice();
-            dice1.roll(Dice.getDie1());
-            dice2.roll(Dice.getDie2());
-        });
-        btn.setTranslateX(600);
-        btn.setTranslateY(600);
+        addRollDiceBtn(dice1, dice2);
+
+    }
+
+    /**
+     * adds the roll dice button to the view
+     * @param dice1
+     * @param dice2
+     * @author justin
+     */
+    private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
+        rollDiceBtn = new Button("Roll dice");
+
+        rollDiceBtn.setTranslateX(600);
+        rollDiceBtn.setTranslateY(600);
 
         SimpleBooleanProperty bool = new SimpleBooleanProperty();
         bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));
 
-        MainView.getRoot().getChildren().addAll(dice1, dice2, btn);
-
+        MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
+    public static Button getRollDiceBtn() {
+        return rollDiceBtn;
+    }
+
+    public static DiceAnimation getDice1() {
+        return dice1;
+    }
+
+    public static DiceAnimation getDice2() {
+        return dice2;
+    }
 }

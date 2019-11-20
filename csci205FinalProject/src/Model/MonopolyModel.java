@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.BoardController;
+import Controller.MainController;
 import Game.Board;
 import View.BoardView;
 import View.MainView;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 public class MonopolyModel extends Application {
 
     private MainView theView;
-    private BoardController theController;
+    private MainController theController;
     private MonopolyModel theModel;
     private Board theBoard;
 
@@ -25,7 +26,7 @@ public class MonopolyModel extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        //this.theController = new BoardController(theModel, theView);
+        this.theController = new MainController(theModel, theView);
 
         // add the scene graph to the stage
         primaryStage.setScene(new Scene(theView.getRoot()));

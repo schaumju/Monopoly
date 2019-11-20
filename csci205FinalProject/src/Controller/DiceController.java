@@ -18,14 +18,22 @@
  */
 package Controller;
 
+import Game.Dice;
+import View.DiceAnimation;
 import View.DiceView;
 
 public class DiceController {
 
+    /**
+     * handles rolling the dice
+     * @author justin & kerri
+     */
     protected static void handleRollDice() {
-
-        DiceView.getRollDiceBtn().setOnMouseClicked(mouseEvent -> {
-            System.out.println("roll dice button");
+        DiceView.getRollDiceBtn().setOnAction(event -> {
+            Dice dice = new Dice();
+            dice.rollDice();
+            DiceView.getDice1().roll(Dice.getDie1());
+            DiceView.getDice2().roll(Dice.getDie2());
         });
 
     }
