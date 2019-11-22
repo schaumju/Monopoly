@@ -68,6 +68,16 @@ public class BoardView {
                 MainView.getRoot().add(spaceName, 0, 40 - i);
             }
         }
+        addTurnHistoryColumn();
+    }
+
+    /**
+     * adds the column on the right side that keeps track and displays text of what each player is doing so that
+     * all of the players stay updated with what the others have done
+     * @author kerri
+     */
+    private static void addTurnHistoryColumn() {
+        MainView.getRoot().addColumn(MainView.getRoot().getColumnCount(),new Label("   what has happened in the game   "));
     }
 
     /**

@@ -27,6 +27,11 @@ public class MainView {
     private MonopolyModel theModel;
     private static GridPane root;
 
+    /**
+     * sets up the main view
+     * @param theModel
+     * @author kerri
+     */
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
 
