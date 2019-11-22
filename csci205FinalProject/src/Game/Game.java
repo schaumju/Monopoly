@@ -1,8 +1,5 @@
 package Game;
 
-import javafx.scene.paint.Color;
-
-
 /**
  * Representation of a Monopoly Game
  *
@@ -50,18 +47,18 @@ public class Game {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
-        Game game = new Game(playerList);
-        Character curPlayer = playerList[0];
-        do {
-            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
-            curPlayer = game.getNextPlayer();
-
-        } while (!game.gameOver());
-
-        System.out.println(game.getWinner().getName() + " won the game");
-    }
+//    public static void main(String[] args) {
+//        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
+//        Game game = new Game(playerList);
+//        Character curPlayer = playerList[0];
+//        do {
+//            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
+//            curPlayer = game.getNextPlayer();
+//
+//        } while (!game.gameOver());
+//
+//        System.out.println(game.getWinner().getName() + " won the game");
+//    }
 
     /**
      * Determines if the game should end
@@ -124,5 +121,18 @@ public class Game {
      */
     public boolean isValidPlayer(int index) {
         return !playerList[index].isBankrupt();
+    }
+
+    /**
+     * Returns the character object of the player with the current turn
+     *
+     * @return the Character with the current turn
+     */
+    public Character getCurPlayer() {
+        return playerList[curPlayerTurn];
+    }
+
+    public Character[] getPlayerList() {
+        return playerList;
     }
 }

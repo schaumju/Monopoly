@@ -18,6 +18,8 @@
  */
 package Game.Spaces;
 
+import Game.Character;
+
 /**
  * A property class that represents a property on the board.
  * @author Ashlyn Ramos
@@ -121,10 +123,11 @@ public class Property extends Space implements Buyable {
 
     /**
      * Sets the owner of the property to the player that purchases the property.
-     * @param playerID the id of the player who is buying the property
+     * @param player the player who is buying the property
      */
-    public void buyProperty(int playerID) {
-        owner = playerID;
+    public void buyProperty(Character player) {
+        owner = player.getID();
+        player.subtractFromBalance(getCost());
     }
 
     /**
