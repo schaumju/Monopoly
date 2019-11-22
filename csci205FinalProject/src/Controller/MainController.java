@@ -39,6 +39,8 @@ public class MainController {
         
         //handle roll dice
         DiceController.handleRollDice();
+
+        BuyPropertyController.handleBuyProperty();
     }
 
 

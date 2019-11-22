@@ -7,13 +7,13 @@ public class PropertyView {
     static Button buyPropertyButton;
 
     public static void addPropertyBuyButton() {
-        Button btn = new Button("Buy Property");
+        buyPropertyButton = new Button("Buy \nProperty");
 
-        btn.setTranslateX(600);
-        btn.setTranslateY(600);
+        buyPropertyButton.setTranslateX(600);
+        buyPropertyButton.setTranslateY(550);
 
 
-        MainView.getRoot().getChildren().addAll(btn);
+        MainView.getRoot().getChildren().addAll(buyPropertyButton);
     }
 
     public static Button getBuyPropertyButton() {

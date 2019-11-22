@@ -34,11 +34,11 @@ public class MainView {
 
         BoardView.addBoardSpaces();
 
-        //DiceView.addDice();
-        DiceView view = new DiceView();
-        view.addDice();
+        DiceView.addDice();
 
         CharacterView.addCharacters();
+
+        PropertyView.addPropertyBuyButton();
     }
 
 
