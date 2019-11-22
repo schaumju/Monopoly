@@ -39,6 +39,8 @@ public class MainView {
         CharacterView.addCharacters();
 
         PropertyView.addPropertyBuyButton();
+
+        CardsView.addCards();
     }
 
 
