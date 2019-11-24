@@ -18,9 +18,11 @@
  */
 package View;
 
+import Game.Character;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class MainView {
 
@@ -36,7 +38,7 @@ public class MainView {
 
         DiceView.addDice();
 
-        //Moved addCharacters to Game object class
+        //new CharacterView(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
 
         PropertyView.addPropertyBuyButton();
     }

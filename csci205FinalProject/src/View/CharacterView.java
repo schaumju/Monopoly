@@ -29,27 +29,42 @@ public class CharacterView {
     //List of Circle objects
     private List<Circle> boardPlayerList;
 
+    //List of Character objects
+    private Character[] playerList;
+
     public CharacterView(Character[] playerList)
     {
+        this.playerList = playerList;
         this.boardPlayerList = new ArrayList<>();
         convertPlayers(playerList);
-        addCharacters();
     }
 
     private void convertPlayers(Character[] playerList) {
         //Fills the circle list using the players in playerList.
         for (Character player : playerList)
         {
-            boardPlayerList.add(new Circle(100, player.getColor()));
+            boardPlayerList.add(new Circle(30, player.getColor()));
         }
     }
 
-    //Adds the characters contained in the
+    //Adds the characters contained in the list
     public void addCharacters()
     {
-        for (Circle playerCircle: boardPlayerList)
+        for (int i = 0; i < boardPlayerList.size(); i++)
         {
-            MainView.getRoot().getChildren().addAll(playerCircle);
+            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+        }
+    }
+
+    //Updates the characters positions
+    public void updateCharacters()
+    {
+        for(int i = 0; i < boardPlayerList.size(); i++)
+        {
+            MainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+            int playerMoves = 70 * playerList[i].getPosition();
+            boardPlayerList.get(i).setTranslateX(4+playerMoves);
+            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
         }
     }
 }

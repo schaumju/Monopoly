@@ -56,5 +56,8 @@ public class MonopolyModel extends Application {
         this.theView = new MainView(theModel);
         this.Game = new Game(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
         this.Game.getCharacters().addCharacters();
+        //Moves the first player by 3 moves
+        this.Game.getPlayerList()[0].move(3);
+        this.Game.getCharacters().updateCharacters();
     }
 }
