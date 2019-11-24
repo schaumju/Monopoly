@@ -3,10 +3,13 @@ package Model;
 import Controller.BoardController;
 import Controller.MainController;
 import Game.Board;
+import Game.Character;
+import Game.Game;
 import View.BoardView;
 import View.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MonopolyModel extends Application {
@@ -15,6 +18,7 @@ public class MonopolyModel extends Application {
     private MainController theController;
     private MonopolyModel theModel;
     private Board theBoard;
+    private Game Game;
 
     public static void main(String[] args) { launch(args); }
 
@@ -50,5 +54,7 @@ public class MonopolyModel extends Application {
         this.theModel = new MonopolyModel();
         this.theBoard = new Board();
         this.theView = new MainView(theModel);
+        this.Game = new Game(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
+        this.Game.getCharacters().addCharacters();
     }
 }
