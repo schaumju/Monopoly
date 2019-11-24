@@ -36,7 +36,7 @@ public class MainView {
 
         DiceView.addDice();
 
-        CharacterView.addCharacters();
+        //Moved addCharacters to Game object class
 
         PropertyView.addPropertyBuyButton();
     }

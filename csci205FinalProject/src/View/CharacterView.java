@@ -18,10 +18,38 @@
  */
 package View;
 
+import Game.Character;
+import javafx.scene.shape.Circle;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CharacterView {
 
-    protected static void addCharacters() {
-        System.out.println("adding characters");
+    //List of Circle objects
+    private List<Circle> boardPlayerList;
+
+    public CharacterView(Character[] playerList)
+    {
+        this.boardPlayerList = new ArrayList<>();
+        convertPlayers(playerList);
+        addCharacters();
     }
 
+    private void convertPlayers(Character[] playerList) {
+        //Fills the circle list using the players in playerList.
+        for (Character player : playerList)
+        {
+            boardPlayerList.add(new Circle(100, player.getColor()));
+        }
+    }
+
+    //Adds the characters contained in the
+    public void addCharacters()
+    {
+        for (Circle playerCircle: boardPlayerList)
+        {
+            MainView.getRoot().getChildren().addAll(playerCircle);
+        }
+    }
 }

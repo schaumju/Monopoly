@@ -1,5 +1,6 @@
 package Game;
 
+import View.CharacterView;
 import javafx.scene.paint.Color;
 
 
@@ -17,7 +18,7 @@ public class Game {
     /**
      * A list containing all the players
      */
-    private Character[] playerList;
+    public Character[] playerList;
     /**
      * The number of turns that have been played already in the game
      */
@@ -32,7 +33,10 @@ public class Game {
      */
     private int curPlayerTurn;
 
-
+    /**
+     * The Characters in characterview
+     */
+    private CharacterView characters;
     /**
      * Constructor
      *
@@ -41,6 +45,7 @@ public class Game {
     public Game(Character[] playerList) {
         this.playerList = playerList;
         this.numTurns = 0;
+        this.characters = new CharacterView(playerList);
         curPlayerTurn = 0;
         board = new Board();
     }
@@ -52,6 +57,10 @@ public class Game {
      */
     public static void main(String[] args) {
         Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
+
+        //Add characters to the board
+
+
         Game game = new Game(playerList);
         Character curPlayer = playerList[0];
         do {
@@ -124,5 +133,15 @@ public class Game {
      */
     public boolean isValidPlayer(int index) {
         return !playerList[index].isBankrupt();
+    }
+
+    public Character[] getPlayerList()
+    {
+        return playerList;
+    }
+
+    //Returns a list of character objects
+    public CharacterView getCharacters() {
+        return characters;
     }
 }
