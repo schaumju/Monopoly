@@ -67,6 +67,11 @@ public class Railroads extends Space implements Buyable {
         player.buyRailroad();
     }
 
+    @Override
+    public void buyProperty(int i) {
+        ownerID = -1;
+    }
+
     /**
      * Returns the rent
      * @param numOwned the number of railroads the player owns

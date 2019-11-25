@@ -69,6 +69,11 @@ public class Utilities extends Space implements Buyable {
         player.buyUtility();
     }
 
+    @Override
+    public void buyProperty(int i) {
+        ownerID = -1;
+    }
+
 
     /**
      * Returns the rent
