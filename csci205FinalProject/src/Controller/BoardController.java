@@ -64,13 +64,35 @@ public class BoardController
             }
             if(BoardView.getListOfSpaces().get(i) instanceof Tax)
             {
-
+                taxPopupOnClick(BoardView.getListOfLabels().get(i), BoardView.getListOfSpaces().get(i));
             }
         }
     }
 
     /**
-     * Creates a popup window for property prices
+     * Creates a popup window for tax prices
+     * @param label - label to be clicked on for popup window to show
+     * @param curSpace - space with information to display
+     */
+    private void taxPopupOnClick(Label label, Space curSpace)
+    {
+        label.setOnMouseClicked(mouseEvent ->
+        {
+            Stage dialog = new Stage();
+            VBox popup = new VBox(20);
+            Text propPrices = new Text(curSpace.getName() + " Tax");
+            Text taxAmount = new Text("Tax amount: $" + ((Tax)curSpace).getTax());
+            popup.getChildren().add(propPrices);
+            popup.getChildren().add(taxAmount);
+            popup.setAlignment(Pos.TOP_CENTER);
+            Scene dialogScene = new Scene(popup, 300, 100);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        });
+    }
+
+    /**
+     * Creates a popup window for property/railroad prices
      * @param label - the text object in the square
      * @param curSpace - the board space
      */
@@ -86,7 +108,7 @@ public class BoardController
             Text rentPrice;
             if (curSpace instanceof Property)
             {
-                rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
+                rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent());
             }
             else
             {
