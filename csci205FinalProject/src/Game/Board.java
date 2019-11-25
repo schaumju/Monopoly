@@ -23,10 +23,10 @@ public class Board {
      * Default Constructor
      */
     public Board() {
-        board = new ArrayList<>();
-        buyableProperties = new ArrayList<>();
-        chanceDeck = new ChanceDeck();
-        communityChestDeck = new CommunityChestDeck();
+        this.board = new ArrayList<>();
+        this.buyableProperties = new ArrayList<>();
+        this.chanceDeck = new ChanceDeck();
+        this.communityChestDeck = new CommunityChestDeck();
         init();
         sort();
     }
