@@ -41,9 +41,11 @@ import java.util.ArrayList;
 
 public class BoardView {
 
-    private static final int NUM_SPACES = 40;
+    public static final int NUM_SPACES = 40;
 
-    public ArrayList<Space> listOfSpaces;
+    public static ArrayList<Label> listOfLabels = new ArrayList<>();
+
+    public static ArrayList<Space> listOfSpaces = new ArrayList<>();
 
     /**
      * adds all of the board spaces to the gridpane
@@ -78,58 +80,11 @@ public class BoardView {
                 MainView.getRoot().add(spaceName, 0, 40 - i);
             }
 
-            //Andrew added
-            if(curSpace instanceof Property) {
-                pricePopupOnClick(spaceName, curSpace);
-            }
-            //Andrew Done
+            listOfLabels.add(spaceName);
+            listOfSpaces.add(curSpace);
 
         }
         addTurnHistoryColumn();
-    }
-
-    /**
-     * Creates a popup window
-     * @param label - the text object in the square
-     * @param curSpace - the board space
-     */
-    private static void pricePopupOnClick(Label label, Space curSpace)
-    {
-        label.setOnMouseClicked(mouseEvent ->
-        {
-            Stage dialog = new Stage();
-            VBox popup = new VBox(20);
-
-            //Text
-            Text propPrices = new Text(curSpace.getName() + " Price");
-            Text rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
-            String propertyOwner = getPropertyOwners((Property)curSpace);
-            Text owner = new Text("Owner: " + propertyOwner);
-            popup.getChildren().add(propPrices);
-            popup.getChildren().add(rentPrice);
-            popup.getChildren().add(owner);
-            popup.setAlignment(Pos.TOP_CENTER);
-            Scene dialogScene = new Scene(popup, 200, 100);
-            dialog.setScene(dialogScene);
-            dialog.show();
-        });
-    }
-
-    /**
-     * Finds the property owner
-     * @param curSpace - space in question
-     * @return - string of owner
-     */
-    private static String getPropertyOwners(Property curSpace)
-    {
-        if(curSpace.getOwner() == -1)
-        {
-            return " None";
-        }
-        else
-        {
-            return " owned";
-        }
     }
 
     /**
@@ -251,4 +206,13 @@ public class BoardView {
         else  { colorRectangle.setFill(Color.WHITE); }
     }
 
+    //Getters
+
+    public static ArrayList<Label> getListOfLabels() {
+        return listOfLabels;
+    }
+
+    public static ArrayList<Space> getListOfSpaces() {
+        return listOfSpaces;
+    }
 }

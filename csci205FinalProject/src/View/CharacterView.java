@@ -43,7 +43,7 @@ public class CharacterView {
         //Fills the circle list using the players in playerList.
         for (Character player : playerList)
         {
-            boardPlayerList.add(new Circle(30, player.getColor()));
+            boardPlayerList.add(new Circle(10, player.getColor()));
         }
     }
 

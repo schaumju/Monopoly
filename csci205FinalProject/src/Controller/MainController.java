@@ -19,6 +19,7 @@
 package Controller;
 
 import Model.MonopolyModel;
+import View.BoardView;
 import View.DiceView;
 import View.MainView;
 
@@ -26,6 +27,7 @@ public class MainController {
 
     private MonopolyModel theModel;
     private MainView theView;
+    private BoardController boardController;
 
     /**
      * constructor
@@ -36,6 +38,7 @@ public class MainController {
     public MainController(MonopolyModel theModel, MainView theView) {
         this.theModel = theModel;
         this.theView = theView;
+        this.boardController = new BoardController(theModel, new BoardView());
         
         //handle roll dice
         DiceController.handleRollDice();

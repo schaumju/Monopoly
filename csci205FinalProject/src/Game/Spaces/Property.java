@@ -128,10 +128,12 @@ public class Property extends Space implements Buyable {
     public void buyProperty(Character player) {
         owner = player.getID();
         player.subtractFromBalance(getCost());
+        System.out.println("RAN");
     }
 
     public void buyProperty(int playerID)
     {
+
         owner = -1;
     }
 
