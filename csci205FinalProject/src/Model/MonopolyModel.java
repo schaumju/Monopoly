@@ -1,18 +1,18 @@
 package Model;
 
-import Game.Board;
-import Controller.BoardController;
+
 import Controller.MainController;
 import Game.Board;
 import Game.Character;
 import Game.Game;
-import Game.Spaces.Property;
-import View.BoardView;
 import View.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+//import Controller.MainController;
+//import Game.Spaces.Property;
 
 public class MonopolyModel extends Application {
 
@@ -21,8 +21,16 @@ public class MonopolyModel extends Application {
     private MonopolyModel theModel;
     private Board theBoard;
     private Game Game;
+    private static MonopolyModel _instance;
 
     public static void main(String[] args) { launch(args); }
+
+    public static MonopolyModel getInstance() {
+        if (_instance == null) {
+            _instance = new MonopolyModel();
+        }
+        return _instance;
+    }
 
     /**
      * starts the graphic
@@ -33,7 +41,7 @@ public class MonopolyModel extends Application {
     public void start(Stage primaryStage) {
 
         // add the scene graph to the stage
-        primaryStage.setScene(new Scene(theView.getRoot()));
+        primaryStage.setScene(new Scene(MainView.getRoot()));
         primaryStage.sizeToScene();
 
         // set the title for the main window
