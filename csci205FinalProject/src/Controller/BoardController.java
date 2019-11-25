@@ -21,6 +21,7 @@ package Controller;
 
 import Game.Board;
 import Game.Spaces.Property;
+import Game.Spaces.Railroads;
 import Game.Spaces.Space;
 import Game.Spaces.Tax;
 import Model.MonopolyModel;
@@ -57,7 +58,7 @@ public class BoardController
     {
         for (int i = 0; i < BoardView.NUM_SPACES; i++)
         {
-            if (BoardView.getListOfSpaces().get(i) instanceof Property)
+            if (BoardView.getListOfSpaces().get(i) instanceof Property || BoardView.getListOfSpaces().get(i) instanceof Railroads)
             {
                 pricePopupOnClick(BoardView.getListOfLabels().get(i), BoardView.getListOfSpaces().get(i));
             }
@@ -80,16 +81,24 @@ public class BoardController
             Stage dialog = new Stage();
             VBox popup = new VBox(20);
 
-            //Text
+
             Text propPrices = new Text(curSpace.getName() + " Price");
-            Text rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
+            Text rentPrice;
+            if (curSpace instanceof Property)
+            {
+                rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
+            }
+            else
+            {
+                rentPrice = new Text("Rent Price for One Railroad Owned: $" + ((Railroads) curSpace).getRent(1) + "\nRent Price for Two Railroads Owned: $" + ((Railroads) curSpace).getRent(2) + "\nRent Price for Three Railroads Owned: $" + ((Railroads) curSpace).getRent(3) + "\nRent Price for Four Railroads Owned: $" + (((Railroads) curSpace).getRent(4)));
+            }
             //String propertyOwner = getPropertyOwners(theModel.getGame().getBoard());
             //Text owner = new Text("Owner: " + propertyOwner);
             popup.getChildren().add(propPrices);
             popup.getChildren().add(rentPrice);
             //popup.getChildren().add(owner);
             popup.setAlignment(Pos.TOP_CENTER);
-            Scene dialogScene = new Scene(popup, 200, 100);
+            Scene dialogScene = new Scene(popup, 300, 100);
             dialog.setScene(dialogScene);
             dialog.show();
         });

@@ -78,8 +78,4 @@ public class MonopolyModel extends Application {
     public Board getTheBoard() {
         return theBoard;
     }
-    public Game getGame()
-    {
-        return Game;
-    }
 }
