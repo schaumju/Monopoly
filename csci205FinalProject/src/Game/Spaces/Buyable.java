@@ -1,5 +1,7 @@
 package Game.Spaces;
 
+import Game.Character;
+
 /**
  * Interface for Spaces on the board that can be bought
  * @author Justin
@@ -21,9 +23,9 @@ public interface Buyable {
     /**
      * Sets the owner id to the input
      *
-     * @param id the id of the player buying the property
+     * @param player the player buying the property
      */
-    void buyProperty(int id);
+    void buyProperty(Character player);
 
 
 }

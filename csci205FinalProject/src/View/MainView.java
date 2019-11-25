@@ -29,6 +29,11 @@ public class MainView {
     private MonopolyModel theModel;
     private static GridPane root;
 
+    /**
+     * sets up the main view
+     * @param theModel
+     * @author kerri
+     */
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
 
@@ -41,6 +46,8 @@ public class MainView {
         //new CharacterView(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
 
         PropertyView.addPropertyBuyButton();
+
+        CardsView.addCards();
     }
 
 

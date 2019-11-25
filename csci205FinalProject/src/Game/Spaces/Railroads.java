@@ -1,5 +1,7 @@
 package Game.Spaces;
 
+import Game.Character;
+
 /**
  * Class that represents the 4 railroads on the board
  * @author Justin
@@ -56,11 +58,13 @@ public class Railroads extends Space implements Buyable {
     /**
      * Sets the owner id to the input
      *
-     * @param id the id of the player buying the property
+     * @param player the player buying the property
      */
     @Override
-    public void buyProperty(int id) {
-        ownerID = id;
+    public void buyProperty(Character player) {
+        ownerID = player.getID();
+        player.subtractFromBalance(getCost());
+        player.buyRailroad();
     }
 
     /**
