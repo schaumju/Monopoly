@@ -20,6 +20,7 @@ package View;
 
 import Game.Board;
 import Game.Dice;
+import Game.Game;
 import Game.Spaces.Property;
 import Game.Spaces.Space;
 import Model.MonopolyModel;
@@ -41,6 +42,8 @@ import java.util.ArrayList;
 public class BoardView {
 
     private static final int NUM_SPACES = 40;
+
+    public ArrayList<Space> listOfSpaces;
 
     /**
      * adds all of the board spaces to the gridpane
@@ -96,15 +99,37 @@ public class BoardView {
         {
             Stage dialog = new Stage();
             VBox popup = new VBox(20);
+
+            //Text
             Text propPrices = new Text(curSpace.getName() + " Price");
             Text rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
+            String propertyOwner = getPropertyOwners((Property)curSpace);
+            Text owner = new Text("Owner: " + propertyOwner);
             popup.getChildren().add(propPrices);
             popup.getChildren().add(rentPrice);
+            popup.getChildren().add(owner);
             popup.setAlignment(Pos.TOP_CENTER);
             Scene dialogScene = new Scene(popup, 200, 100);
             dialog.setScene(dialogScene);
             dialog.show();
         });
+    }
+
+    /**
+     * Finds the property owner
+     * @param curSpace - space in question
+     * @return - string of owner
+     */
+    private static String getPropertyOwners(Property curSpace)
+    {
+        if(curSpace.getOwner() == -1)
+        {
+            return " None";
+        }
+        else
+        {
+            return " owned";
+        }
     }
 
     /**

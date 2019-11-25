@@ -62,4 +62,8 @@ public class MonopolyModel extends Application {
         this.Game.getPlayerList()[0].move(3);
         this.Game.getCharacters().updateCharacters();
     }
+    public Game getGame()
+    {
+        return Game;
+    }
 }

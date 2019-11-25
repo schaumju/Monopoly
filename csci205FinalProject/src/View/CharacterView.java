@@ -72,4 +72,8 @@ public class CharacterView {
             MainView.getRoot().getChildren().add(boardPlayerList.get(i));
         }
     }
+
+    public Character[] getPlayerList() {
+        return playerList;
+    }
 }
