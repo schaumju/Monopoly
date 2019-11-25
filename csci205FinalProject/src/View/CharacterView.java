@@ -63,7 +63,12 @@ public class CharacterView {
         {
             MainView.getRoot().getChildren().remove(boardPlayerList.get(i));
             int playerMoves = 70 * playerList[i].getPosition();
+
+            //Add different moves depending on position, if position >11 then move to the right, if <11 and >21 move down, etc.
+            //Same thing when Kerri created the properties
             boardPlayerList.get(i).setTranslateX(4+playerMoves);
+
+            //Also not sure where to add it in the scene, it kinda blocks the name of the property.
             MainView.getRoot().getChildren().add(boardPlayerList.get(i));
         }
     }
