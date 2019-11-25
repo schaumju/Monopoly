@@ -19,7 +19,7 @@
 package Controller;
 
 
-public class BoardController {
-
+public class BoardController
+{
 
 }

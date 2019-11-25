@@ -20,15 +20,21 @@ package View;
 
 import Game.Board;
 import Game.Dice;
+import Game.Spaces.Property;
 import Game.Spaces.Space;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -56,6 +62,30 @@ public class BoardView {
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
+
+                //Andrew added
+                spaceName.setTranslateY(-20);
+                colorRectangle.setTranslateY(-20);
+
+                if(curSpace instanceof Property) {
+                    square.setOnMouseClicked(mouseEvent ->
+                    {
+                        //https://stackoverflow.com/questions/22166610/how-to-create-a-popup-windows-in-javafx
+                        Stage dialog = new Stage();
+                        VBox popup = new VBox(20);
+                        Text propPrices = new Text(curSpace.getName() + " Price");
+                        Text rentPrice = new Text("Rent Price: $" + Integer.toString(((Property) curSpace).getRent()) + ".00");
+                        popup.getChildren().add(propPrices);
+                        popup.getChildren().add(rentPrice);
+                        popup.setAlignment(Pos.TOP_CENTER);
+                        Scene dialogScene = new Scene(popup, 200, 100);
+                        dialog.setScene(dialogScene);
+                        dialog.show();
+
+                    });
+                }
+                //Andrew done
+
                 MainView.getRoot().add(spaceName, i, 0);
             } else if (i < 21) {
                 handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
