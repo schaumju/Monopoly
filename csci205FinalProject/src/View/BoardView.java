@@ -62,32 +62,9 @@ public class BoardView {
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
-
-                //Andrew added
-                spaceName.setTranslateY(-20);
-                colorRectangle.setTranslateY(-20);
-
-                if(curSpace instanceof Property) {
-                    square.setOnMouseClicked(mouseEvent ->
-                    {
-                        //https://stackoverflow.com/questions/22166610/how-to-create-a-popup-windows-in-javafx
-                        Stage dialog = new Stage();
-                        VBox popup = new VBox(20);
-                        Text propPrices = new Text(curSpace.getName() + " Price");
-                        Text rentPrice = new Text("Rent Price: $" + Integer.toString(((Property) curSpace).getRent()) + ".00");
-                        popup.getChildren().add(propPrices);
-                        popup.getChildren().add(rentPrice);
-                        popup.setAlignment(Pos.TOP_CENTER);
-                        Scene dialogScene = new Scene(popup, 200, 100);
-                        dialog.setScene(dialogScene);
-                        dialog.show();
-
-                    });
-                }
-                //Andrew done
-
                 MainView.getRoot().add(spaceName, i, 0);
             } else if (i < 21) {
+
                 handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
                 MainView.getRoot().add(spaceName, 10, i - 10);
             } else if (i < 31) {
@@ -97,8 +74,37 @@ public class BoardView {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
                 MainView.getRoot().add(spaceName, 0, 40 - i);
             }
+
+            //Andrew added
+            if(curSpace instanceof Property) {
+                pricePopupOnClick(spaceName, curSpace);
+            }
+            //Andrew Done
+
         }
         addTurnHistoryColumn();
+    }
+
+    /**
+     * Creates a popup window
+     * @param label - the text object in the square
+     * @param curSpace - the board space
+     */
+    private static void pricePopupOnClick(Label label, Space curSpace)
+    {
+        label.setOnMouseClicked(mouseEvent ->
+        {
+            Stage dialog = new Stage();
+            VBox popup = new VBox(20);
+            Text propPrices = new Text(curSpace.getName() + " Price");
+            Text rentPrice = new Text("Rent Price: $" + ((Property) curSpace).getRent() + ".00");
+            popup.getChildren().add(propPrices);
+            popup.getChildren().add(rentPrice);
+            popup.setAlignment(Pos.TOP_CENTER);
+            Scene dialogScene = new Scene(popup, 200, 100);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        });
     }
 
     /**
