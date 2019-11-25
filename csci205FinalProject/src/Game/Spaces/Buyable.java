@@ -27,5 +27,6 @@ public interface Buyable {
      */
     void buyProperty(Character player);
 
-
+    //For setting the owner to none
+    void buyProperty(int i);
 }

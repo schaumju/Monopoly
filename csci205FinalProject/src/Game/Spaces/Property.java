@@ -130,6 +130,11 @@ public class Property extends Space implements Buyable {
         player.subtractFromBalance(getCost());
     }
 
+    public void buyProperty(int playerID)
+    {
+        owner = -1;
+    }
+
     /**
      * Returns true if the property has an owner and false if unowned.
      * @return boolean true or false
