@@ -24,19 +24,46 @@ import javafx.scene.layout.GridPane;
 
 public class MainView {
 
-    private MonopolyModel theModel;
+    /**
+     * The root pane for the graphics
+     */
     private static GridPane root;
-
+    /**
+     * Game model
+     */
+    private MonopolyModel theModel;
+    /**
+     * View class for board
+     */
     private BoardView boardView;
+    /**
+     * View class for cards
+     */
     private CardsView cardsView;
+    /**
+     * View class for dice
+     */
     private DiceView diceView;
+    /**
+     * View class for characters
+     */
     private CharacterView characterView;
+    /**
+     * View class for property
+     */
     private PropertyView propertyView;
+    /**
+     * View class for the end of the turn
+     */
     private EndTurnView endTurnView;
+    /**
+     * View class for the game log
+     */
+    private LogView logView;
 
     /**
      * sets up the main view
-     * @param theModel
+     * @param theModel the game model
      * @author kerri
      */
     public MainView(MonopolyModel theModel) {
@@ -48,6 +75,7 @@ public class MainView {
         propertyView = new PropertyView(theModel);
         diceView = new DiceView(theModel);
         endTurnView = new EndTurnView(theModel);
+        logView = new LogView(theModel);
 
 
         // BoardView.addBoardSpaces();
@@ -73,6 +101,9 @@ public class MainView {
         root.setGridLinesVisible(false);
     }
 
+    /**
+     * Getter method for grid pane
+     */
     public static GridPane getRoot() {
         return root;
     }
@@ -81,7 +112,6 @@ public class MainView {
     /**
      * Getter Methods
      */
-
 
     public MonopolyModel getTheModel() {
         return theModel;
@@ -114,7 +144,7 @@ public class MainView {
     /**
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
-    public void doubles() throws Exception {
+    public void doubles() {
         diceView.getRollDiceBtn().setDisable(false);
 
     }

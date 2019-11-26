@@ -25,9 +25,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class CardsView {
-
+    /**
+     * model for the game
+     */
     private MonopolyModel theModel;
 
+    /**
+     * Constructor
+     *
+     * @param theModel model for the game
+     */
     public CardsView(MonopolyModel theModel) {
         this.theModel = theModel;
         addCards();

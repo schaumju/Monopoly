@@ -20,7 +20,6 @@ package View;
 
 import Game.Character;
 import Model.MonopolyModel;
-import javafx.geometry.Pos;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -28,26 +27,37 @@ import java.util.List;
 
 public class CharacterView {
 
-    //List of Circle objects
+    /**
+     * List of circle objects representing the players
+     */
     private List<Circle> boardPlayerList;
 
-    //List of Character objects
+    /**
+     * List of the characters in the game
+     */
     private Character[] playerList;
     /**
      * Model object
      */
     private MonopolyModel theModel;
 
-    public CharacterView(MonopolyModel theModel)
-    {
+    /**
+     * Constructor
+     *
+     * @param theModel model object
+     */
+    public CharacterView(MonopolyModel theModel) {
         this.theModel = theModel;
         this.playerList = theModel.getPlayerList();
         this.boardPlayerList = new ArrayList<>();
-        convertPlayers(playerList);
+        convertPlayers();
         addCharacters();
     }
 
-    private void convertPlayers(Character[] playerList) {
+    /**
+     * Creates circle objects for all the players in the game with their colors
+     */
+    private void convertPlayers() {
         //Fills the circle list using the players in playerList.
         for (Character player : playerList)
         {
@@ -58,7 +68,7 @@ public class CharacterView {
     /**
      * Adds the characters to the board
      */
-    public void addCharacters()
+    private void addCharacters()
     {
         //Amount to stagger the individual circles by
         int translateAmount = 8;

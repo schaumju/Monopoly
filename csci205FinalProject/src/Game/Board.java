@@ -23,7 +23,7 @@ public class Board {
      * Default Constructor
      */
     public Board() {
-        this.board = new ArrayList<>();
+        board = new ArrayList<>();
         this.buyableProperties = new ArrayList<>();
         this.chanceDeck = new ChanceDeck();
         this.communityChestDeck = new CommunityChestDeck();
@@ -213,7 +213,7 @@ public class Board {
         board.getChanceDeck().draw();
     }
 
-    public static ArrayList<Space> getBoard() {
+    public ArrayList<Space> getBoard() {
         return board;
     }
 

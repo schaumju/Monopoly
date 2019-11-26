@@ -24,9 +24,21 @@ import View.MainView;
 
 public class DiceController {
 
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
+    /**
+     * View class for the graphics of the game
+     */
     private MainView theView;
 
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     * @param theView  view class for the graphics of the game
+     */
     public DiceController(MonopolyModel theModel, MainView theView) {
         this.theModel = theModel;
         this.theView = theView;
@@ -44,6 +56,8 @@ public class DiceController {
             theView.getDiceView().getDice1().roll(dice.getDie1());
             theView.getDiceView().getDice2().roll(dice.getDie2());
             theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
+            int totalRoll = dice.getDie1() + dice.getDie2();
+            theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled a " + totalRoll);
             theView.getCharacterView().updateCharacters();
             try {
                 theModel.interactSpace(dice.getDie1() + dice.getDie2());
@@ -53,9 +67,7 @@ public class DiceController {
                 e.printStackTrace();
             }
             theView.getCharacterView().updateCharacters();
-            /**
-             * If the given space is available to purchase
-             */
+            // If the given space is available to purchase
             if (theModel.isAvailable()) {
                 theView.getPropertyView().turnButtonOn();
             } else {

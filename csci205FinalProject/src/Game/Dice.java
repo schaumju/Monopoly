@@ -30,11 +30,11 @@ public class Dice {
     /**
      * The value of the first dice roll
      */
-    static int die1;
+    private int die1;
     /**
      * The value of the second dice roll
      */
-    static int die2;
+    private int die2;
 
     public Dice() {
         die1 = 0;
@@ -50,6 +50,8 @@ public class Dice {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
+        die1 = 1;
+        die2 = 5;
         return die1 + die2;
     }
 

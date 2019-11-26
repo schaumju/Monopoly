@@ -26,11 +26,28 @@ import javafx.scene.control.Button;
 public class DiceView {
 
     private SimpleIntegerProperty target = new SimpleIntegerProperty();
+    /**
+     * Button to roll the dice
+     */
     private Button rollDiceBtn;
+    /**
+     * Animation for the first die
+     */
     private DiceAnimation dice1;
+    /**
+     * Animation for the second die
+     */
     private DiceAnimation dice2;
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
 
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     */
     public DiceView(MonopolyModel theModel) {
         this.theModel = theModel;
         addDice();
@@ -58,8 +75,8 @@ public class DiceView {
 
     /**
      * adds the roll dice button to the view
-     * @param dice1
-     * @param dice2
+     * @param dice1 first dice roll
+     * @param dice2 second dice roll
      * @author justin
      */
     private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
@@ -74,6 +91,7 @@ public class DiceView {
         MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
+    // Getter methods
     public Button getRollDiceBtn() {
         return rollDiceBtn;
     }

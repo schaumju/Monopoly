@@ -4,9 +4,20 @@ import Model.MonopolyModel;
 import javafx.scene.control.Button;
 
 public class EndTurnView {
+    /**
+     * Button to end turn
+     */
     private Button endTurnButton;
+    /**
+     * Game model
+     */
     private MonopolyModel theModel;
 
+    /**
+     * Constructor
+     *
+     * @param theModel game model
+     */
     public EndTurnView(MonopolyModel theModel) {
         this.theModel = theModel;
         addEndTurnButton();
@@ -17,7 +28,7 @@ public class EndTurnView {
      *
      * @author - justin
      */
-    public void addEndTurnButton() {
+    private void addEndTurnButton() {
         endTurnButton = new Button("End Turn");
 
         endTurnButton.setTranslateX(600);
@@ -32,12 +43,18 @@ public class EndTurnView {
         return endTurnButton;
     }
 
+    /**
+     * Turns the button to clickable
+     */
     public void turnButtonOn() {
         endTurnButton.setDisable(false);
 
     }
 
-    public void turnButtonOff() {
+    /**
+     * Makes the button not clickable
+     */
+    private void turnButtonOff() {
         endTurnButton.setDisable(true);
     }
 }

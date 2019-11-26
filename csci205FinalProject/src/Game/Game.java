@@ -1,7 +1,5 @@
 package Game;
 
-import javafx.scene.paint.Color;
-
 /**
  * Representation of a Monopoly Game
  *
@@ -16,7 +14,7 @@ public class Game {
     /**
      * A list containing all the players
      */
-    public Character[] playerList;
+    private Character[] playerList;
     /**
      * The number of turns that have been played already in the game
      */
@@ -100,28 +98,12 @@ public class Game {
     }
 
     /**
-     * Checks to see if the player is valid. The player is invalid if they are bankrupt
-     *
-     * @param index the index of the player in the list of players
-     * @return true if the player at that index is valid and false otherwise
-     */
-    public boolean isValidPlayer(int index) {
-        return !playerList[index].isBankrupt();
-    }
-
-    public Character[] getPlayerList()
-    {
-        return playerList;
-    }
-
-
-    /**
      * Main method
      *
-     * @param args
+     * @param args array of string
      */
     public static void main(String[] args) {
-        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
+        /*Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
 
         //Add characters to the board
 
@@ -134,7 +116,21 @@ public class Game {
 
         } while (!game.gameOver());
 
-        System.out.println(game.getWinner().getName() + " won the game");
+        System.out.println(game.getWinner().getName() + " won the game");*/
+    }
+
+    public Character[] getPlayerList() {
+        return playerList;
+    }
+
+    /**
+     * Checks to see if the player is valid. The player is invalid if they are bankrupt
+     *
+     * @param index the index of the player in the list of players
+     * @return true if the player at that index is valid and false otherwise
+     */
+    private boolean isValidPlayer(int index) {
+        return !playerList[index].isBankrupt();
     }
 
     /**
