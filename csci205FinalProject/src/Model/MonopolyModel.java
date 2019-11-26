@@ -62,6 +62,7 @@ public class MonopolyModel extends Application {
         this.Game.getPlayerList()[0].move(3);
         this.Game.getCharacters().updateCharacters();
 
+        
         /**
         //Testing popup window ownership
         ((Property)theBoard.getBuyableProperties().get(3)).buyProperty(Game.getPlayerList()[0]);

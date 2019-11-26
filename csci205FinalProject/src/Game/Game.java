@@ -37,6 +37,7 @@ public class Game {
      * The Characters in characterview
      */
     private CharacterView characters;
+
     /**
      * Constructor
      *
@@ -141,6 +142,7 @@ public class Game {
     }
 
     //Returns a list of character objects
+    
     public CharacterView getCharacters() {
         return characters;
     }
