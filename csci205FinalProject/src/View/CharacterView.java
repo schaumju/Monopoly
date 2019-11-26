@@ -20,6 +20,7 @@ package View;
 
 import Game.Character;
 import Model.MonopolyModel;
+import javafx.geometry.Pos;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -59,9 +60,14 @@ public class CharacterView {
      */
     public void addCharacters()
     {
+        //Amount to stagger the individual circles by
+        int translateAmount = 8;
+        
         for (int i = 0; i < boardPlayerList.size(); i++)
         {
             MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            //Staggering the player circles
+            boardPlayerList.get(i).setTranslateY(translateAmount*i);
         }
     }
 

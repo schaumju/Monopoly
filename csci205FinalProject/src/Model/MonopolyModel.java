@@ -6,6 +6,7 @@ import Game.Game;
 import Game.Spaces.*;
 import View.BuyPromptView;
 import javafx.stage.Stage;
+import Game.Board;
 
 public class MonopolyModel {
     /**
@@ -102,7 +103,7 @@ public class MonopolyModel {
     }
 
 
-    /**
+    /**this.theController = new MainController(theModel, theView);
      * Allows the player to interact with the go to jail space
      */
     private void interactGoToJail() {
