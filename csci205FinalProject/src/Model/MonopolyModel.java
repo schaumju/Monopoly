@@ -32,6 +32,8 @@ public class MonopolyModel extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        this.theController = new MainController(theModel, theView);
+
         // add the scene graph to the stage
         primaryStage.setScene(new Scene(theView.getRoot()));
         primaryStage.sizeToScene();
@@ -53,22 +55,9 @@ public class MonopolyModel extends Application {
         super.init();
         this.theBoard = new Board();
         this.theView = new MainView(theModel);
-
-        //TESTING MOVING CHARACTERS
         this.Game = new Game(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
         this.Game.getCharacters().addCharacters();
 
-        //Moves the first player by 3 moves
-        this.Game.getPlayerList()[0].move(3);
-        this.Game.getCharacters().updateCharacters();
-
-        
-        /**
-        //Testing popup window ownership
-        ((Property)theBoard.getBuyableProperties().get(3)).buyProperty(Game.getPlayerList()[0]);
-        System.out.println(((Property) theBoard.getBuyableProperties().get(3)).getOwner());
-        */
-        this.theController = new MainController(theModel, theView);
 
     }
     public Game getGame()
