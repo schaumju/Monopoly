@@ -1,8 +1,6 @@
 package Game;
 
-import View.CharacterView;
 import javafx.scene.paint.Color;
-
 
 /**
  * Representation of a Monopoly Game
@@ -33,10 +31,6 @@ public class Game {
      */
     private int curPlayerTurn;
 
-    /**
-     * The Characters in characterview
-     */
-    private CharacterView characters;
 
     /**
      * Constructor
@@ -46,32 +40,11 @@ public class Game {
     public Game(Character[] playerList) {
         this.playerList = playerList;
         this.numTurns = 0;
-        this.characters = new CharacterView(playerList);
         curPlayerTurn = 0;
         board = new Board();
     }
 
-    /**
-     * Main method
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
 
-        //Add characters to the board
-
-
-        Game game = new Game(playerList);
-        Character curPlayer = playerList[0];
-        do {
-            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
-            curPlayer = game.getNextPlayer();
-
-        } while (!game.gameOver());
-
-        System.out.println(game.getWinner().getName() + " won the game");
-    }
 
     /**
      * Determines if the game should end
@@ -141,9 +114,35 @@ public class Game {
         return playerList;
     }
 
-    //Returns a list of character objects
-    
-    public CharacterView getCharacters() {
-        return characters;
+
+    /**
+     * Main method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
+
+        //Add characters to the board
+
+
+        Game game = new Game(playerList);
+        Character curPlayer = playerList[0];
+        do {
+            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
+            curPlayer = game.getNextPlayer();
+
+        } while (!game.gameOver());
+
+        System.out.println(game.getWinner().getName() + " won the game");
+    }
+
+    /**
+     * Gets the character object containing the current player
+     *
+     * @return returns the character object with the player whose turn it is
+     */
+    public Character getCurPlayer() {
+        return playerList[curPlayerTurn];
     }
 }

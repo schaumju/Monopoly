@@ -1,10 +1,17 @@
 package View;
 
+import Model.MonopolyModel;
 import javafx.scene.control.Button;
 
 public class PropertyView {
 
     static Button buyPropertyButton;
+    private MonopolyModel theModel;
+
+    public PropertyView(MonopolyModel theModel) {
+        this.theModel = theModel;
+        addPropertyBuyButton();
+    }
 
     /**
      * adds a property button to the view
@@ -16,7 +23,8 @@ public class PropertyView {
         buyPropertyButton.setTranslateX(600);
         buyPropertyButton.setTranslateY(550);
 
-
+        // Set the button to be disabled at first
+        buyPropertyButton.setDisable(true);
         MainView.getRoot().getChildren().addAll(buyPropertyButton);
     }
 

@@ -18,16 +18,20 @@
  */
 package View;
 
-import Game.Character;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 public class MainView {
 
     private MonopolyModel theModel;
     private static GridPane root;
+
+    private BoardView boardView;
+    private CardsView cardsView;
+    private DiceView diceView;
+    private CharacterView characterView;
+    private PropertyView propertyView;
 
     /**
      * sets up the main view
@@ -36,18 +40,24 @@ public class MainView {
      */
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
-
         setUpRoot();
+        boardView = new BoardView(theModel);
+        cardsView = new CardsView(theModel);
+        characterView = new CharacterView(theModel);
+        propertyView = new PropertyView(theModel);
+        diceView = new DiceView(theModel);
 
-        BoardView.addBoardSpaces();
 
-        DiceView.addDice();
+        // BoardView.addBoardSpaces();
+
+        //DiceView.addDice();
 
         //new CharacterView(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
 
-        PropertyView.addPropertyBuyButton();
+        //PropertyView.addPropertyBuyButton();
 
-        CardsView.addCards();
+        //CardsView.addCards();
+
     }
 
 
@@ -63,5 +73,51 @@ public class MainView {
 
     public static GridPane getRoot() {
         return root;
+    }
+
+
+    /**
+     * Getter Methods
+     */
+
+
+    public MonopolyModel getTheModel() {
+        return theModel;
+    }
+
+    public BoardView getBoardView() {
+        return boardView;
+    }
+
+    public CardsView getCardsView() {
+        return cardsView;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
+    }
+
+    public CharacterView getCharacterView() {
+        return characterView;
+    }
+
+    public PropertyView getPropertyView() {
+        return propertyView;
+    }
+
+    /**
+     * Updates the scene for the player if the player rolled doubles (roll again)
+     */
+    public void doubles() throws Exception {
+        DiceView.getRollDiceBtn().setDisable(false);
+
+    }
+
+    /**
+     * Makes the only thing enabled the endTurn button
+     */
+    public void endTurn() {
+        DiceView.getRollDiceBtn().setDisable(true);
+        PropertyView.getBuyPropertyButton().setDisable(true);
     }
 }

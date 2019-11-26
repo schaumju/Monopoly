@@ -193,3 +193,4 @@ public class Property extends Space implements Buyable {
         return isMonopoly;
     }
 }
+

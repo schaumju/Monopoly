@@ -5,4 +5,5 @@ module csci205FinalProject {
     requires java.desktop;
 
     opens Model;
+    opens Main;
 }

@@ -19,6 +19,7 @@
 package View;
 
 import Game.Character;
+import Model.MonopolyModel;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -31,12 +32,18 @@ public class CharacterView {
 
     //List of Character objects
     private Character[] playerList;
+    /**
+     * Model object
+     */
+    private MonopolyModel theModel;
 
-    public CharacterView(Character[] playerList)
+    public CharacterView(MonopolyModel theModel)
     {
-        this.playerList = playerList;
+        this.theModel = theModel;
+        this.playerList = theModel.getPlayerList();
         this.boardPlayerList = new ArrayList<>();
         convertPlayers(playerList);
+        addCharacters();
     }
 
     private void convertPlayers(Character[] playerList) {
@@ -47,7 +54,9 @@ public class CharacterView {
         }
     }
 
-    //Adds the characters contained in the list
+    /**
+     * Adds the characters to the board
+     */
     public void addCharacters()
     {
         for (int i = 0; i < boardPlayerList.size(); i++)
@@ -56,7 +65,9 @@ public class CharacterView {
         }
     }
 
-    //Updates the characters positions
+    /**
+     * Updates the character's position
+     */
     public void updateCharacters()
     {
         for(int i = 0; i < boardPlayerList.size(); i++)
@@ -73,6 +84,9 @@ public class CharacterView {
         }
     }
 
+    /**
+     * Getter method
+     */
     public Character[] getPlayerList() {
         return playerList;
     }

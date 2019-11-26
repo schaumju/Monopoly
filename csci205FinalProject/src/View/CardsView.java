@@ -19,12 +19,19 @@
 package View;
 
 
-import javafx.geometry.Pos;
+import Model.MonopolyModel;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class CardsView {
+
+    private MonopolyModel theModel;
+
+    public CardsView(MonopolyModel theModel) {
+        this.theModel = theModel;
+        addCards();
+    }
 
     /**
      * adds the community chest and the chance cards onto the board

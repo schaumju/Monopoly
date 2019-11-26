@@ -19,8 +19,6 @@
 package Controller;
 
 import Model.MonopolyModel;
-import View.BoardView;
-import View.DiceView;
 import View.MainView;
 
 public class MainController {
@@ -38,10 +36,11 @@ public class MainController {
     public MainController(MonopolyModel theModel, MainView theView) {
         this.theModel = theModel;
         this.theView = theView;
-        this.boardController = new BoardController(theModel, new BoardView());
+        this.boardController = new BoardController(theModel, theView.getBoardView());
         
         //handle roll dice
-        DiceController.handleRollDice();
+        //DiceController.handleRollDice();
+        DiceController diceController = new DiceController(theModel, theView);
 
         BuyPropertyController.handleBuyProperty();
     }

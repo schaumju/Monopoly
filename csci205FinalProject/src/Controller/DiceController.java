@@ -19,21 +19,47 @@
 package Controller;
 
 import Game.Dice;
-import View.DiceAnimation;
+import Model.MonopolyModel;
 import View.DiceView;
+import View.MainView;
 
 public class DiceController {
+
+    private MonopolyModel theModel;
+    private MainView theView;
+
+    public DiceController(MonopolyModel theModel, MainView theView) {
+        this.theModel = theModel;
+        this.theView = theView;
+        handleRollDice();
+    }
 
     /**
      * handles rolling the dice
      * @author justin & kerri
      */
-    protected static void handleRollDice() {
+    private void handleRollDice() {
         DiceView.getRollDiceBtn().setOnAction(event -> {
             Dice dice = new Dice();
             dice.rollDice();
-            DiceView.getDice1().roll(Dice.getDie1());
-            DiceView.getDice2().roll(Dice.getDie2());
+            DiceView.getDice1().roll(dice.getDie1());
+            DiceView.getDice2().roll(dice.getDie2());
+            theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
+            theView.getCharacterView().updateCharacters();
+            try {
+                theModel.interactSpace(dice.getDie1() + dice.getDie2());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (dice.isDoubles()) {
+                try {
+                    theView.doubles();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                theView.endTurn();
+            }
         });
 
     }

@@ -19,33 +19,30 @@
 package View;
 
 import Game.Board;
-import Game.Dice;
-import Game.Game;
-import Game.Spaces.Property;
 import Game.Spaces.Space;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class BoardView {
+
+    private MonopolyModel theModel;
 
     public static final int NUM_SPACES = 40;
 
     public static ArrayList<Label> listOfLabels = new ArrayList<>();
 
     public static ArrayList<Space> listOfSpaces = new ArrayList<>();
+
+    public BoardView(MonopolyModel theModel) {
+        this.theModel = theModel;
+        addBoardSpaces();
+    }
 
     /**
      * adds all of the board spaces to the gridpane

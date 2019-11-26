@@ -37,8 +37,8 @@ public class Dice {
     static int die2;
 
     public Dice() {
-        this.die1 = 0;
-        this.die2 = 0;
+        die1 = 0;
+        die2 = 0;
     }
 
     /**
@@ -50,6 +50,7 @@ public class Dice {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
+
         return die1 + die2;
     }
 
@@ -62,11 +63,11 @@ public class Dice {
         return getDie1() == getDie2();
     }
 
-    public static int getDie1() {
+    public int getDie1() {
         return die1;
     }
 
-    public static int getDie2() {
+    public int getDie2() {
         return die2;
     }
 }

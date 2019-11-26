@@ -18,15 +18,10 @@
  */
 package View;
 
-import Game.Dice;
+import Model.MonopolyModel;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class DiceView {
 
@@ -34,36 +29,18 @@ public class DiceView {
     static Button rollDiceBtn;
     private static DiceAnimation dice1;
     private static DiceAnimation dice2;
+    private MonopolyModel theModel;
+
+    public DiceView(MonopolyModel theModel) {
+        this.theModel = theModel;
+        addDice();
+    }
 
     /**
      * adds the view of dice to the gridpane
      * @author - kerri
      */
     protected static void addDice() {
-        /*int die1 = 5; //Dice.getDie1();
-        int die2 = 3; //Dice.getDie2();
-
-        Label die1Label = new Label("  " + String.valueOf(die1));
-        die1Label.setAlignment(Pos.CENTER);
-
-        Label die2Label = new Label("  " + String.valueOf(die2));
-        die2Label.setAlignment(Pos.CENTER);
-
-        Rectangle rect1 = new Rectangle(20,20);
-        rect1.setFill(Color.WHITE);
-        rect1.setStroke(Color.BLACK);
-        rect1.setStrokeWidth(2);
-
-        Rectangle rect2 = new Rectangle(20,20);
-        rect2.setFill(Color.WHITE);
-        rect2.setStroke(Color.BLACK);
-        rect2.setStrokeWidth(2);
-
-        MainView.getRoot().add(rect1, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2);
-        MainView.getRoot().add(die1Label, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2);
-
-        MainView.getRoot().add(rect2, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
-        MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);*/
 
         dice1 = new DiceAnimation();
         dice2 = new DiceAnimation();
