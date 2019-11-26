@@ -26,6 +26,9 @@ public class MainController {
     private MonopolyModel theModel;
     private MainView theView;
     private BoardController boardController;
+    private DiceController diceController;
+    private BuyPropertyController buyPropertyController;
+    private EndTurnController endTurnController;
 
     /**
      * constructor
@@ -40,9 +43,10 @@ public class MainController {
         
         //handle roll dice
         //DiceController.handleRollDice();
-        DiceController diceController = new DiceController(theModel, theView);
+        diceController = new DiceController(theModel, theView);
+        buyPropertyController = new BuyPropertyController(theModel, theView);
+        endTurnController = new EndTurnController(theModel, theView);
 
-        BuyPropertyController.handleBuyProperty();
     }
 
 

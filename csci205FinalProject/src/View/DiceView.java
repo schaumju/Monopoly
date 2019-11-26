@@ -25,10 +25,10 @@ import javafx.scene.control.Button;
 
 public class DiceView {
 
-    private static SimpleIntegerProperty target = new SimpleIntegerProperty();
-    static Button rollDiceBtn;
-    private static DiceAnimation dice1;
-    private static DiceAnimation dice2;
+    private SimpleIntegerProperty target = new SimpleIntegerProperty();
+    private Button rollDiceBtn;
+    private DiceAnimation dice1;
+    private DiceAnimation dice2;
     private MonopolyModel theModel;
 
     public DiceView(MonopolyModel theModel) {
@@ -40,7 +40,7 @@ public class DiceView {
      * adds the view of dice to the gridpane
      * @author - kerri
      */
-    protected static void addDice() {
+    private void addDice() {
 
         dice1 = new DiceAnimation();
         dice2 = new DiceAnimation();
@@ -62,7 +62,7 @@ public class DiceView {
      * @param dice2
      * @author justin
      */
-    private static void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
+    private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
         rollDiceBtn = new Button("Roll dice");
 
         rollDiceBtn.setTranslateX(600);
@@ -74,15 +74,15 @@ public class DiceView {
         MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
-    public static Button getRollDiceBtn() {
+    public Button getRollDiceBtn() {
         return rollDiceBtn;
     }
 
-    public static DiceAnimation getDice1() {
+    public DiceAnimation getDice1() {
         return dice1;
     }
 
-    public static DiceAnimation getDice2() {
+    public DiceAnimation getDice2() {
         return dice2;
     }
 }

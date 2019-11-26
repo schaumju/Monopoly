@@ -1,12 +1,10 @@
 package Model;
 
+import Game.Board;
 import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
-import View.BuyPromptView;
-import javafx.stage.Stage;
-import Game.Board;
 
 public class MonopolyModel {
     /**
@@ -95,10 +93,7 @@ public class MonopolyModel {
              * For now auto buy the property
              */
             //buyProperty(space);
-            /**
-             * Check if the current space is buyable
-             */
-            buyPropertyPrompt();
+
         }
     }
 
@@ -167,15 +162,13 @@ public class MonopolyModel {
             System.out.println("You do not have enough money to buy this property");
         } else {
 
+            System.out.println("You have the option to buy this property");
             // Get input for whether they want to buy the property or not
             /**
              * For now auto buy the property
              */
             //buyProperty(space);
-            /**
-             * Check if the current space is buyable
-             */
-            buyPropertyPrompt();
+
         }
     }
 
@@ -201,34 +194,10 @@ public class MonopolyModel {
         } else {
 
             // Get input for whether they want to buy the property or not
-            /**
-             * For now auto buy the property
-             */
-            //buyProperty(space);
-            buyPropertyPrompt();
+
         }
     }
 
-    /**
-     * Prompts the user with a yes or no screen with 2 buttons to decide whether they want to buy the property or not
-     *
-     * @throws Exception
-     */
-    private void buyPropertyPrompt() throws Exception {
-        /**
-         * Check if the current space is buyable
-         */
-        if (Board.getBoard().get(getCurPlayer().getPosition()) instanceof Buyable && ((Buyable) Board.getBoard().get(getCurPlayer().getPosition())).getOwner() == -1) {
-            BuyPromptView promptView = new BuyPromptView((Buyable) Board.getBoard().get(getCurPlayer().getPosition()), this);
-            try {
-                promptView.init();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Stage stage = new Stage();
-            promptView.start(stage);
-        }
-    }
 
     /**
      * Allows the user to buy the space
@@ -258,4 +227,35 @@ public class MonopolyModel {
         System.out.println("You have bought this property from the bank");
         System.out.println("Your new balance is $" + getCurPlayer().getBalance());
     }
+
+    /**
+     * Determines whether the space is buyable or not
+     *
+     * @return true if the space is an instance of the Buyable class
+     */
+    public boolean isBuyable() {
+        return Board.getBoard().get(getCurPlayer().getPosition()) instanceof Buyable;
+    }
+
+    /**
+     * Determines if the space is unowned
+     *
+     * @return true if the property is unowned (available to buy)
+     */
+    public boolean isAvailable() {
+        if (isBuyable()) {
+            Buyable space = (Buyable) Board.getBoard().get(getCurPlayer().getPosition());
+            return space.getOwner() == -1;
+        }
+        return false;
+
+    }
+
+    /**
+     * Ends the turn by switching the current player to the next player (changes the turn)
+     */
+    public void endTurn() {
+        game.getNextPlayer();
+    }
+
 }

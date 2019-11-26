@@ -50,7 +50,6 @@ public class Dice {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
-
         return die1 + die2;
     }
 

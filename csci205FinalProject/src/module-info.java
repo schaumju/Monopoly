@@ -4,6 +4,5 @@ module csci205FinalProject {
     requires javafx.controls;
     requires java.desktop;
 
-    opens Model;
     opens Main;
 }

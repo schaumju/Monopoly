@@ -32,6 +32,7 @@ public class MainView {
     private DiceView diceView;
     private CharacterView characterView;
     private PropertyView propertyView;
+    private EndTurnView endTurnView;
 
     /**
      * sets up the main view
@@ -46,6 +47,7 @@ public class MainView {
         characterView = new CharacterView(theModel);
         propertyView = new PropertyView(theModel);
         diceView = new DiceView(theModel);
+        endTurnView = new EndTurnView(theModel);
 
 
         // BoardView.addBoardSpaces();
@@ -105,19 +107,24 @@ public class MainView {
         return propertyView;
     }
 
+    public EndTurnView getEndTurnView() {
+        return endTurnView;
+    }
+
     /**
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
     public void doubles() throws Exception {
-        DiceView.getRollDiceBtn().setDisable(false);
+        diceView.getRollDiceBtn().setDisable(false);
 
     }
 
     /**
-     * Makes the only thing enabled the endTurn button
+     * Resets the buttons for the next turn
      */
     public void endTurn() {
-        DiceView.getRollDiceBtn().setDisable(true);
-        PropertyView.getBuyPropertyButton().setDisable(true);
+        diceView.getRollDiceBtn().setDisable(false);
+        endTurnView.getEndTurnButton().setDisable(true);
+        propertyView.turnButtonOff();
     }
 }

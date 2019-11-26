@@ -20,7 +20,6 @@ package Controller;
 
 import Game.Dice;
 import Model.MonopolyModel;
-import View.DiceView;
 import View.MainView;
 
 public class DiceController {
@@ -39,26 +38,41 @@ public class DiceController {
      * @author justin & kerri
      */
     private void handleRollDice() {
-        DiceView.getRollDiceBtn().setOnAction(event -> {
+        theView.getDiceView().getRollDiceBtn().setOnAction(event -> {
             Dice dice = new Dice();
             dice.rollDice();
-            DiceView.getDice1().roll(dice.getDie1());
-            DiceView.getDice2().roll(dice.getDie2());
+            theView.getDiceView().getDice1().roll(dice.getDie1());
+            theView.getDiceView().getDice2().roll(dice.getDie2());
             theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
             theView.getCharacterView().updateCharacters();
             try {
                 theModel.interactSpace(dice.getDie1() + dice.getDie2());
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            theView.getCharacterView().updateCharacters();
+            /**
+             * If the given space is available to purchase
+             */
+            if (theModel.isAvailable()) {
+                theView.getPropertyView().turnButtonOn();
+            } else {
+                theView.getPropertyView().turnButtonOff();
+            }
+
+            theView.getDiceView().getRollDiceBtn().setDisable(true);
+
             if (dice.isDoubles()) {
                 try {
                     theView.doubles();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             } else {
-                theView.endTurn();
+                theView.getEndTurnView().turnButtonOn();
             }
         });
 
