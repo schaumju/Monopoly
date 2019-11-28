@@ -15,19 +15,26 @@ public class LogView {
      * The model of the game
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
+
 
     /**
      * Constructor
      *
      * @param theModel the model of the game
+     * @param mainView
      */
-    public LogView(MonopolyModel theModel) {
+    public LogView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
         /* Make the server log ListView */
         Label logLabel = new Label("Game log");
         ListView<String> logView = new ListView<>();
+        this.mainView = mainView;
         ObservableList<String> logList = theModel.getLog().getLog();
         logView.setItems(logList);
-        MainView.getRoot().addColumn(MainView.getRoot().getColumnCount(), logView);
+        mainView.getRoot().addColumn(mainView.getRoot().getColumnCount(), logView);
     }
 }

@@ -5,7 +5,9 @@ import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
 
-public class MonopolyModel {
+import java.io.Serializable;
+
+public class MonopolyModel implements Serializable {
     /**
      * List of player in the game
      */
@@ -261,5 +263,9 @@ public class MonopolyModel {
 
     public GameLog getLog() {
         return log;
+    }
+
+    public void setLog(GameLog log) {
+        this.log = log;
     }
 }

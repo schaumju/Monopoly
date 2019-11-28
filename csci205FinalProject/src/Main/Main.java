@@ -29,7 +29,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         theController = new MainController(theModel, theView);
         primaryStage.setTitle("Monopoly");
-        primaryStage.setScene(new Scene(MainView.getRoot()));
+        primaryStage.setScene(new Scene(theView.getRoot()));
         primaryStage.show();
 
     }

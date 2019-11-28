@@ -22,6 +22,7 @@ import Game.Spaces.Property;
 import Game.Spaces.PropertyColor;
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -31,8 +32,7 @@ import java.util.ArrayList;
  *  subtractFromBalance(double) - self explanatory
  *  isBankrupt() - self explanatory
  */
-public class Character
-{
+public class Character implements Serializable {
     //Balance of the character
     private static final int STARTING_BALANCE = 1500;
 

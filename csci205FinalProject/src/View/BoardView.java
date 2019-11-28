@@ -48,14 +48,20 @@ public class BoardView {
      * ArrayList of all the spaces
      */
     private ArrayList<Space> listOfSpaces = new ArrayList<>();
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel the model for the game
+     * @param mainView
      */
-    public BoardView(MonopolyModel theModel) {
+    public BoardView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addBoardSpaces();
     }
 
@@ -79,17 +85,17 @@ public class BoardView {
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
-                MainView.getRoot().add(spaceName, i, 0);
+                mainView.getRoot().add(spaceName, i, 0);
             } else if (i < 21) {
 
                 handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
-                MainView.getRoot().add(spaceName, 10, i - 10);
+                mainView.getRoot().add(spaceName, 10, i - 10);
             } else if (i < 31) {
                 handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
-                MainView.getRoot().add(spaceName, 30 - i, 10);
+                mainView.getRoot().add(spaceName, 30 - i, 10);
             } else {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
-                MainView.getRoot().add(spaceName, 0, 40 - i);
+                mainView.getRoot().add(spaceName, 0, 40 - i);
             }
 
             listOfLabels.add(spaceName);
@@ -132,8 +138,8 @@ public class BoardView {
      * @author kerri
      */
     private void addRowCol(int i) {
-        MainView.getRoot().addColumn(i);
-        MainView.getRoot().addRow(i);
+        mainView.getRoot().addColumn(i);
+        mainView.getRoot().addRow(i);
     }
 
     /**
@@ -147,9 +153,9 @@ public class BoardView {
      * @author kerri
      */
     private void handleRow(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
-        MainView.getRoot().add(square, colIndex, rowIndex);
+        mainView.getRoot().add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
-            MainView.getRoot().add(colorRectangle, colIndex, rowIndex);
+            mainView.getRoot().add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
     }
@@ -166,9 +172,9 @@ public class BoardView {
      */
     private void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
 
-        MainView.getRoot().add(square, colIndex, rowIndex);
+        mainView.getRoot().add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
-            MainView.getRoot().add(colorRectangle, colIndex, rowIndex);
+            mainView.getRoot().add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
     }

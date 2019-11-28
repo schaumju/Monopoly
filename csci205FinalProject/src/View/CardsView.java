@@ -29,14 +29,20 @@ public class CardsView {
      * model for the game
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel model for the game
+     * @param mainView
      */
-    public CardsView(MonopolyModel theModel) {
+    public CardsView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addCards();
     }
 
@@ -44,7 +50,7 @@ public class CardsView {
      * adds the community chest and the chance cards onto the board
      * @author - kerri
      */
-    public static void addCards() {
+    public void addCards() {
 
         Rectangle communityChest = new Rectangle(70,70, Color.WHITE);
         communityChest.setTranslateX(400);
@@ -62,6 +68,6 @@ public class CardsView {
         chanceLabel.setTranslateX(500);
         chanceLabel.setTranslateY(525);
 
-        MainView.getRoot().getChildren().addAll(communityChest, chance, communityChestLabel, chanceLabel);
+        mainView.getRoot().getChildren().addAll(communityChest, chance, communityChestLabel, chanceLabel);
     }
 }

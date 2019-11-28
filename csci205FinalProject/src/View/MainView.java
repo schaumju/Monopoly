@@ -69,13 +69,13 @@ public class MainView {
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
         setUpRoot();
-        boardView = new BoardView(theModel);
-        cardsView = new CardsView(theModel);
-        characterView = new CharacterView(theModel);
-        propertyView = new PropertyView(theModel);
-        diceView = new DiceView(theModel);
-        endTurnView = new EndTurnView(theModel);
-        logView = new LogView(theModel);
+        boardView = new BoardView(theModel, this);
+        cardsView = new CardsView(theModel, this);
+        characterView = new CharacterView(theModel, this);
+        propertyView = new PropertyView(theModel, this);
+        diceView = new DiceView(theModel, this);
+        endTurnView = new EndTurnView(theModel, this);
+        logView = new LogView(theModel, this);
 
 
         // BoardView.addBoardSpaces();
@@ -104,7 +104,7 @@ public class MainView {
     /**
      * Getter method for grid pane
      */
-    public static GridPane getRoot() {
+    public GridPane getRoot() {
         return root;
     }
 

@@ -40,14 +40,20 @@ public class CharacterView {
      * Model object
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel model object
+     * @param mainView
      */
-    public CharacterView(MonopolyModel theModel) {
+    public CharacterView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         this.playerList = theModel.getPlayerList();
         this.boardPlayerList = new ArrayList<>();
         convertPlayers();
@@ -75,7 +81,7 @@ public class CharacterView {
         
         for (int i = 0; i < boardPlayerList.size(); i++)
         {
-            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().add(boardPlayerList.get(i));
             //Staggering the player circles
             boardPlayerList.get(i).setTranslateY(translateAmount*i);
         }
@@ -88,7 +94,7 @@ public class CharacterView {
     {
         for(int i = 0; i < boardPlayerList.size(); i++)
         {
-            MainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
             int playerMoves = 70 * playerList[i].getPosition();
 
             //Add different moves depending on position, if position >11 then move to the right, if <11 and >21 move down, etc.
@@ -96,7 +102,7 @@ public class CharacterView {
             boardPlayerList.get(i).setTranslateX(4+playerMoves);
 
             //Also not sure where to add it in the scene, it kinda blocks the name of the property.
-            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().add(boardPlayerList.get(i));
         }
     }
 

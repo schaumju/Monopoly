@@ -42,14 +42,19 @@ public class DiceView {
      * The game model
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel the game model
      */
-    public DiceView(MonopolyModel theModel) {
+    public DiceView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addDice();
     }
 
@@ -88,7 +93,7 @@ public class DiceView {
         SimpleBooleanProperty bool = new SimpleBooleanProperty();
         bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));
 
-        MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
+        mainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
     // Getter methods

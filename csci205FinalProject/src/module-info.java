@@ -5,4 +5,6 @@ module csci205FinalProject {
     requires java.desktop;
 
     opens Main;
+    opens Networking.client;
+    opens Networking.server;
 }

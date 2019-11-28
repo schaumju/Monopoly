@@ -12,14 +12,20 @@ public class EndTurnView {
      * Game model
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel game model
+     * @param mainView
      */
-    public EndTurnView(MonopolyModel theModel) {
+    public EndTurnView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addEndTurnButton();
     }
 
@@ -36,7 +42,7 @@ public class EndTurnView {
 
         // Set the button to be disabled at first
         turnButtonOff();
-        MainView.getRoot().getChildren().addAll(endTurnButton);
+        mainView.getRoot().getChildren().addAll(endTurnButton);
     }
 
     public Button getEndTurnButton() {

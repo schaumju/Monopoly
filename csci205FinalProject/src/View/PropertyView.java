@@ -12,14 +12,20 @@ public class PropertyView {
      * Game model
      */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
     /**
      * Constructor
      *
      * @param theModel the game model
+     * @param mainView
      */
-    public PropertyView(MonopolyModel theModel) {
+    public PropertyView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addPropertyBuyButton();
     }
 
@@ -35,7 +41,7 @@ public class PropertyView {
 
         // Set the button to be disabled at first
         turnButtonOff();
-        MainView.getRoot().getChildren().addAll(buyPropertyButton);
+        mainView.getRoot().getChildren().addAll(buyPropertyButton);
     }
 
     public Button getBuyPropertyButton() {
