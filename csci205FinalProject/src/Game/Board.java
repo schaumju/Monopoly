@@ -4,6 +4,7 @@ import Game.Cards.ChanceDeck;
 import Game.Cards.CommunityChestDeck;
 import Game.Spaces.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,7 +13,7 @@ import java.util.Comparator;
  * Creates an ArrayList with all of the Spaces that represents the monopoly board
  * @author Justin
  */
-public class Board {
+public class Board implements Serializable {
 
     private static ArrayList<Space> board;
     private ArrayList<Space> buyableProperties;

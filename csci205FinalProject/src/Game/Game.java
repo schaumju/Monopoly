@@ -1,11 +1,13 @@
 package Game;
 
+import java.io.Serializable;
+
 /**
  * Representation of a Monopoly Game
  *
  * @author Justin
  */
-public class Game {
+public class Game implements Serializable {
 
     /**
      * The maximum amount of turns the users want to play in a game

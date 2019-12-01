@@ -1,8 +1,6 @@
 package Networking.client;
 
 import javafx.application.Application;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,22 +18,60 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.util.ArrayList;
 
+/**
+ * Handles graphics for the client side
+ */
 public class ClientApplication extends Application {
+    /**
+     * An arrayList of thread objects
+     */
     private ArrayList<Thread> threads;
+    /**
+     * The client object
+     */
     private Client client;
+    /**
+     * The scene to get input for the set up and connection to the server
+     */
     private Scene setUpScene;
+    /**
+     * The scene that is displayed while the server is being started
+     */
     private Scene waitingScene;
+    /**
+     * The scene that is displayed while the game is being played
+     */
     private Scene playingScene;
+    /**
+     * Button to submit information to connect to the server
+     */
     private Button submitClientInfoButton;
+    /**
+     * TextField to get input of client's name
+     */
     private TextField nameField;
+    /**
+     * TextField to get input of host's name
+     */
     private TextField hostNameField;
+    /**
+     * TextField to get input of the port number
+     */
     private TextField portNumberField;
+    /**
+     * Error label to display any issues with the user's input
+     */
     private Label errorLabel;
-
-    private BooleanProperty gameReady = new SimpleBooleanProperty();
+    /**
+     * Button the user presses to start the graphics once the server is ready
+     */
     private Button everyoneReadyButton;
 
-
+    /**
+     * Main method
+     *
+     * @param args String Array
+     */
     public static void main(String[] args) {
         launch();
     }
@@ -71,6 +107,10 @@ public class ClientApplication extends Application {
 
     }
 
+    /**
+     * Generates the action events for when the buttons are pressed
+     * @param primaryStage the current stage being used
+     */
     private void generateActionEvents(Stage primaryStage) {
         submitClientInfoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -120,7 +160,10 @@ public class ClientApplication extends Application {
 
     }
 
-
+    /**
+     * Sets up the playingScene
+     * @return the Scene containing the graphics for playing the game
+     */
     private Scene setUpPlayingScene() {
         return new Scene(client.getTheView().getRoot());
     }
@@ -142,6 +185,10 @@ public class ClientApplication extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Creates the scene to get input from the user
+     * @return the Scene that gets input to allow the client to connect to the server
+     */
     public Scene makeInitScene() {
         /* Make the root pane and set properties */
         GridPane rootPane = new GridPane();
@@ -179,6 +226,10 @@ public class ClientApplication extends Application {
         return new Scene(rootPane, 400, 400);
     }
 
+    /**
+     * Scene that is shown while the client is waiting for the server to be ready
+     * @return the Scene that is shown while the client is waiting for the server to be ready
+     */
     private Scene getWaitingScene() {
 
         // Create UI.

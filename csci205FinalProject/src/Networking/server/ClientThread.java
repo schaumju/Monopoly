@@ -8,33 +8,51 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-/* Thread Class for each incoming client */
+/**
+ * Thread class for each client
+ */
 public class ClientThread implements Runnable {
 
-    /* The socket of the client */
+    /**
+     * The socket of the client
+     */
     private Socket clientSocket;
-    /* Server class from which thread was called */
+    /**
+     * The server class
+     */
     private Server baseServer;
-    /* Reader and writer for sending messages*/
+    /**
+     * Input stream to read incoming messages
+     */
     private ObjectInputStream incomingMessageReader;
+    /**
+     * Output stream to send messages
+     */
     private ObjectOutputStream outgoingMessageWriter;
-    /* The name of the client */
+    /**
+     * The name of the client
+     */
     private String clientName;
+    /**
+     * Determines if the thread is connected
+     */
     private boolean connected;
 
+    /**
+     * Constructor
+     *
+     * @param clientSocket the client socket
+     * @param baseServer   the server
+     */
     public ClientThread(Socket clientSocket, Server baseServer) {
         this.setClientSocket(clientSocket);
         this.connected = false;
         this.baseServer = baseServer;
         try {
 
-            /* Writer to write outgoing messages from the server to the client */
             outgoingMessageWriter = new ObjectOutputStream(clientSocket.getOutputStream());
             outgoingMessageWriter.flush();
-            /*
-             * Reader to get all incoming messages that the client passes to the
-             * server
-             */
+
             incomingMessageReader = new ObjectInputStream(clientSocket.getInputStream());
 
 
@@ -43,6 +61,9 @@ public class ClientThread implements Runnable {
         }
     }
 
+    /**
+     * Constantly runs to look for input from the clients
+     */
     public void run() {
         try {
             this.clientName = getClientNameFromNetwork();
@@ -61,6 +82,9 @@ public class ClientThread implements Runnable {
                 }
 
             });
+            /**
+             * Reads input and determines what to do with it
+             */
             Object inputToServer;
             while (true) {
                 inputToServer = incomingMessageReader.readObject();
@@ -74,21 +98,24 @@ public class ClientThread implements Runnable {
                 }
 
             }
-        } /*catch (SocketException e) {
-			baseServer.clientDisconnected(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/ catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Writes to the client
+     * @param input the object being written to the client
+     */
     public void writeToClient(Object input) throws IOException {
         outgoingMessageWriter.writeObject(input);
         outgoingMessageWriter.flush();
     }
 
+    /**
+     * Gets the name fo the client which is the first data it reads in always
+     * @return the name of the client
+     */
     public String getClientNameFromNetwork() throws IOException, ClassNotFoundException {
         /*
          * Get the name of the client, which is the first data transaction the
@@ -97,19 +124,33 @@ public class ClientThread implements Runnable {
         return (String) incomingMessageReader.readObject();
     }
 
+    /**
+     * Getter method for client name
+     * @return the client name
+     */
     public String getClientName() {
         return this.clientName;
     }
 
+    /**
+     * Getter method for the client socket
+     * @return the client socket
+     */
     public Socket getClientSocket() {
         return clientSocket;
     }
 
+    /**
+     * Setter method for the client socket
+     * @param clientSocket the client socket
+     */
     public void setClientSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
-
+    /**
+     * Used to disconnect the thread appropriately
+     */
     public synchronized void waitForDisconnect() {
         while (connected) {
             try {

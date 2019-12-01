@@ -258,7 +258,7 @@ public class MonopolyModel implements Serializable {
      */
     public void endTurn() {
         log.addToLog(game.getCurPlayer().getName() + " ended their turn");
-        game.getNextPlayer();
+        //game.getNextPlayer();
     }
 
     public GameLog getLog() {

@@ -1,10 +1,12 @@
 package Game.Cards;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Community Chest Card
  * @author Justin
  */
-public class CommunityChestCard extends Card
+public class CommunityChestCard extends Card implements Serializable
 {
     /**
      * Constructor

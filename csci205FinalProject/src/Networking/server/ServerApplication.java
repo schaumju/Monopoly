@@ -20,12 +20,28 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Class to handle running the Server side of the graphics
+ */
 public class ServerApplication extends Application {
+    /**
+     * Threads of the clients that join the game
+     */
     public static ArrayList<Thread> threads;
+    /**
+     * Maximum number of players that can play
+     */
     private final int MAX_PLAYERS = 4;
+    /**
+     * Minimum number of players that can play
+     */
     private final int MIN_PLAYERS = 2;
 
+    /**
+     * Main method
+     *
+     * @param args a string array
+     */
     public static void main(String[] args) {
         launch();
     }
@@ -39,7 +55,11 @@ public class ServerApplication extends Application {
 
     }
 
-
+    /**
+     * Creates a scene to get the necessary input to create the server
+     * @param primaryStage the Stage we are displaying
+     * @return a Scene used to get input from the user
+     */
     public Scene makePortUI(Stage primaryStage) {
         /* Make the root and set properties */
         GridPane rootPane = new GridPane();
@@ -61,7 +81,6 @@ public class ServerApplication extends Application {
         errorLabel2.setTextFill(Color.RED);
         TextField numberPlayers = new TextField();
         numPlayers.setFont(Font.font("Tahoma"));
-        System.out.println("HERE");
         /*
          * "Done" button and its click handler When clicked, another method is
          * called
@@ -114,6 +133,11 @@ public class ServerApplication extends Application {
         return new Scene(rootPane, 400, 300);
     }
 
+    /**
+     * Creates the visual that will be seen throughout the game on the server side
+     * @param server the server that is running the game
+     * @return a Scene that is the graphics that the server will display
+     */
     public Scene makeServerUI(Server server) {
         /* Make the root pane and set properties */
         GridPane rootPane = new GridPane();
@@ -149,7 +173,7 @@ public class ServerApplication extends Application {
     /**
      * Class for an invalid input of the number of players
      */
-    public class NumberPlayersException extends Exception {
+    private class NumberPlayersException extends Exception {
         public NumberPlayersException(String message) {
             super(message);
         }

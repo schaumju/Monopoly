@@ -1,7 +1,11 @@
 package Networking.server;
 
+import Controller.MainController;
 import Game.Character;
 import Model.GameLog;
+import Model.MonopolyModel;
+import Networking.TurnState;
+import View.MainView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +27,9 @@ public class Server implements Runnable {
     private ArrayList<Socket> clients;
     private ArrayList<ClientThread> clientThreads;
     private Character[] playerList;
+    private MonopolyModel theModel;
+    private MainView theView;
+    private MainController theController;
 
     /**
      * Constructor
@@ -87,6 +94,7 @@ public class Server implements Runnable {
         playerList = new Character[NUM_PLAYERS];
         for (int i = 0; i < NUM_PLAYERS; i++) {
             playerList[i] = new Character(clientNames.get(i), playerColors[i]);
+            playerList[i].setID(i);
         }
     }
 
@@ -116,16 +124,43 @@ public class Server implements Runnable {
     }
 
     /**
+     * Write to the client whose turn it was an change their turn state to waiting
+     */
+    public void changeTurn() throws IOException {
+        clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.WAITING);
+        theModel.getGame().getNextPlayer();
+        clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
+    }
+
+    /**
      * Closes the socket once it reaches the correct number of clients
      */
     public void closeSocket() {
         try {
             socket.close();
             createPlayerList();
+            startGame();
             writeToAllClients(playerList);
+            clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates the objects necessary to start the game
+     */
+    private void startGame() {
+        theModel = new MonopolyModel(playerList);
+        theView = new MainView(theModel);
+        theController = new MainController(theModel, theView);
+        theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
+            try {
+                changeTurn();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 

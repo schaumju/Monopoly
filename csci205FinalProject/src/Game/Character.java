@@ -20,6 +20,7 @@ package Game;
 
 import Game.Spaces.Property;
 import Game.Spaces.PropertyColor;
+import Networking.SerializableColor;
 import javafx.scene.paint.Color;
 
 import java.io.Serializable;
@@ -43,7 +44,7 @@ public class Character implements Serializable {
     private String name;
 
     //Color of their character
-    private Color color;
+    private SerializableColor color;
 
     //Place on board
     private int position;
@@ -75,7 +76,7 @@ public class Character implements Serializable {
     public Character(String name, Color color)
     {
         this.name = name;
-        this.color = color;
+        this.color = new SerializableColor(color);
         this.position = 0;
         this.numRailroads = 0;
         this.numUtilities = 0;
@@ -234,7 +235,7 @@ public class Character implements Serializable {
 
     public Color getColor()
     {
-        return color;
+        return color.getFXColor();
     }
 
     public int getNumRailroads()

@@ -1,22 +1,25 @@
 package Model;
 
+import Networking.SerializableObservableList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.Serializable;
 
 /**
  * Class to represent a log of all the moves in the game
  *
  * @author Justin
  */
-public class GameLog {
+public class GameLog implements Serializable {
 
-    private ObservableList<String> log;
+    private SerializableObservableList log;
 
     /**
      * Constructor
      */
     public GameLog() {
-        log = FXCollections.observableArrayList();
+        log = new SerializableObservableList(FXCollections.observableArrayList());
     }
 
     /**
@@ -32,6 +35,6 @@ public class GameLog {
      * Getter method
      */
     public ObservableList<String> getLog() {
-        return log;
+        return log.getObservableList();
     }
 }

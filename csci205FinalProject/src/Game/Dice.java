@@ -18,6 +18,7 @@
  */
 package Game;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -25,7 +26,7 @@ import java.util.Random;
  *
  * @author Kerri
  */
-public class Dice {
+public class Dice implements Serializable {
 
     /**
      * The value of the first dice roll

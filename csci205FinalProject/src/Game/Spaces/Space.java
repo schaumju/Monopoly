@@ -18,11 +18,13 @@
  */
 package Game.Spaces;
 
+import java.io.Serializable;
+
 /**
  * An abstract class that represents a space on the board
  * @author Ashlyn Ramos
  */
-public abstract class Space {
+public abstract class Space implements Serializable {
 
     protected int position;
     protected String name;

@@ -1,41 +1,75 @@
 package Networking.client;
 
 import Controller.MainController;
+import Game.Character;
 import Model.MonopolyModel;
+import Networking.TurnState;
 import View.MainView;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.net.Socket;
 
+/**
+ * Class to represent the client in a server-client protocol
+ */
 public class Client implements Runnable {
-    public ObservableList<String> chatLog;
-    /* The Socket of the Client */
+    /**
+     * The socket of the client
+     */
     private Socket clientSocket;
+    /**
+     * Input Stream for reading input from the Server
+     */
     private ObjectInputStream serverToClientReader;
+    /**
+     * Output Stream for sending messages to the Server
+     */
     private ObjectOutputStream clientToServerWriter;
+    /**
+     * Name of the player
+     */
     private String name;
+    /**
+     * Boolean value to determine if the game is ready to display the board
+     */
     private boolean graphicsReady;
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
+    /**
+     * The game graphics
+     */
     private MainView theView;
+    /**
+     * The game controller
+     */
     private MainController theController;
+    /**
+     * The current state of the player in the game
+     */
+    private TurnState turnState;
 
+    /**
+     * Constructor
+     *
+     * @param hostName
+     * @param portNumber the port number
+     * @param name       the name of the player
+     * @throws IOException
+     */
     public Client(String hostName, int portNumber, String name) throws IOException {
+        turnState = TurnState.WAITING;
         graphicsReady = false;
         /* Try to establish a connection to the server */
         clientSocket = new Socket(hostName, portNumber);
         /* Instantiate writers and readers to the socket */
-
-
         clientToServerWriter = new ObjectOutputStream(clientSocket.getOutputStream());
         serverToClientReader = new ObjectInputStream(clientSocket.getInputStream());
         clientToServerWriter.flush();
-        chatLog = FXCollections.observableArrayList();
         /* Send name data to the server */
         this.name = name;
 
@@ -44,21 +78,45 @@ public class Client implements Runnable {
 
     }
 
-
+    /**
+     * Runs so that the Client is continually looking for input from the Server
+     */
     public void run() {
         /* Infinite loop to update the chat log from the server */
 
         while (true) {
+            if (theView != null) {
+                System.out.println("HERE OUTSIDE");
+                if (turnState != TurnState.IN_TURN) {
+                    System.out.println("HERE INSIDE");
+                    theView.getDiceView().getRollDiceBtn().setDisable(false);
+                } else {
+                    System.out.println("HERE INSIDE2");
+                    theView.getDiceView().getRollDiceBtn().setDisable(true);
+                }
+            }
+
             try {
                 final Object inputFromServer = serverToClientReader.readObject();
-                System.err.println(inputFromServer);
+
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        if (inputFromServer instanceof Array) {
+                        if (inputFromServer instanceof Character[]) {
                             initiateGame(inputFromServer);
                         } else if (inputFromServer instanceof MonopolyModel) {
                             theModel = (MonopolyModel) inputFromServer;
+                        }
+                        // If you receive a TurnState from the server that means your turn is over so update the server with your model
+                        else if (inputFromServer instanceof TurnState) {
+                            System.out.println("HERE WE GO");
+                            turnState = (TurnState) inputFromServer;
+                            try {
+                                writeToServer();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                         }
                     }
                 });
@@ -93,10 +151,16 @@ public class Client implements Runnable {
 
     }
 
+    /**
+     * Getter method
+     */
     public boolean isGraphicsReady() {
         return graphicsReady;
     }
 
+    /**
+     * Getter method
+     */
     public MainView getTheView() {
         return theView;
     }

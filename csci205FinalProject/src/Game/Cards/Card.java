@@ -2,11 +2,13 @@ package Game.Cards;
 
 import Game.Character;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Card (Community Chest or Chance)
  * @author Justin
  */
-public class Card {
+public class Card implements Serializable {
 
     /**
      * Description on the card
