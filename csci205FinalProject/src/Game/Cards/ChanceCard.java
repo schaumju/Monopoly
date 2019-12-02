@@ -1,10 +1,12 @@
 package Game.Cards;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Chance Card
  * @author Justin
  */
-public class ChanceCard extends Card
+public class ChanceCard extends Card implements Serializable
 {
     /**
      * Constructor

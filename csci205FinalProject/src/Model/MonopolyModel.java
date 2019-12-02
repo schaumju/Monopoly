@@ -1,71 +1,271 @@
 package Model;
 
-import Game.Board;
-import Controller.BoardController;
-import Controller.MainController;
-import Game.Board;
+import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
-import Game.Spaces.Property;
-import View.BoardView;
-import View.MainView;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import Game.Spaces.*;
 
-public class MonopolyModel extends Application {
+import java.io.Serializable;
 
-    private MainView theView;
-    private MainController theController;
-    private MonopolyModel theModel;
-    private Board theBoard;
-    private Game Game;
-
-    public static void main(String[] args) { launch(args); }
+public class MonopolyModel implements Serializable {
+    /**
+     * List of player in the game
+     */
+    private Character[] playerList;
+    /**
+     * The game object
+     */
+    private Game game;
 
     /**
-     * starts the graphic
-     * @param primaryStage
-     * @author kerri
+     * Log of the events in the game
      */
-    @Override
-    public void start(Stage primaryStage) {
+    private GameLog log;
 
-        this.theController = new MainController(theModel, theView);
 
-        // add the scene graph to the stage
-        primaryStage.setScene(new Scene(theView.getRoot()));
-        primaryStage.sizeToScene();
+    /**
+     * Constructor
+     * @param playerList the list of player's in the game
+     */
+    public MonopolyModel(Character[] playerList) {
+        this.playerList = playerList;
+        this.game = new Game(playerList);
+        log = new GameLog();
+        log.addToLog(game.getCurPlayer().getName() + " is starting their turn");
 
-        // set the title for the main window
-        primaryStage.setTitle("Monopoly");
-
-        // display the screen
-        primaryStage.show();
     }
 
     /**
-     * initializes the model and view
-     * @throws Exception
-     * @author kerri
+     * Getter Method
      */
-    @Override
-    public void init() throws Exception {
-        super.init();
-        this.theBoard = new Board();
-        this.theView = new MainView(theModel);
-        this.Game = new Game(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
-        this.Game.getCharacters().addCharacters();
-
-
-    }
-    public Game getGame()
-    {
-        return this.Game;
+    public Character[] getPlayerList() {
+        return playerList;
     }
 
-    public Board getTheBoard() {
-        return theBoard;
+    /**
+     * Getter Method
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * Gets the player whose turn it is
+     *
+     * @return the character object of the player whose turn it is
+     */
+    public Character getCurPlayer() {
+        return game.getCurPlayer();
+    }
+
+    /**
+     * Determines what space the player landed on and performs the appropriate action
+     */
+    public void interactSpace(int roll) throws Exception {
+
+        Space space = game.getBoard().getBoard().get(getCurPlayer().getPosition());
+        log.addToLog(getCurPlayer().getName() + " landed on " + space.getName());
+        System.out.println(getCurPlayer().getName() + " landed on " + space.getName());
+
+        if (space instanceof Property) {
+            interactProperty((Property) space);
+        } else if (space instanceof Railroads) {
+            interactRailroad((Railroads) space);
+        } else if (space instanceof Utilities) {
+            interactUtilities((Utilities) space, roll);
+        } else if (space instanceof GoToJailSpace) {
+            interactGoToJail();
+        } else if (space instanceof Chance) {
+            interactChance((Chance) space);
+        } else if (space instanceof CommunityChest) {
+            interactCommunityChest((CommunityChest) space);
+        } else if (space instanceof Tax) {
+            interactTax((Tax) space);
+        }
+
+    }
+
+    /**
+     * Allows the user to interact with a Utility space
+     *
+     * @param space the Utility space they are currently on
+     */
+    private void interactUtilities(Utilities space, int roll) {
+        if (space.isOwned()) {
+            Character owner = playerList[space.getOwner()];
+            log.addToLog("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent(owner.getNumUtilities(), roll));
+            System.out.println("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owes " + owner.getName() + " " + space.getRent(owner.getNumUtilities(), roll));
+            getCurPlayer().payPlayer(owner, space.getRent(owner.getNumUtilities(), roll));
+        } else if (getCurPlayer().getBalance() < space.getCost()) {
+            System.out.println("You do not have enough money to buy this property");
+            log.addToLog(getCurPlayer().getName() + " do not have enough money to buy this property");
+        }
+    }
+
+
+    /**this.theController = new MainController(theModel, theView);
+     * Allows the player to interact with the go to jail space
+     */
+    private void interactGoToJail() {
+        getCurPlayer().goToJail();
+    }
+
+    /**
+     * Allows the player to interact with the chance space
+     *
+     * @param space the Chance space they are currently on
+     */
+    private void interactChance(Chance space) throws Exception {
+        Card card = game.getBoard().getChanceDeck().draw();
+        int beforePosition = getCurPlayer().getPosition();
+        System.out.println("You drew the Chance card " + card.getDescription());
+        log.addToLog(getCurPlayer().getName() + "drew the Chance card " + card.getDescription());
+        card.preformAction(getCurPlayer(), playerList);
+        // If the player moved as a result of the chance card
+        if (beforePosition != getCurPlayer().getPosition()) {
+            interactSpace(0);
+        }
+
+    }
+
+    /**
+     * Allows the player to interact with a Community Chest space
+     *
+     * @param space the Community Chest space they are currently on
+     */
+    private void interactCommunityChest(CommunityChest space) throws Exception {
+        Card card = game.getBoard().getCommunityChestDeck().draw();
+        int beforePosition = getCurPlayer().getPosition();
+        System.out.println("You drew the Community Chest card " + card.getDescription());
+        log.addToLog(getCurPlayer().getName() + "drew the Community Chest card " + card.getDescription());
+        card.preformAction(getCurPlayer(), playerList);
+        // If the player moved as a result of the Community chest card
+        if (beforePosition != getCurPlayer().getPosition()) {
+            interactSpace(0);
+        }
+    }
+
+    /**
+     * Allows the player to interact with a tax space
+     *
+     * @param space the Tax space they are currently on
+     */
+    private void interactTax(Tax space) {
+        getCurPlayer().subtractFromBalance(space.getTax());
+        log.addToLog(getCurPlayer().getName() + " paid " + space.getTax());
+        System.out.println(getCurPlayer().getName() + " paid " + space.getTax());
+    }
+
+    /**
+     * Allows the player to interact with a Railroad space
+     *
+     * @param space the Railroad space they are currently on
+     */
+    private void interactRailroad(Railroads space) {
+        if (space.isOwned()) {
+            Character owner = playerList[space.getOwner()];
+            log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + space.getRent(owner.getNumRailroads()));
+            System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent(owner.getNumRailroads()));
+            getCurPlayer().payPlayer(owner, space.getRent(owner.getNumRailroads()));
+        } else if (getCurPlayer().getBalance() < space.getCost()) {
+            System.out.println("You do not have enough money to buy this property");
+            log.addToLog(getCurPlayer().getName() + " do not have enough money to buy this property");
+        }
+
+    }
+
+    /**
+     * Allows the player to interact with a property space
+     *
+     * @param space the Property space they are currently on
+     */
+    private void interactProperty(Property space) {
+
+        if (space.isOwned()) {
+            Character owner = playerList[space.getOwner()];
+            if (getCurPlayer().isMonopoly(space.getPropertyColor()) && space.getNumHouses() == 0) {
+                System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + 2 * space.getRent());
+                getCurPlayer().payPlayer(owner, 2 * space.getRent());
+            } else {
+                System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + space.getRent());
+                getCurPlayer().payPlayer(owner, space.getRent());
+            }
+
+        } else if (getCurPlayer().getBalance() < space.getCost()) {
+            System.out.println("You do not have enough money to buy this property");
+            log.addToLog(getCurPlayer().getName() + " does not have enough money to buy this property");
+        }
+    }
+
+
+    /**
+     * Allows the user to buy the space
+     *
+     * @param space the space that is being bought
+     */
+    public void buyProperty(Space space) {
+
+        if (space instanceof Property) {
+
+            ((Property) space).buyProperty(getCurPlayer());
+            getCurPlayer().subtractFromBalance(((Property) space).getCost());
+
+        } else if (space instanceof Railroads) {
+            ((Railroads) space).buyProperty(getCurPlayer());
+            getCurPlayer().subtractFromBalance(((Railroads) space).getCost());
+            getCurPlayer().buyRailroad();
+
+        } else if (space instanceof Utilities) {
+            ((Utilities) space).buyProperty(getCurPlayer());
+            getCurPlayer().subtractFromBalance(((Utilities) space).getCost());
+            getCurPlayer().buyUtility();
+
+        }
+
+        System.out.println("You have bought this property from the bank");
+        log.addToLog(getCurPlayer().getName() + " has bought this property from the bank");
+        System.out.println("Your new balance is $" + getCurPlayer().getBalance());
+        log.addToLog("Their new balance is $" + getCurPlayer().getBalance());
+    }
+
+    /**
+     * Determines whether the space is buyable or not
+     *
+     * @return true if the space is an instance of the Buyable class
+     */
+    private boolean isBuyable() {
+        return game.getBoard().getBoard().get(getCurPlayer().getPosition()) instanceof Buyable;
+    }
+
+    /**
+     * Determines if the space is unowned
+     *
+     * @return true if the property is unowned (available to buy)
+     */
+    public boolean isAvailable() {
+        if (isBuyable()) {
+            Buyable space = (Buyable) game.getBoard().getBoard().get(getCurPlayer().getPosition());
+            return space.getOwner() == -1;
+        }
+        return false;
+
+    }
+
+    /**
+     * Ends the turn by switching the current player to the next player (changes the turn)
+     */
+    public void endTurn() {
+        log.addToLog(game.getCurPlayer().getName() + " ended their turn");
+        //game.getNextPlayer();
+    }
+
+    public GameLog getLog() {
+        return log;
+    }
+
+    public void setLog(GameLog log) {
+        this.log = log;
     }
 }

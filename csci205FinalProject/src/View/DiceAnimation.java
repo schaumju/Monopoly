@@ -17,7 +17,9 @@ import javafx.util.Duration;
  */
 public class DiceAnimation extends StackPane {
 
-
+    /**
+     * Property to store the value of the die
+     */
     public final SimpleIntegerProperty valueProperty = new SimpleIntegerProperty();
 
     /**
@@ -40,7 +42,7 @@ public class DiceAnimation extends StackPane {
 
     /**
      * does the rolling of the dice
-     * @param roll
+     * @param roll the sum of the dice roll
      * @author - justin
      */
     public void roll(int roll) {

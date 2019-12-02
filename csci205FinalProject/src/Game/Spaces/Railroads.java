@@ -2,11 +2,13 @@ package Game.Spaces;
 
 import Game.Character;
 
+import java.io.Serializable;
+
 /**
  * Class that represents the 4 railroads on the board
  * @author Justin
  */
-public class Railroads extends Space implements Buyable {
+public class Railroads extends Space implements Buyable, Serializable {
 
     /**
      * The ID of the person who owns the Railroad

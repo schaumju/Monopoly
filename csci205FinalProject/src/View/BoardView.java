@@ -18,46 +18,64 @@
  */
 package View;
 
-import Game.Board;
-import Game.Dice;
-import Game.Game;
-import Game.Spaces.Property;
 import Game.Spaces.Space;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class BoardView {
 
+    /**
+     * Number of spaces on the board
+     */
     public static final int NUM_SPACES = 40;
+    /**
+     * Model for the game
+     */
+    private MonopolyModel theModel;
+    /**
+     * ArrayList of all the labels
+     */
+    private ArrayList<Label> listOfLabels = new ArrayList<>();
+    /**
+     * ArrayList of all the spaces
+     */
+    private ArrayList<Space> listOfSpaces = new ArrayList<>();
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
-    public static ArrayList<Label> listOfLabels = new ArrayList<>();
-
-    public static ArrayList<Space> listOfSpaces = new ArrayList<>();
+    /**
+     * Constructor
+     *
+     * @param theModel the model for the game
+     * @param mainView
+     */
+    public BoardView(MonopolyModel theModel, MainView mainView) {
+        this.theModel = theModel;
+        this.mainView = mainView;
+        addBoardSpaces();
+    }
 
     /**
      * adds all of the board spaces to the gridpane
      * @author kerri
      */
-    protected static void addBoardSpaces() {
+    private void addBoardSpaces() {
         for (int i = 0; i < NUM_SPACES; i++) {
             Rectangle square = createSquare();
             Rectangle colorRectangle = createColorRectangle(i);
             String spaceNum = String.valueOf(i);
 
-            ArrayList theBoard = Board.getBoard();
+            ArrayList theBoard = theModel.getGame().getBoard().getBoard();
             Space curSpace = (Space) theBoard.get(i);
             Label spaceName = new Label(curSpace.getName());
 
@@ -67,17 +85,17 @@ public class BoardView {
             if (i < 11) {
                 addRowCol(i);
                 handleRow(square, colorRectangle, i, 0, 0, spaceNum);
-                MainView.getRoot().add(spaceName, i, 0);
+                mainView.getRoot().add(spaceName, i, 0);
             } else if (i < 21) {
 
                 handleColumn(square, colorRectangle, 10, i-10, 90, spaceNum);
-                MainView.getRoot().add(spaceName, 10, i - 10);
+                mainView.getRoot().add(spaceName, 10, i - 10);
             } else if (i < 31) {
                 handleRow(square, colorRectangle, 30 - i, 10, 180, spaceNum);
-                MainView.getRoot().add(spaceName, 30 - i, 10);
+                mainView.getRoot().add(spaceName, 30 - i, 10);
             } else {
                 handleColumn(square, colorRectangle, 0, 40 - i, 270, spaceNum);
-                MainView.getRoot().add(spaceName, 0, 40 - i);
+                mainView.getRoot().add(spaceName, 0, 40 - i);
             }
 
             listOfLabels.add(spaceName);
@@ -92,8 +110,8 @@ public class BoardView {
      * all of the players stay updated with what the others have done
      * @author kerri
      */
-    private static void addTurnHistoryColumn() {
-        MainView.getRoot().addColumn(MainView.getRoot().getColumnCount(),new Label("   what has happened in the game   "));
+    private void addTurnHistoryColumn() {
+        //MainView.getRoot().addColumn(MainView.getRoot().getColumnCount(),new Label("   what has happened in the game   "));
     }
 
     /**
@@ -102,14 +120,16 @@ public class BoardView {
      * @param spaceName - the name of the space
      * @author - kerri
      */
-    private static void formatSpaceName(Space curSpace, Label spaceName) {
+    private void formatSpaceName(Space curSpace, Label spaceName) {
         if (curSpace.getName().contains(" ")) {
             spaceName.setText(spaceName.getText().replace(" ", "\n"));
         }
 
         spaceName.setAlignment(Pos.CENTER);
         spaceName.setMaxSize(70, 70);
-        spaceName.setFont(new Font(12));
+        Font font = Font.font("TimesRoman", FontWeight.EXTRA_BOLD, 12);
+        spaceName.setFont(font);
+        spaceName.setTextAlignment(TextAlignment.CENTER);
     }
 
     /**
@@ -117,9 +137,9 @@ public class BoardView {
      * @param i - the number row/column the for loop is on
      * @author kerri
      */
-    private static void addRowCol(int i) {
-        MainView.getRoot().addColumn(i);
-        MainView.getRoot().addRow(i);
+    private void addRowCol(int i) {
+        mainView.getRoot().addColumn(i);
+        mainView.getRoot().addRow(i);
     }
 
     /**
@@ -132,10 +152,10 @@ public class BoardView {
      * @param spaceNum - where the space is on the board
      * @author kerri
      */
-    private static void handleRow(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
-        MainView.getRoot().add(square, colIndex, rowIndex);
+    private void handleRow(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
+        mainView.getRoot().add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
-            MainView.getRoot().add(colorRectangle, colIndex, rowIndex);
+            mainView.getRoot().add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
     }
@@ -150,11 +170,11 @@ public class BoardView {
      * @param spaceNum - where the space is on the board
      * @author kerri
      */
-    private static void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
+    private void handleColumn(Rectangle square, Rectangle colorRectangle, int colIndex, int rowIndex, int angleToRotate, String spaceNum) {
 
-        MainView.getRoot().add(square, colIndex, rowIndex);
+        mainView.getRoot().add(square, colIndex, rowIndex);
         if (Integer.parseInt(spaceNum)%10 != 0) {
-            MainView.getRoot().add(colorRectangle, colIndex, rowIndex);
+            mainView.getRoot().add(colorRectangle, colIndex, rowIndex);
             colorRectangle.setRotate(angleToRotate);
         }
     }
@@ -164,7 +184,7 @@ public class BoardView {
      * @return - the new square
      * @author kerri
      */
-    private static Rectangle createSquare() {
+    private Rectangle createSquare() {
         Rectangle square = new Rectangle();
         square.setStroke(Color.BLACK);
         square.setFill(Color.WHITE);
@@ -179,7 +199,7 @@ public class BoardView {
      * @return - the rectangle
      * @author kerri
      */
-    private static Rectangle createColorRectangle(int spaceNum) {
+    private Rectangle createColorRectangle(int spaceNum) {
         Rectangle colorRectangle = new Rectangle();
         setColor(colorRectangle, spaceNum);
         colorRectangle.setWidth(70);
@@ -194,7 +214,7 @@ public class BoardView {
      * @param spaceNum - the position it is on the board
      * @author kerri
      */
-    private static void setColor(Rectangle colorRectangle, int spaceNum) {
+    private void setColor(Rectangle colorRectangle, int spaceNum) {
         if (spaceNum == 1 || spaceNum == 3) { colorRectangle.setFill(Color.BROWN); }
         else if (spaceNum == 6 || spaceNum == 8 || spaceNum == 9) { colorRectangle.setFill(Color.LIGHTBLUE); }
         else if (spaceNum == 11 || spaceNum == 13 || spaceNum == 14) { colorRectangle.setFill(Color.PINK); }
@@ -208,11 +228,11 @@ public class BoardView {
 
     //Getters
 
-    public static ArrayList<Label> getListOfLabels() {
+    public ArrayList<Label> getListOfLabels() {
         return listOfLabels;
     }
 
-    public static ArrayList<Space> getListOfSpaces() {
+    public ArrayList<Space> getListOfSpaces() {
         return listOfSpaces;
     }
 }

@@ -1,3 +1,4 @@
+/*
 package Game;
 
 import Game.Cards.Card;
@@ -5,41 +6,348 @@ import Game.Spaces.*;
 
 import java.util.Scanner;
 
+*/
 /**
  * Runs a single turn for a player
  *
  * @author Justin
- */
+ *//*
+
 public class Turn {
 
     private static final int JAIL_FINE = 50;
-    /**
-     * The player whose turn it is currently
-     */
+    */
+/**
+ * The player whose turn it is currently
+ * <p>
+ * The number of rolls the user has done this turn
+ * <p>
+ * The game board
+ * <p>
+ * The sum of the user's roll
+ * <p>
+ * The list of the players in the game
+ * <p>
+ * Constructor
+ *
+ * @param player the player whose turn it is
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * The number of rolls the user has done this turn
+ * <p>
+ * The game board
+ * <p>
+ * The sum of the user's roll
+ * <p>
+ * The list of the players in the game
+ * <p>
+ * Constructor
+ * @param player the player whose turn it is
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * The number of rolls the user has done this turn
+ * <p>
+ * The game board
+ * <p>
+ * The sum of the user's roll
+ * <p>
+ * The list of the players in the game
+ * <p>
+ * Constructor
+ * @param player the player whose turn it is
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * The number of rolls the user has done this turn
+ * <p>
+ * The game board
+ * <p>
+ * The sum of the user's roll
+ * <p>
+ * The list of the players in the game
+ * <p>
+ * Constructor
+ * @param player the player whose turn it is
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ *//*
+
     private Character player;
-    /**
-     * The number of rolls the user has done this turn
-     */
+    */
+/**
+ * The number of rolls the user has done this turn
+ *//*
+
     private int numRolls;
-    /**
-     * The game board
-     */
+    */
+/**
+ * The game board
+ *//*
+
     private Board board;
-    /**
-     * The sum of the user's roll
-     */
+    */
+/**
+ * The sum of the user's roll
+ *//*
+
     private int roll;
-    /**
-     * The list of the players in the game
-     */
+    */
+/**
+ * The list of the players in the game
+ *//*
+
     private Character[] playerList;
 
 
-    /**
-     * Constructor
-     *
-     * @param player the player whose turn it is
-     */
+    */
+/**
+ * Constructor
+ *
+ * @param player the player whose turn it is
+ * <p>
+ * Determines what space the player landed on and performs the appropriate action
+ * <p>
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ * <p>
+ * Allows the player to interact with the go to jail space
+ * <p>
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ * <p>
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ * <p>
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ * <p>
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ * <p>
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ * <p>
+ * Allows the user to buy the space
+ * @param space the space that is being bought
+ * <p>
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ * <p>
+ * Method that runs the player's turn
+ * <p>
+ * Get out of jail attempt
+ *//*
+
     public Turn(Character player, Board board, Character[] playerList) {
         this.player = player;
         numRolls = 0;
@@ -57,9 +365,11 @@ public class Turn {
 
 
 
-    /**
-     * Determines what space the player landed on and performs the appropriate action
-     */
+    */
+/**
+ * Determines what space the player landed on and performs the appropriate action
+ *//*
+
     private void interactSpace() {
 
         Space space = Board.getBoard().get(player.getPosition());
@@ -83,10 +393,12 @@ public class Turn {
 
     }
 
-    /**
-     * Allows the user to interact with a Utility space
-     * @param space the Utility space they are currently on
-     */
+    */
+/**
+ * Allows the user to interact with a Utility space
+ * @param space the Utility space they are currently on
+ *//*
+
     private void interactUtilities(Utilities space) {
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
@@ -106,60 +418,24 @@ public class Turn {
         }
     }
 
-    /**
-     * Get out of jail attempt
-     */
-    public void getOutOfJailAttempt()
-    {
-        Dice dice = new Dice();
-        int numRolls = dice.rollDice();
-        System.out.println(player.getName() + " rolled a " + numRolls);
-        //If they successfully get out
-        if (dice.isDoubles())
-        {
-            System.out.println("Its doubles! You're out!");
-            player.move(numRolls);
-            player.leaveJail();
-            interactSpace();
 
-        }
-        else
-        {
-            if(player.getTurnsInJail() == 2)
-            {
-                player.move(numRolls);
-                System.out.println("You've served your sentence! Pay $50 and leave!");
-                player.subtractFromBalance(JAIL_FINE);
 
-                //CHECK BANKRUPT
+    */
+/**
+ * Allows the player to interact with the go to jail space
+ *//*
 
-                player.leaveJail();
-                interactSpace();
-            }
-            else
-            {
-                System.out.println("Its not a double! Stay in jail");
-                //TODO
-                //Ask user if he wants to pay $50 and get out or not and show them the turn in jail they are at
-
-                player.incrementTurnsInJail();
-                System.out.println("Turns in jail: " + player.getTurnsInJail());
-            }
-        }
-    }
-
-    /**
-     * Allows the player to interact with the go to jail space
-     */
     private void interactGoToJail()
     {
         player.goToJail();
     }
 
-    /**
-     * Allows the player to interact with the chance space
-     * @param space the Chance space they are currently on
-     */
+    */
+/**
+ * Allows the player to interact with the chance space
+ * @param space the Chance space they are currently on
+ *//*
+
     private void interactChance(Chance space) {
         Card card = board.getChanceDeck().draw();
         int beforePosition = player.getPosition();
@@ -172,10 +448,12 @@ public class Turn {
 
     }
 
-    /**
-     * Allows the player to interact with a Community Chest space
-     * @param space the Community Chest space they are currently on
-     */
+    */
+/**
+ * Allows the player to interact with a Community Chest space
+ * @param space the Community Chest space they are currently on
+ *//*
+
     private void interactCommunityChest(CommunityChest space) {
         Card card = board.getCommunityChestDeck().draw();
         int beforePosition = player.getPosition();
@@ -187,19 +465,23 @@ public class Turn {
         }
     }
 
-    /**
-     * Allows the player to interact with a tax space
-     * @param space the Tax space they are currently on
-     */
+    */
+/**
+ * Allows the player to interact with a tax space
+ * @param space the Tax space they are currently on
+ *//*
+
     private void interactTax(Tax space) {
         player.subtractFromBalance(space.getTax());
         System.out.println(player.getName() + " paid " + space.getTax());
     }
 
-    /**
-     * Allows the player to interact with a Railroad space
-     * @param space the Railroad space they are currently on
-     */
+    */
+/**
+ * Allows the player to interact with a Railroad space
+ * @param space the Railroad space they are currently on
+ *//*
+
     private void interactRailroad(Railroads space) {
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
@@ -219,10 +501,12 @@ public class Turn {
         }
     }
 
-    /**
-     * Allows the player to interact with a property space
-     * @param space the Property space they are currently on
-     */
+    */
+/**
+ * Allows the player to interact with a property space
+ * @param space the Property space they are currently on
+ *//*
+
     private void interactProperty(Property space) {
 
         if (space.isOwned()) {
@@ -249,11 +533,13 @@ public class Turn {
         }
     }
 
-    /**
-     * Allows the user to buy the space
-     *
-     * @param space the space that is being bought
-     */
+    */
+/**
+ * Allows the user to buy the space
+ *
+ * @param space the space that is being bought
+ *//*
+
     private void buyProperty(Space space) {
 
         if (space instanceof Property) {
@@ -277,9 +563,11 @@ public class Turn {
         System.out.println("Your new balance is $" + player.getBalance());
     }
 
-    /**
-     * Called only if a player is bankrupted. Returns all his properties to unowned
-     */
+    */
+/**
+ * Called only if a player is bankrupted. Returns all his properties to unowned
+ *//*
+
     private void bankrupt() {
         int id = player.getID();
 
@@ -295,9 +583,11 @@ public class Turn {
 
     }
 
-    /**
-     * Method that runs the player's turn
-     */
+    */
+/**
+ * Method that runs the player's turn
+ *//*
+
     private void playTurn() {
         Dice dice;
         do {
@@ -337,5 +627,43 @@ public class Turn {
 
     }
 
+    */
+/**
+ * Get out of jail attempt
+ *//*
+
+    public void getOutOfJailAttempt() {
+        Dice dice = new Dice();
+        int numRolls = dice.rollDice();
+        System.out.println(player.getName() + " rolled a " + numRolls);
+        //If they successfully get out
+        if (dice.isDoubles()) {
+            System.out.println("Its doubles! You're out!");
+            player.move(numRolls);
+            player.leaveJail();
+            interactSpace();
+
+        } else {
+            if (player.getTurnsInJail() == 2) {
+                player.move(numRolls);
+                System.out.println("You've served your sentence! Pay $50 and leave!");
+                player.subtractFromBalance(JAIL_FINE);
+
+                //CHECK BANKRUPT
+
+                player.leaveJail();
+                interactSpace();
+            } else {
+                System.out.println("Its not a double! Stay in jail");
+                //TODO
+                //Ask user if he wants to pay $50 and get out or not and show them the turn in jail they are at
+
+                player.incrementTurnsInJail();
+                System.out.println("Turns in jail: " + player.getTurnsInJail());
+            }
+        }
+    }
+
 
 }
+*/

@@ -18,36 +18,76 @@
  */
 package View;
 
-import Game.Character;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 public class MainView {
 
-    private MonopolyModel theModel;
+    /**
+     * The root pane for the graphics
+     */
     private static GridPane root;
+    /**
+     * Game model
+     */
+    private MonopolyModel theModel;
+    /**
+     * View class for board
+     */
+    private BoardView boardView;
+    /**
+     * View class for cards
+     */
+    private CardsView cardsView;
+    /**
+     * View class for dice
+     */
+    private DiceView diceView;
+    /**
+     * View class for characters
+     */
+    private CharacterView characterView;
+    /**
+     * View class for property
+     */
+    private PropertyView propertyView;
+    /**
+     * View class for the end of the turn
+     */
+    private EndTurnView endTurnView;
+    /**
+     * View class for the game log
+     */
+    private LogView logView;
 
     /**
      * sets up the main view
-     * @param theModel
+     * @param theModel the game model
      * @author kerri
      */
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
-
         setUpRoot();
+        boardView = new BoardView(theModel, this);
+        cardsView = new CardsView(theModel, this);
+        characterView = new CharacterView(theModel, this);
+        propertyView = new PropertyView(theModel, this);
+        diceView = new DiceView(theModel, this);
+        endTurnView = new EndTurnView(theModel, this);
+        logView = new LogView(theModel, this);
 
-        BoardView.addBoardSpaces();
 
-        DiceView.addDice();
+        // BoardView.addBoardSpaces();
+
+        //DiceView.addDice();
 
         //new CharacterView(new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)});
 
-        PropertyView.addPropertyBuyButton();
+        //PropertyView.addPropertyBuyButton();
 
-        CardsView.addCards();
+        //CardsView.addCards();
+
     }
 
 
@@ -61,7 +101,60 @@ public class MainView {
         root.setGridLinesVisible(false);
     }
 
-    public static GridPane getRoot() {
+    /**
+     * Getter method for grid pane
+     */
+    public GridPane getRoot() {
         return root;
+    }
+
+
+    /**
+     * Getter Methods
+     */
+
+    public MonopolyModel getTheModel() {
+        return theModel;
+    }
+
+    public BoardView getBoardView() {
+        return boardView;
+    }
+
+    public CardsView getCardsView() {
+        return cardsView;
+    }
+
+    public DiceView getDiceView() {
+        return diceView;
+    }
+
+    public CharacterView getCharacterView() {
+        return characterView;
+    }
+
+    public PropertyView getPropertyView() {
+        return propertyView;
+    }
+
+    public EndTurnView getEndTurnView() {
+        return endTurnView;
+    }
+
+    /**
+     * Updates the scene for the player if the player rolled doubles (roll again)
+     */
+    public void doubles() {
+        diceView.getRollDiceBtn().setDisable(false);
+
+    }
+
+    /**
+     * Resets the buttons for the next turn
+     */
+    public void endTurn() {
+        diceView.getRollDiceBtn().setDisable(false);
+        endTurnView.getEndTurnButton().setDisable(true);
+        propertyView.turnButtonOff();
     }
 }

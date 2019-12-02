@@ -18,52 +18,51 @@
  */
 package View;
 
-import Game.Dice;
+import Model.MonopolyModel;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class DiceView {
 
-    private static SimpleIntegerProperty target = new SimpleIntegerProperty();
-    static Button rollDiceBtn;
-    private static DiceAnimation dice1;
-    private static DiceAnimation dice2;
+    private SimpleIntegerProperty target = new SimpleIntegerProperty();
+    /**
+     * Button to roll the dice
+     */
+    private Button rollDiceBtn;
+    /**
+     * Animation for the first die
+     */
+    private DiceAnimation dice1;
+    /**
+     * Animation for the second die
+     */
+    private DiceAnimation dice2;
+    /**
+     * The game model
+     */
+    private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
+
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     */
+    public DiceView(MonopolyModel theModel, MainView mainView) {
+        this.theModel = theModel;
+        this.mainView = mainView;
+        addDice();
+    }
 
     /**
      * adds the view of dice to the gridpane
      * @author - kerri
      */
-    protected static void addDice() {
-        /*int die1 = 5; //Dice.getDie1();
-        int die2 = 3; //Dice.getDie2();
-
-        Label die1Label = new Label("  " + String.valueOf(die1));
-        die1Label.setAlignment(Pos.CENTER);
-
-        Label die2Label = new Label("  " + String.valueOf(die2));
-        die2Label.setAlignment(Pos.CENTER);
-
-        Rectangle rect1 = new Rectangle(20,20);
-        rect1.setFill(Color.WHITE);
-        rect1.setStroke(Color.BLACK);
-        rect1.setStrokeWidth(2);
-
-        Rectangle rect2 = new Rectangle(20,20);
-        rect2.setFill(Color.WHITE);
-        rect2.setStroke(Color.BLACK);
-        rect2.setStrokeWidth(2);
-
-        MainView.getRoot().add(rect1, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2);
-        MainView.getRoot().add(die1Label, MainView.getRoot().getColumnCount()/2, MainView.getRoot().getRowCount()/2);
-
-        MainView.getRoot().add(rect2, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);
-        MainView.getRoot().add(die2Label, MainView.getRoot().getColumnCount()/2 + 1, MainView.getRoot().getRowCount()/2);*/
+    private void addDice() {
 
         dice1 = new DiceAnimation();
         dice2 = new DiceAnimation();
@@ -81,11 +80,11 @@ public class DiceView {
 
     /**
      * adds the roll dice button to the view
-     * @param dice1
-     * @param dice2
+     * @param dice1 first dice roll
+     * @param dice2 second dice roll
      * @author justin
      */
-    private static void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
+    private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
         rollDiceBtn = new Button("Roll dice");
 
         rollDiceBtn.setTranslateX(600);
@@ -94,18 +93,19 @@ public class DiceView {
         SimpleBooleanProperty bool = new SimpleBooleanProperty();
         bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));
 
-        MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
+        mainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
-    public static Button getRollDiceBtn() {
+    // Getter methods
+    public Button getRollDiceBtn() {
         return rollDiceBtn;
     }
 
-    public static DiceAnimation getDice1() {
+    public DiceAnimation getDice1() {
         return dice1;
     }
 
-    public static DiceAnimation getDice2() {
+    public DiceAnimation getDice2() {
         return dice2;
     }
 }

@@ -20,12 +20,14 @@ package Game.Spaces;
 
 import Game.Character;
 
+import java.io.Serializable;
+
 /**
  * A property class that represents a property on the board.
  * @author Ashlyn Ramos
  * Reference : https://github.com/BenPollock/Monopoly/blob/master/Property.java
  */
-public class Property extends Space implements Buyable {
+public class Property extends Space implements Buyable, Serializable {
 
     /**
      * The number of houses on the property
@@ -193,3 +195,4 @@ public class Property extends Space implements Buyable {
         return isMonopoly;
     }
 }
+

@@ -19,6 +19,7 @@
 package View;
 
 import Game.Character;
+import Model.MonopolyModel;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -26,20 +27,43 @@ import java.util.List;
 
 public class CharacterView {
 
-    //List of Circle objects
+    /**
+     * List of circle objects representing the players
+     */
     private List<Circle> boardPlayerList;
 
-    //List of Character objects
+    /**
+     * List of the characters in the game
+     */
     private Character[] playerList;
+    /**
+     * Model object
+     */
+    private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
-    public CharacterView(Character[] playerList)
-    {
-        this.playerList = playerList;
+    /**
+     * Constructor
+     *
+     * @param theModel model object
+     * @param mainView
+     */
+    public CharacterView(MonopolyModel theModel, MainView mainView) {
+        this.theModel = theModel;
+        this.mainView = mainView;
+        this.playerList = theModel.getPlayerList();
         this.boardPlayerList = new ArrayList<>();
-        convertPlayers(playerList);
+        convertPlayers();
+        addCharacters();
     }
 
-    private void convertPlayers(Character[] playerList) {
+    /**
+     * Creates circle objects for all the players in the game with their colors
+     */
+    private void convertPlayers() {
         //Fills the circle list using the players in playerList.
         for (Character player : playerList)
         {
@@ -47,21 +71,30 @@ public class CharacterView {
         }
     }
 
-    //Adds the characters contained in the list
-    public void addCharacters()
+    /**
+     * Adds the characters to the board
+     */
+    private void addCharacters()
     {
+        //Amount to stagger the individual circles by
+        int translateAmount = 8;
+        
         for (int i = 0; i < boardPlayerList.size(); i++)
         {
-            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            //Staggering the player circles
+            boardPlayerList.get(i).setTranslateY(translateAmount*i);
         }
     }
 
-    //Updates the characters positions
+    /**
+     * Updates the character's position
+     */
     public void updateCharacters()
     {
         for(int i = 0; i < boardPlayerList.size(); i++)
         {
-            MainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
             int playerMoves = 70 * playerList[i].getPosition();
 
             //Add different moves depending on position, if position >11 then move to the right, if <11 and >21 move down, etc.
@@ -69,10 +102,13 @@ public class CharacterView {
             boardPlayerList.get(i).setTranslateX(4+playerMoves);
 
             //Also not sure where to add it in the scene, it kinda blocks the name of the property.
-            MainView.getRoot().getChildren().add(boardPlayerList.get(i));
+            mainView.getRoot().getChildren().add(boardPlayerList.get(i));
         }
     }
 
+    /**
+     * Getter method
+     */
     public Character[] getPlayerList() {
         return playerList;
     }

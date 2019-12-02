@@ -1,15 +1,13 @@
 package Game;
 
-import View.CharacterView;
-import javafx.scene.paint.Color;
-
+import java.io.Serializable;
 
 /**
  * Representation of a Monopoly Game
  *
  * @author Justin
  */
-public class Game {
+public class Game implements Serializable {
 
     /**
      * The maximum amount of turns the users want to play in a game
@@ -18,7 +16,7 @@ public class Game {
     /**
      * A list containing all the players
      */
-    public Character[] playerList;
+    private Character[] playerList;
     /**
      * The number of turns that have been played already in the game
      */
@@ -33,10 +31,6 @@ public class Game {
      */
     private int curPlayerTurn;
 
-    /**
-     * The Characters in characterview
-     */
-    private CharacterView characters;
 
     /**
      * Constructor
@@ -46,32 +40,11 @@ public class Game {
     public Game(Character[] playerList) {
         this.playerList = playerList;
         this.numTurns = 0;
-        this.characters = new CharacterView(playerList);
         curPlayerTurn = 0;
         board = new Board();
     }
 
-    /**
-     * Main method
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
 
-        //Add characters to the board
-
-
-        Game game = new Game(playerList);
-        Character curPlayer = playerList[0];
-        do {
-            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
-            curPlayer = game.getNextPlayer();
-
-        } while (!game.gameOver());
-
-        System.out.println(game.getWinner().getName() + " won the game");
-    }
 
     /**
      * Determines if the game should end
@@ -127,23 +100,47 @@ public class Game {
     }
 
     /**
+     * Main method
+     *
+     * @param args array of string
+     */
+    public static void main(String[] args) {
+        /*Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
+
+        //Add characters to the board
+
+
+        Game game = new Game(playerList);
+        Character curPlayer = playerList[0];
+        do {
+            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
+            curPlayer = game.getNextPlayer();
+
+        } while (!game.gameOver());
+
+        System.out.println(game.getWinner().getName() + " won the game");*/
+    }
+
+    public Character[] getPlayerList() {
+        return playerList;
+    }
+
+    /**
      * Checks to see if the player is valid. The player is invalid if they are bankrupt
      *
      * @param index the index of the player in the list of players
      * @return true if the player at that index is valid and false otherwise
      */
-    public boolean isValidPlayer(int index) {
+    private boolean isValidPlayer(int index) {
         return !playerList[index].isBankrupt();
     }
 
-    public Character[] getPlayerList()
-    {
-        return playerList;
-    }
-
-    //Returns a list of character objects
-    
-    public CharacterView getCharacters() {
-        return characters;
+    /**
+     * Gets the character object containing the current player
+     *
+     * @return returns the character object with the player whose turn it is
+     */
+    public Character getCurPlayer() {
+        return playerList[curPlayerTurn];
     }
 }
