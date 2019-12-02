@@ -86,12 +86,9 @@ public class Client implements Runnable {
 
         while (true) {
             if (theView != null) {
-                System.out.println("HERE OUTSIDE");
                 if (turnState != TurnState.IN_TURN) {
-                    System.out.println("HERE INSIDE");
                     theView.getDiceView().getRollDiceBtn().setDisable(false);
                 } else {
-                    System.out.println("HERE INSIDE2");
                     theView.getDiceView().getRollDiceBtn().setDisable(true);
                 }
             }
