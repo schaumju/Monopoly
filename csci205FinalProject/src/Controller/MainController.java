@@ -62,7 +62,7 @@ public class MainController {
         // Create instances of all the othre controllers
         diceController = new DiceController(theModel, theView);
         buyPropertyController = new BuyPropertyController(theModel, theView, this);
-        endTurnController = new EndTurnController(theModel, theView);
+        //endTurnController = new EndTurnController(theModel, theView);
 
     }
 
