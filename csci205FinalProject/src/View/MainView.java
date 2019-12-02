@@ -21,6 +21,10 @@ package View;
 import Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import Game.Character;
 
 public class MainView {
 
@@ -41,6 +45,7 @@ public class MainView {
     public MainView(MonopolyModel theModel) {
         this.theModel = theModel;
         setUpRoot();
+        setUpWelcome();
         boardView = new BoardView(theModel);
         cardsView = new CardsView(theModel);
         characterView = new CharacterView(theModel);
@@ -60,6 +65,24 @@ public class MainView {
 
     }
 
+    /**
+     * Setup welcome message
+     */
+    private void setUpWelcome()
+    {
+        //Stage dialog = new Stage();
+        VBox popup = new VBox(20);
+
+        //Text
+        Text welcomeMessage = new Text("Welcome to Monopoly!");
+        Text playerCount = new Text("Currents Players are: \n");
+        popup.getChildren().add(welcomeMessage);
+        popup.getChildren().add(playerCount);
+        for (Character player: theModel.getGame().getPlayerList())
+        {
+            popup.getChildren().add(new Text(player.getName() + "\n"));
+        }
+    }
 
     /**
      * sets up a gridpane that holds the board
