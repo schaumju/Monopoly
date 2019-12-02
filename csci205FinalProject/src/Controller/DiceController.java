@@ -34,6 +34,8 @@ public class DiceController {
             dice.rollDice();
             DiceView.getDice1().roll(Dice.getDie1());
             DiceView.getDice2().roll(Dice.getDie2());
+
+            // model needs to move the player based on the dice roll
         });
 
     }
