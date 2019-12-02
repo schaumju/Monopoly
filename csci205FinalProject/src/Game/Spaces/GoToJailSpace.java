@@ -18,9 +18,9 @@
  */
 package Game.Spaces;
 
-import Game.Character;
+import java.io.Serializable;
 
-public class GoToJailSpace extends Space
+public class GoToJailSpace extends Space implements Serializable
 {
 
     public GoToJailSpace() {

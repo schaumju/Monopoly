@@ -1,9 +1,11 @@
 package Game.Cards;
 
+import java.io.Serializable;
+
 /**
  * Class to represent a deck of CommunityChestCard objects
  */
-public class CommunityChestDeck extends Deck {
+public class CommunityChestDeck extends Deck implements Serializable {
     /**
      * Initializes the deck with Cards
      */

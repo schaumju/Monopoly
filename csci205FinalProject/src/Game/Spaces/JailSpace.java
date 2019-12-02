@@ -18,9 +18,9 @@
  */
 package Game.Spaces;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class JailSpace extends Space
+public class JailSpace extends Space implements Serializable
 {
 
     public JailSpace()

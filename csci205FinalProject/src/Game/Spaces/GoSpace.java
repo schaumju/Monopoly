@@ -20,7 +20,9 @@ package Game.Spaces;
 
 import Game.Character;
 
-public class GoSpace extends Space
+import java.io.Serializable;
+
+public class GoSpace extends Space implements Serializable
 {
     //Money you get for passing GO
     private static final double CASH_MONEY = 200.00;

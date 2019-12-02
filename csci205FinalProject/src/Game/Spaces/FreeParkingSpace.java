@@ -18,7 +18,9 @@
  */
 package Game.Spaces;
 
-public class FreeParkingSpace extends Space
+import java.io.Serializable;
+
+public class FreeParkingSpace extends Space implements Serializable
 {
     public FreeParkingSpace()
     {

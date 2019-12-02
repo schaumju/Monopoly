@@ -1,8 +1,8 @@
 package Game.Spaces;
 
-import Game.Spaces.Space;
+import java.io.Serializable;
 
-public class CommunityChest extends Space {
+public class CommunityChest extends Space implements Serializable {
 
     public CommunityChest(int position) {
         super(position, "Community Chest");

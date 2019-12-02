@@ -20,10 +20,12 @@ package Game.Spaces;
 
 import Game.Character;
 
+import java.io.Serializable;
+
 /**
  * Class that represents the Utilities
  */
-public class Utilities extends Space implements Buyable {
+public class Utilities extends Space implements Buyable, Serializable {
 
     /**
      * The ID of the person who owns the Railroad

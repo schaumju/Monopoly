@@ -4,6 +4,7 @@ module csci205FinalProject {
     requires javafx.controls;
     requires java.desktop;
 
-    opens Model;
     opens Main;
+    opens Networking.client;
+    opens Networking.server;
 }

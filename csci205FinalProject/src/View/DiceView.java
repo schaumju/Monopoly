@@ -25,14 +25,36 @@ import javafx.scene.control.Button;
 
 public class DiceView {
 
-    private static SimpleIntegerProperty target = new SimpleIntegerProperty();
-    static Button rollDiceBtn;
-    private static DiceAnimation dice1;
-    private static DiceAnimation dice2;
+    private SimpleIntegerProperty target = new SimpleIntegerProperty();
+    /**
+     * Button to roll the dice
+     */
+    private Button rollDiceBtn;
+    /**
+     * Animation for the first die
+     */
+    private DiceAnimation dice1;
+    /**
+     * Animation for the second die
+     */
+    private DiceAnimation dice2;
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
-    public DiceView(MonopolyModel theModel) {
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     */
+    public DiceView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addDice();
     }
 
@@ -40,7 +62,7 @@ public class DiceView {
      * adds the view of dice to the gridpane
      * @author - kerri
      */
-    protected static void addDice() {
+    private void addDice() {
 
         dice1 = new DiceAnimation();
         dice2 = new DiceAnimation();
@@ -58,11 +80,11 @@ public class DiceView {
 
     /**
      * adds the roll dice button to the view
-     * @param dice1
-     * @param dice2
+     * @param dice1 first dice roll
+     * @param dice2 second dice roll
      * @author justin
      */
-    private static void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
+    private void addRollDiceBtn(DiceAnimation dice1, DiceAnimation dice2) {
         rollDiceBtn = new Button("Roll dice");
 
         rollDiceBtn.setTranslateX(600);
@@ -71,18 +93,19 @@ public class DiceView {
         SimpleBooleanProperty bool = new SimpleBooleanProperty();
         bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));
 
-        MainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
+        mainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
-    public static Button getRollDiceBtn() {
+    // Getter methods
+    public Button getRollDiceBtn() {
         return rollDiceBtn;
     }
 
-    public static DiceAnimation getDice1() {
+    public DiceAnimation getDice1() {
         return dice1;
     }
 
-    public static DiceAnimation getDice2() {
+    public DiceAnimation getDice2() {
         return dice2;
     }
 }

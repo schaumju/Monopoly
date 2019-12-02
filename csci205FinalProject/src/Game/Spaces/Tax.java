@@ -18,12 +18,14 @@
  */
 package Game.Spaces;
 
+import java.io.Serializable;
+
 /**
  * Andrew Lee
  * References: https://i3.cpcache.com/image/112154097_150x150.png
  */
 
-public class Tax extends Space
+public class Tax extends Space implements Serializable
 {
     /**
      * The amount the player owes from landing on this tax

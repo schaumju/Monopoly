@@ -4,12 +4,28 @@ import Model.MonopolyModel;
 import javafx.scene.control.Button;
 
 public class PropertyView {
-
-    static Button buyPropertyButton;
+    /**
+     * Button to buy property
+     */
+    private Button buyPropertyButton;
+    /**
+     * Game model
+     */
     private MonopolyModel theModel;
+    /**
+     * The Main View
+     */
+    private MainView mainView;
 
-    public PropertyView(MonopolyModel theModel) {
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     * @param mainView
+     */
+    public PropertyView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
+        this.mainView = mainView;
         addPropertyBuyButton();
     }
 
@@ -17,18 +33,33 @@ public class PropertyView {
      * adds a property button to the view
      * @author - justin
      */
-    public static void addPropertyBuyButton() {
+    private void addPropertyBuyButton() {
         buyPropertyButton = new Button("Buy \nProperty");
 
         buyPropertyButton.setTranslateX(600);
         buyPropertyButton.setTranslateY(550);
 
         // Set the button to be disabled at first
-        buyPropertyButton.setDisable(true);
-        MainView.getRoot().getChildren().addAll(buyPropertyButton);
+        turnButtonOff();
+        mainView.getRoot().getChildren().addAll(buyPropertyButton);
     }
 
-    public static Button getBuyPropertyButton() {
+    public Button getBuyPropertyButton() {
         return buyPropertyButton;
+    }
+
+    /**
+     * Make the button clickable
+     */
+    public void turnButtonOn() {
+        buyPropertyButton.setDisable(false);
+
+    }
+
+    /**
+     * disables the button
+     */
+    public void turnButtonOff() {
+        buyPropertyButton.setDisable(true);
     }
 }

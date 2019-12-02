@@ -23,28 +23,62 @@ import View.MainView;
 
 public class MainController {
 
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
+    /**
+     * View class for the graphics of the game
+     */
     private MainView theView;
+    /**
+     * Controller for the Board
+     */
     private BoardController boardController;
+    /**
+     * Controller for the dice
+     */
+    private DiceController diceController;
+    /**
+     * Controller to buy properties
+     */
+    private BuyPropertyController buyPropertyController;
+    /**
+     * Controller to handle the end of a turn
+     */
+    private EndTurnController endTurnController;
 
     /**
      * constructor
-     * @param theModel
-     * @param theView
+     * @param theModel the game model
+     * @param theView view class for the graphics of the game
      * @author kerri
      */
     public MainController(MonopolyModel theModel, MainView theView) {
         this.theModel = theModel;
         this.theView = theView;
         this.boardController = new BoardController(theModel, theView.getBoardView());
-        
-        //handle roll dice
-        //DiceController.handleRollDice();
-        DiceController diceController = new DiceController(theModel, theView);
 
-        BuyPropertyController.handleBuyProperty();
+        // Create instances of all the othre controllers
+        diceController = new DiceController(theModel, theView);
+        buyPropertyController = new BuyPropertyController(theModel, theView, this);
+        endTurnController = new EndTurnController(theModel, theView);
+
     }
 
+    public BoardController getBoardController() {
+        return boardController;
+    }
 
+    public DiceController getDiceController() {
+        return diceController;
+    }
 
+    public BuyPropertyController getBuyPropertyController() {
+        return buyPropertyController;
+    }
+
+    public EndTurnController getEndTurnController() {
+        return endTurnController;
+    }
 }

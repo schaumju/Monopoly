@@ -4,11 +4,10 @@ import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
-import View.BuyPromptView;
-import javafx.stage.Stage;
-import Game.Board;
 
-public class MonopolyModel {
+import java.io.Serializable;
+
+public class MonopolyModel implements Serializable {
     /**
      * List of player in the game
      */
@@ -19,12 +18,20 @@ public class MonopolyModel {
     private Game game;
 
     /**
+     * Log of the events in the game
+     */
+    private GameLog log;
+
+
+    /**
      * Constructor
      * @param playerList the list of player's in the game
      */
     public MonopolyModel(Character[] playerList) {
         this.playerList = playerList;
         this.game = new Game(playerList);
+        log = new GameLog();
+        log.addToLog(game.getCurPlayer().getName() + " is starting their turn");
 
     }
 
@@ -56,7 +63,8 @@ public class MonopolyModel {
      */
     public void interactSpace(int roll) throws Exception {
 
-        Space space = Board.getBoard().get(getCurPlayer().getPosition());
+        Space space = game.getBoard().getBoard().get(getCurPlayer().getPosition());
+        log.addToLog(getCurPlayer().getName() + " landed on " + space.getName());
         System.out.println(getCurPlayer().getName() + " landed on " + space.getName());
 
         if (space instanceof Property) {
@@ -82,23 +90,15 @@ public class MonopolyModel {
      *
      * @param space the Utility space they are currently on
      */
-    private void interactUtilities(Utilities space, int roll) throws Exception {
+    private void interactUtilities(Utilities space, int roll) {
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
-            System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent(owner.getNumUtilities(), roll));
+            log.addToLog("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent(owner.getNumUtilities(), roll));
+            System.out.println("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owes " + owner.getName() + " " + space.getRent(owner.getNumUtilities(), roll));
             getCurPlayer().payPlayer(owner, space.getRent(owner.getNumUtilities(), roll));
         } else if (getCurPlayer().getBalance() < space.getCost()) {
             System.out.println("You do not have enough money to buy this property");
-        } else {
-            // Get input for whether they want to buy the property or not
-            /**
-             * For now auto buy the property
-             */
-            //buyProperty(space);
-            /**
-             * Check if the current space is buyable
-             */
-            buyPropertyPrompt();
+            log.addToLog(getCurPlayer().getName() + " do not have enough money to buy this property");
         }
     }
 
@@ -119,6 +119,7 @@ public class MonopolyModel {
         Card card = game.getBoard().getChanceDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
         System.out.println("You drew the Chance card " + card.getDescription());
+        log.addToLog(getCurPlayer().getName() + "drew the Chance card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
         // If the player moved as a result of the chance card
         if (beforePosition != getCurPlayer().getPosition()) {
@@ -136,6 +137,7 @@ public class MonopolyModel {
         Card card = game.getBoard().getCommunityChestDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
         System.out.println("You drew the Community Chest card " + card.getDescription());
+        log.addToLog(getCurPlayer().getName() + "drew the Community Chest card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
         // If the player moved as a result of the Community chest card
         if (beforePosition != getCurPlayer().getPosition()) {
@@ -150,6 +152,7 @@ public class MonopolyModel {
      */
     private void interactTax(Tax space) {
         getCurPlayer().subtractFromBalance(space.getTax());
+        log.addToLog(getCurPlayer().getName() + " paid " + space.getTax());
         System.out.println(getCurPlayer().getName() + " paid " + space.getTax());
     }
 
@@ -158,25 +161,17 @@ public class MonopolyModel {
      *
      * @param space the Railroad space they are currently on
      */
-    private void interactRailroad(Railroads space) throws Exception {
+    private void interactRailroad(Railroads space) {
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
+            log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + space.getRent(owner.getNumRailroads()));
             System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + space.getRent(owner.getNumRailroads()));
             getCurPlayer().payPlayer(owner, space.getRent(owner.getNumRailroads()));
         } else if (getCurPlayer().getBalance() < space.getCost()) {
             System.out.println("You do not have enough money to buy this property");
-        } else {
-
-            // Get input for whether they want to buy the property or not
-            /**
-             * For now auto buy the property
-             */
-            //buyProperty(space);
-            /**
-             * Check if the current space is buyable
-             */
-            buyPropertyPrompt();
+            log.addToLog(getCurPlayer().getName() + " do not have enough money to buy this property");
         }
+
     }
 
     /**
@@ -184,51 +179,26 @@ public class MonopolyModel {
      *
      * @param space the Property space they are currently on
      */
-    private void interactProperty(Property space) throws Exception {
+    private void interactProperty(Property space) {
 
         if (space.isOwned()) {
             Character owner = playerList[space.getOwner()];
             if (getCurPlayer().isMonopoly(space.getPropertyColor()) && space.getNumHouses() == 0) {
                 System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + 2 * space.getRent());
                 getCurPlayer().payPlayer(owner, 2 * space.getRent());
             } else {
                 System.out.println("The property is owned by " + owner.getName() + " You owe " + owner.getName() + " " + 2 * space.getRent());
+                log.addToLog("The property is owned by " + owner.getName() + " " + getCurPlayer().getName() + " owe " + owner.getName() + " " + space.getRent());
                 getCurPlayer().payPlayer(owner, space.getRent());
             }
 
         } else if (getCurPlayer().getBalance() < space.getCost()) {
             System.out.println("You do not have enough money to buy this property");
-        } else {
-
-            // Get input for whether they want to buy the property or not
-            /**
-             * For now auto buy the property
-             */
-            //buyProperty(space);
-            buyPropertyPrompt();
+            log.addToLog(getCurPlayer().getName() + " does not have enough money to buy this property");
         }
     }
 
-    /**
-     * Prompts the user with a yes or no screen with 2 buttons to decide whether they want to buy the property or not
-     *
-     * @throws Exception
-     */
-    private void buyPropertyPrompt() throws Exception {
-        /**
-         * Check if the current space is buyable
-         */
-        if (Board.getBoard().get(getCurPlayer().getPosition()) instanceof Buyable && ((Buyable) Board.getBoard().get(getCurPlayer().getPosition())).getOwner() == -1) {
-            BuyPromptView promptView = new BuyPromptView((Buyable) Board.getBoard().get(getCurPlayer().getPosition()), this);
-            try {
-                promptView.init();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Stage stage = new Stage();
-            promptView.start(stage);
-        }
-    }
 
     /**
      * Allows the user to buy the space
@@ -237,7 +207,6 @@ public class MonopolyModel {
      */
     public void buyProperty(Space space) {
 
-        System.out.println("HERE");
         if (space instanceof Property) {
 
             ((Property) space).buyProperty(getCurPlayer());
@@ -256,6 +225,47 @@ public class MonopolyModel {
         }
 
         System.out.println("You have bought this property from the bank");
+        log.addToLog(getCurPlayer().getName() + " has bought this property from the bank");
         System.out.println("Your new balance is $" + getCurPlayer().getBalance());
+        log.addToLog("Their new balance is $" + getCurPlayer().getBalance());
+    }
+
+    /**
+     * Determines whether the space is buyable or not
+     *
+     * @return true if the space is an instance of the Buyable class
+     */
+    private boolean isBuyable() {
+        return game.getBoard().getBoard().get(getCurPlayer().getPosition()) instanceof Buyable;
+    }
+
+    /**
+     * Determines if the space is unowned
+     *
+     * @return true if the property is unowned (available to buy)
+     */
+    public boolean isAvailable() {
+        if (isBuyable()) {
+            Buyable space = (Buyable) game.getBoard().getBoard().get(getCurPlayer().getPosition());
+            return space.getOwner() == -1;
+        }
+        return false;
+
+    }
+
+    /**
+     * Ends the turn by switching the current player to the next player (changes the turn)
+     */
+    public void endTurn() {
+        log.addToLog(game.getCurPlayer().getName() + " ended their turn");
+        //game.getNextPlayer();
+    }
+
+    public GameLog getLog() {
+        return log;
+    }
+
+    public void setLog(GameLog log) {
+        this.log = log;
     }
 }
