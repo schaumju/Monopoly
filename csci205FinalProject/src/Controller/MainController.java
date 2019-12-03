@@ -98,4 +98,15 @@ public class MainController {
         return endTurnController;
     }
 
+    /**
+     * Updates the model
+     *
+     * @param theModel the new Model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        boardController.updateModel(theModel);
+        diceController.updateModel(theModel);
+        endTurnController.updateModel(theModel);
+    }
 }

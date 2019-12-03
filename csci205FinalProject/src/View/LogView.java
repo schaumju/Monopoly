@@ -37,4 +37,11 @@ public class LogView {
         logView.setItems(logList);
         mainView.getRoot().addColumn(mainView.getRoot().getColumnCount(), logView);
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

@@ -54,4 +54,5 @@ public class DiceAnimation extends StackPane {
         });
         rt.play();
     }
+
 }

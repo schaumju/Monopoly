@@ -157,4 +157,18 @@ public class MainView {
         endTurnView.getEndTurnButton().setDisable(true);
         propertyView.turnButtonOff();
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        boardView.updateModel(theModel);
+        cardsView.updateModel(theModel);
+        characterView.updateModel(theModel);
+        diceView.updateModel(theModel);
+        endTurnView.updateModel(theModel);
+        logView.updateModel(theModel);
+        propertyView.updateModel(theModel);
+    }
 }

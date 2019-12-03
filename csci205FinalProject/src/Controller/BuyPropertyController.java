@@ -45,4 +45,13 @@ public class BuyPropertyController {
         });
         theController.getBoardController().update();
     }
+
+    /**
+     * Updates the model
+     *
+     * @param theModel the new Model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

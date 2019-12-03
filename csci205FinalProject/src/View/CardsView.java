@@ -70,4 +70,11 @@ public class CardsView {
 
         mainView.getRoot().getChildren().addAll(communityChest, chance, communityChestLabel, chanceLabel);
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

@@ -157,4 +157,14 @@ public class BoardController
     public void update() {
         generateActionEvents();
     }
+
+    /**
+     * Updates the model
+     *
+     * @param theModel the new Model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        update();
+    }
 }

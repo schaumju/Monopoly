@@ -112,4 +112,20 @@ public class CharacterView {
     public Character[] getPlayerList() {
         return playerList;
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        this.playerList = theModel.getPlayerList();
+        for (int i = 0; i < boardPlayerList.size(); i++) {
+            mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+        }
+        this.boardPlayerList = new ArrayList<>();
+
+        convertPlayers();
+        addCharacters();
+
+    }
 }

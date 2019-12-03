@@ -63,4 +63,11 @@ public class EndTurnView {
     private void turnButtonOff() {
         endTurnButton.setDisable(true);
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

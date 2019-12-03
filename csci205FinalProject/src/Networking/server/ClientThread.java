@@ -1,6 +1,7 @@
 package Networking.server;
 
 import Model.MonopolyModel;
+import Networking.TurnState;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -88,13 +89,17 @@ public class ClientThread implements Runnable {
             Object inputToServer;
             while (true) {
                 inputToServer = incomingMessageReader.readObject();
-                System.err.println(inputToServer);
+                //System.err.println(inputToServer);
                 if (inputToServer instanceof MonopolyModel) {
                     // Update the server log
-                    baseServer.log = ((MonopolyModel) inputToServer).getLog();
+                    System.out.println("HERE");
+                    //baseServer.log = ((MonopolyModel) inputToServer).getLog();
+                    baseServer.update((MonopolyModel) inputToServer);
+                    baseServer.changeTurn();
+                    baseServer.writeToAllClients(baseServer.getTheModel());
 
+                } else if (inputToServer instanceof TurnState) {
                     writeToClient(inputToServer);
-
                 }
 
             }

@@ -133,8 +133,14 @@ public class Server implements Runnable {
      */
     public void changeTurn() throws IOException {
         clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.WAITING);
+        System.out.println("Turn over");
+        System.out.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
         theModel.getGame().getNextPlayer();
         clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
+        System.err.println("turn starting");
+        System.err.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
+        System.out.println();
+
     }
 
     /**
@@ -146,6 +152,8 @@ public class Server implements Runnable {
             createPlayerList();
             startGame();
             writeToAllClients(playerList);
+            System.err.println("turn starting");
+            System.err.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
             clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,18 +167,20 @@ public class Server implements Runnable {
         theModel = new MonopolyModel(playerList);
         theView = new MainView(theModel);
         theController = new MainController(theModel, theView);
+        System.out.println("thread order");
+        for (ClientThread thread : clientThreads) {
+            System.out.println(thread.getClientName());
+        }
 
-        /*theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
-            try {
-                System.out.println("HELLO");
-                changeTurn();
-                theModel.endTurn();
-                theView.endTurn();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
+
     }
 
+    public void update(MonopolyModel theModel) {
+        this.theModel = theModel;
+        this.log = theModel.getLog();
+    }
 
+    public MonopolyModel getTheModel() {
+        return theModel;
+    }
 }

@@ -108,4 +108,11 @@ public class DiceView {
     public DiceAnimation getDice2() {
         return dice2;
     }
+
+    /**
+     * Updates the model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }
