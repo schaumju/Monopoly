@@ -112,7 +112,6 @@ public class CharacterView {
             if (playerList[i].getPosition() < 10) {
                 translateY = 0;
                 translateX = playerMoves;
-                System.out.println("ran");
             }
 
             //If player is on the right row
@@ -120,13 +119,12 @@ public class CharacterView {
             {
                 translateY = playerMoves; //Since its going down down down down
                 translateX = 735;
-                System.out.println("ran2");
             }
 
             //If the player is on the bottom row
             else if (playerList[i].getPosition() >= 20 && playerList[i].getPosition() < 30)
             {
-                translateX = 700 - playerMoves;
+                translateX = 770 - playerMoves;
                 translateY = 735;
             }
 
