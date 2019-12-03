@@ -160,7 +160,7 @@ public class Server implements Runnable {
         theView = new MainView(theModel);
         theController = new MainController(theModel, theView);
 
-        theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
+        /*theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
             try {
                 System.out.println("HELLO");
                 changeTurn();
@@ -169,7 +169,7 @@ public class Server implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        });*/
     }
 
 

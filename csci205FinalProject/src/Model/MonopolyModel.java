@@ -5,6 +5,7 @@ import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 public class MonopolyModel implements Serializable {
@@ -23,6 +24,7 @@ public class MonopolyModel implements Serializable {
     private GameLog log;
 
 
+
     /**
      * Constructor
      * @param playerList the list of player's in the game
@@ -34,6 +36,7 @@ public class MonopolyModel implements Serializable {
         log.addToLog(game.getCurPlayer().getName() + " is starting their turn");
 
     }
+
 
     /**
      * Getter Method
@@ -256,8 +259,9 @@ public class MonopolyModel implements Serializable {
     /**
      * Ends the turn by switching the current player to the next player (changes the turn)
      */
-    public void endTurn() {
+    public void endTurn() throws IOException {
         log.addToLog(game.getCurPlayer().getName() + " ended their turn");
+        //client.writeToServer();
         //game.getNextPlayer();
     }
 

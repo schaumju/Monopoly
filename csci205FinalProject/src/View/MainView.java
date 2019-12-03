@@ -153,7 +153,7 @@ public class MainView {
      * Resets the buttons for the next turn
      */
     public void endTurn() {
-        diceView.getRollDiceBtn().setDisable(false);
+        diceView.getRollDiceBtn().setDisable(true);
         endTurnView.getEndTurnButton().setDisable(true);
         propertyView.turnButtonOff();
     }
