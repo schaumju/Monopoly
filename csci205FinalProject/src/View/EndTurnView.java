@@ -35,10 +35,10 @@ public class EndTurnView {
      * @author - justin
      */
     private void addEndTurnButton() {
-        endTurnButton = new Button("End Turn");
+        endTurnButton = new Button("End\nTurn");
 
         endTurnButton.setTranslateX(600);
-        endTurnButton.setTranslateY(650);
+        endTurnButton.setTranslateY(600);
 
         // Set the button to be disabled at first
         turnButtonOff();

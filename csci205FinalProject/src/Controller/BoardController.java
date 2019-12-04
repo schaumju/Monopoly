@@ -76,6 +76,7 @@ public class BoardController
             if (boardView.getListOfSpaces().get(i) instanceof Tax) {
                 taxPopupOnClick(boardView.getListOfLabels().get(i), boardView.getListOfSpaces().get(i));
             }
+
         }
     }
 
@@ -130,6 +131,21 @@ public class BoardController
             dialog.setScene(dialogScene);
             dialog.show();
         });
+    }
+
+    public static void cardPopUp(String popUpText) {
+
+        Stage card = new Stage();
+        VBox popup = new VBox(20);
+
+        Text cardText = new Text(popUpText);
+
+        popup.getChildren().add(cardText);
+
+        popup.setAlignment(Pos.TOP_CENTER);
+        Scene cardScene = new Scene(popup, 400, 100);
+        card.setScene(cardScene);
+        card.show();
     }
 
     /**

@@ -37,7 +37,7 @@ public class PropertyView {
         buyPropertyButton = new Button("Buy \nProperty");
 
         buyPropertyButton.setTranslateX(600);
-        buyPropertyButton.setTranslateY(550);
+        buyPropertyButton.setTranslateY(500);
 
         // Set the button to be disabled at first
         turnButtonOff();
