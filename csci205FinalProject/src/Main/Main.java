@@ -21,7 +21,7 @@ public class Main extends Application {
         /**
          * For testing purposes for now leave be
          */
-        theModel = new MonopolyModel(new Character[]{new Character("Player 1", Color.RED), new Character("Player 2", Color.BLUE)});
+        theModel = new MonopolyModel(new Character[]{new Character("Player 1", Color.BLUE)});
         theView = new MainView(theModel);
     }
 

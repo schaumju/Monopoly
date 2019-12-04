@@ -19,6 +19,7 @@
 package Controller;
 
 import Model.MonopolyModel;
+import Networking.client.Client;
 import View.MainView;
 
 public class MainController {
@@ -48,6 +49,7 @@ public class MainController {
      */
     private EndTurnController endTurnController;
 
+
     /**
      * constructor
      * @param theModel the game model
@@ -59,12 +61,26 @@ public class MainController {
         this.theView = theView;
         this.boardController = new BoardController(theModel, theView.getBoardView());
 
-        // Create instances of all the othre controllers
+        // Create instances of all the other controllers
         diceController = new DiceController(theModel, theView);
         buyPropertyController = new BuyPropertyController(theModel, theView, this);
         endTurnController = new EndTurnController(theModel, theView);
 
     }
+
+    public MainController(MonopolyModel theModel, MainView theView, Client client) {
+        this.theModel = theModel;
+        this.theView = theView;
+        this.boardController = new BoardController(theModel, theView.getBoardView());
+
+        // Create instances of all the othre controllers
+        diceController = new DiceController(theModel, theView);
+        buyPropertyController = new BuyPropertyController(theModel, theView, this);
+        endTurnController = new EndTurnController(theModel, theView, client);
+
+
+    }
+
 
     public BoardController getBoardController() {
         return boardController;
@@ -81,4 +97,5 @@ public class MainController {
     public EndTurnController getEndTurnController() {
         return endTurnController;
     }
+
 }

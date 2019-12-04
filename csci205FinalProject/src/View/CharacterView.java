@@ -94,12 +94,47 @@ public class CharacterView {
     {
         for(int i = 0; i < boardPlayerList.size(); i++)
         {
+            //Removes the previous circle from the board
             mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
-            int playerMoves = 70 * playerList[i].getPosition();
 
-            //Add different moves depending on position, if position >11 then move to the right, if <11 and >21 move down, etc.
-            //Same thing when Kerri created the properties
-            boardPlayerList.get(i).setTranslateX(4+playerMoves);
+            //Non-vector amount to move
+            int playerMoves = 35 + (70 * (playerList[i].getPosition()%10));
+
+            //Amount to move horizontally
+            double translateX = 50;
+
+            //Amount to move vertically
+            double translateY = 50;
+
+            //If player is on the top row
+            if (playerList[i].getPosition() < 10) {
+                translateY = 0;
+                translateX = playerMoves;
+            }
+
+            //If player is on the right row
+            else if (playerList[i].getPosition() >= 10 && playerList[i].getPosition() < 20)
+            {
+                translateY = playerMoves; //Since its going down down down down
+                translateX = 735;
+            }
+
+            //If the player is on the bottom row
+            else if (playerList[i].getPosition() >= 20 && playerList[i].getPosition() < 30)
+            {
+                translateX = 770 - playerMoves;
+                translateY = 735;
+            }
+
+            //If the player is on the left row
+            else
+            {
+                translateX = 0;
+                translateY = 700-playerMoves;
+            }
+
+            boardPlayerList.get(i).setTranslateX(translateX);
+            boardPlayerList.get(i).setTranslateY(translateY);
 
             //Also not sure where to add it in the scene, it kinda blocks the name of the property.
             mainView.getRoot().getChildren().add(boardPlayerList.get(i));
