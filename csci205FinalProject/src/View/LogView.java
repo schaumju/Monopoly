@@ -20,6 +20,11 @@ public class LogView {
      */
     private MainView mainView;
 
+    private int column;
+    private Label logLabel;
+    private ListView<String> logView;
+    private ObservableList<String> logList;
+
 
     /**
      * Constructor
@@ -30,12 +35,13 @@ public class LogView {
     public LogView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
         /* Make the server log ListView */
-        Label logLabel = new Label("Game log");
-        ListView<String> logView = new ListView<>();
+        logLabel = new Label("Game log");
+        logView = new ListView<>();
         this.mainView = mainView;
-        ObservableList<String> logList = theModel.getLog().getLog();
+        logList = theModel.getLog().getLog();
         logView.setItems(logList);
-        mainView.getRoot().addColumn(mainView.getRoot().getColumnCount(), logView);
+        column = mainView.getRoot().getColumnCount();
+        mainView.getRoot().addColumn(column, logView);
     }
 
     /**
@@ -43,5 +49,12 @@ public class LogView {
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;
+        updateLog();
+    }
+
+
+    public void updateLog() {
+        logList = theModel.getLog().getLog();
+        logView.setItems(logList);
     }
 }

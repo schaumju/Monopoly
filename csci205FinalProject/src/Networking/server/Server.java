@@ -98,7 +98,7 @@ public class Server implements Runnable {
     private void createPlayerList() {
         playerList = new Character[NUM_PLAYERS];
         for (int i = 0; i < NUM_PLAYERS; i++) {
-            playerList[i] = new Character(clientNames.get(i), playerColors[i]);
+            playerList[i] = new Character(clientNames.get(i).substring(0, clientNames.get(i).indexOf(" ")), playerColors[i]);
             playerList[i].setID(i);
         }
     }

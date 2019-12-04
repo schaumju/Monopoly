@@ -58,10 +58,11 @@ public class DiceController {
             theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
             int totalRoll = dice.getDie1() + dice.getDie2();
             theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled a " + totalRoll);
+            theView.getLogView().updateLog();
             theView.getCharacterView().updateCharacters();
             try {
                 theModel.interactSpace(dice.getDie1() + dice.getDie2());
-
+                theView.getLogView().updateLog();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,6 +87,7 @@ public class DiceController {
             } else {
                 theView.getEndTurnView().turnButtonOn();
             }
+            theView.getLogView().updateLog();
         });
 
     }

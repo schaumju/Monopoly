@@ -55,6 +55,7 @@ public class EndTurnController {
             try {
                 theModel.endTurn();
                 System.err.println("HERE");
+                theView.getLogView().updateLog();
                 client.writeToServer();
             } catch (IOException e) {
                 e.printStackTrace();

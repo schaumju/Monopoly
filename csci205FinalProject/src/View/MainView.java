@@ -172,5 +172,7 @@ public class MainView {
         propertyView.updateModel(theModel);
     }
 
-
+    public LogView getLogView() {
+        return logView;
+    }
 }
