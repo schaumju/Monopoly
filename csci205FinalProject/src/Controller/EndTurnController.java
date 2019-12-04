@@ -54,7 +54,9 @@ public class EndTurnController {
         theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
             try {
                 theModel.endTurn();
-                client.writeToServer();
+                if(client != null) {
+                    client.writeToServer();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
