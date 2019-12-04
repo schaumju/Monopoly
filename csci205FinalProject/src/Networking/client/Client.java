@@ -2,7 +2,6 @@ package Networking.client;
 
 import Controller.MainController;
 import Game.Character;
-import Game.Spaces.Property;
 import Model.MonopolyModel;
 import Networking.TurnState;
 import View.MainView;
@@ -89,6 +88,7 @@ public class Client implements Runnable, Serializable {
 
         while (true) {
             if (theView != null) {
+
                 if (turnState != TurnState.IN_TURN) {
                     theView.getDiceView().getRollDiceBtn().setDisable(true);
                 } else {
@@ -145,9 +145,6 @@ public class Client implements Runnable, Serializable {
      * Updates the MonopolyModel object in the View and Controller
      */
     private void updateModel() {
-        System.out.println("HEllo world");
-        Property test = (Property) theModel.getGame().getBoard().getBoard().get(6);
-        System.out.println("HERE: " + test.getOwner());
         theView.updateModel(theModel);
         theController.updateModel(theModel);
     }

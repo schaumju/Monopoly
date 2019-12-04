@@ -161,6 +161,7 @@ public class CharacterView {
         }
         this.boardPlayerList = new ArrayList<>();
 
+
         convertPlayers();
         addCharacters();
 

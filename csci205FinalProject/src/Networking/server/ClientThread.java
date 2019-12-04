@@ -91,8 +91,6 @@ public class ClientThread implements Runnable {
                 inputToServer = incomingMessageReader.readObject();
                 //System.err.println(inputToServer);
                 if (inputToServer instanceof MonopolyModel) {
-                    // Update the server log
-                    System.out.println("HERE");
                     //baseServer.log = ((MonopolyModel) inputToServer).getLog();
                     baseServer.update((MonopolyModel) inputToServer);
                     baseServer.changeTurn();

@@ -123,6 +123,7 @@ public class Server implements Runnable {
     }
 
     public void writeToAllClients(Object message) throws IOException {
+
         for (ClientThread clientThread : clientThreads) {
             clientThread.writeToClient(message);
         }
@@ -167,16 +168,13 @@ public class Server implements Runnable {
         theModel = new MonopolyModel(playerList);
         theView = new MainView(theModel);
         theController = new MainController(theModel, theView);
-        System.out.println("thread order");
-        for (ClientThread thread : clientThreads) {
-            System.out.println(thread.getClientName());
-        }
 
 
     }
 
     public void update(MonopolyModel theModel) {
         this.theModel = theModel;
+        //theModel.testPropertyOwner(theModel.getGame().getBoard().getBoard().get(6));
         this.log = theModel.getLog();
     }
 
