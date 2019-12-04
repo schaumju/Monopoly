@@ -98,9 +98,9 @@ public class CharacterView {
             mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
 
             //Non-vector amount to move
-            System.out.println(playerList[i].getPosition());
+            //System.out.println(playerList[i].getPosition());
             int playerMoves = 35 + (70 * (playerList[i].getPosition()%10));
-            System.out.println(playerMoves);
+            //System.out.println(playerMoves);
 
             //Amount to move horizontally
             double translateX = 50;
