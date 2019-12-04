@@ -88,7 +88,7 @@ public class DiceView {
         rollDiceBtn = new Button("Roll dice");
 
         rollDiceBtn.setTranslateX(600);
-        rollDiceBtn.setTranslateY(600);
+        rollDiceBtn.setTranslateY(550);
 
         SimpleBooleanProperty bool = new SimpleBooleanProperty();
         bool.bind(target.isEqualTo(dice1.valueProperty.add(dice2.valueProperty)));

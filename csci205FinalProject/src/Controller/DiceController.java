@@ -19,6 +19,8 @@
 package Controller;
 
 import Game.Dice;
+import Game.Spaces.Chance;
+import Game.Spaces.CommunityChest;
 import Model.MonopolyModel;
 import View.MainView;
 
