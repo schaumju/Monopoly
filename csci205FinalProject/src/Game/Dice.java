@@ -51,7 +51,7 @@ public class Dice implements Serializable {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
-        die1 = 1;
+        die1 = 2;
         die2 = 5;
         return die1 + die2;
     }

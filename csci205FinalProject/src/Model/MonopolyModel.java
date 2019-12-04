@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.BoardController;
 import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
@@ -118,6 +119,7 @@ public class MonopolyModel implements Serializable {
     private void interactChance(Chance space) throws Exception {
         Card card = game.getBoard().getChanceDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
+        BoardController.cardPopUp("You drew the Chance card\n" + card.getDescription());
         System.out.println("You drew the Chance card " + card.getDescription());
         log.addToLog(getCurPlayer().getName() + "drew the Chance card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
@@ -136,6 +138,7 @@ public class MonopolyModel implements Serializable {
     private void interactCommunityChest(CommunityChest space) throws Exception {
         Card card = game.getBoard().getCommunityChestDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
+        BoardController.cardPopUp("You drew the Community Chest card\n" + card.getDescription());
         System.out.println("You drew the Community Chest card " + card.getDescription());
         log.addToLog(getCurPlayer().getName() + "drew the Community Chest card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
