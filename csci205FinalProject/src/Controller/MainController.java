@@ -82,6 +82,10 @@ public class MainController {
     }
 
 
+    public MainView getTheView() {
+        return theView;
+    }
+
     public BoardController getBoardController() {
         return boardController;
     }

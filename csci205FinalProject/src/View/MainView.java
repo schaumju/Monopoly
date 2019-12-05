@@ -113,6 +113,7 @@ public class MainView {
      * Getter Methods
      */
 
+
     public MonopolyModel getTheModel() {
         return theModel;
     }
