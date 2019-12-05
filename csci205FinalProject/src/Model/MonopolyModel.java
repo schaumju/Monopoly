@@ -287,4 +287,5 @@ public class MonopolyModel implements Serializable {
     public void setLog(GameLog log) {
         this.log = log;
     }
+
 }

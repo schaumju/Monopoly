@@ -23,6 +23,7 @@ import Model.MonopolyModel;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.TextAlignment;
 
 public class CardsView {
     /**
@@ -57,6 +58,7 @@ public class CardsView {
         communityChest.setTranslateY(525);
 
         Label communityChestLabel = new Label("Community\nChest");
+        communityChestLabel.setTextAlignment(TextAlignment.CENTER);
         communityChestLabel.setTranslateX(400);
         communityChestLabel.setTranslateY(525);
 
@@ -65,6 +67,7 @@ public class CardsView {
         chance.setTranslateY(525);
 
         Label chanceLabel = new Label("Chance");
+        chanceLabel.setTextAlignment(TextAlignment.CENTER);
         chanceLabel.setTranslateX(500);
         chanceLabel.setTranslateY(525);
 
@@ -73,6 +76,7 @@ public class CardsView {
 
     /**
      * Updates the model
+     * @param theModel the new model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;

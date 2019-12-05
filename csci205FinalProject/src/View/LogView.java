@@ -46,13 +46,16 @@ public class LogView {
 
     /**
      * Updates the model
+     * @param theModel the new model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;
         updateLog();
     }
 
-
+    /**
+     * Updates the log
+     */
     public void updateLog() {
         logList = theModel.getLog().getLog();
         logView.setItems(logList);

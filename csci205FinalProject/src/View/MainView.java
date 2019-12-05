@@ -141,6 +141,10 @@ public class MainView {
         return endTurnView;
     }
 
+    public LogView getLogView() {
+        return logView;
+    }
+
     /**
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
@@ -160,6 +164,7 @@ public class MainView {
 
     /**
      * Updates the model
+     * @param theModel the new model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;
@@ -172,7 +177,5 @@ public class MainView {
         propertyView.updateModel(theModel);
     }
 
-    public LogView getLogView() {
-        return logView;
-    }
+
 }

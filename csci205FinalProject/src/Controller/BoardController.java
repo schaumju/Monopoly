@@ -44,6 +44,7 @@ public class BoardController
      * View for the Board
      */
     private BoardView boardView;
+    public static Stage card;
 
     /**
      * Constructor
@@ -135,7 +136,7 @@ public class BoardController
 
     public static void cardPopUp(String popUpText) {
 
-        Stage card = new Stage();
+        card = new Stage();
         VBox popup = new VBox(20);
 
         Text cardText = new Text(popUpText);
@@ -146,6 +147,7 @@ public class BoardController
         Scene cardScene = new Scene(popup, 400, 100);
         card.setScene(cardScene);
         card.show();
+
     }
 
     /**
@@ -176,8 +178,7 @@ public class BoardController
 
     /**
      * Updates the model
-     *
-     * @param theModel the new Model
+     * @param theModel the new model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;
