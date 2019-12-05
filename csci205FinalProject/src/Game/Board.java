@@ -15,7 +15,7 @@ import java.util.Comparator;
  */
 public class Board implements Serializable {
 
-    private static ArrayList<Space> board;
+    private ArrayList<Space> board;
     private ArrayList<Space> buyableProperties;
     private CommunityChestDeck communityChestDeck;
     private ChanceDeck chanceDeck;

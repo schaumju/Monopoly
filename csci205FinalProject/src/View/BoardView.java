@@ -235,4 +235,12 @@ public class BoardView {
     public ArrayList<Space> getListOfSpaces() {
         return listOfSpaces;
     }
+
+    /**
+     * Updates the model
+     * @param theModel the new model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

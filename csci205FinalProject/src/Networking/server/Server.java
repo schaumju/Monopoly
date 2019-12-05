@@ -98,7 +98,7 @@ public class Server implements Runnable {
     private void createPlayerList() {
         playerList = new Character[NUM_PLAYERS];
         for (int i = 0; i < NUM_PLAYERS; i++) {
-            playerList[i] = new Character(clientNames.get(i), playerColors[i]);
+            playerList[i] = new Character(clientNames.get(i).substring(0, clientNames.get(i).indexOf(" ")), playerColors[i]);
             playerList[i].setID(i);
         }
     }
@@ -123,6 +123,7 @@ public class Server implements Runnable {
     }
 
     public void writeToAllClients(Object message) throws IOException {
+
         for (ClientThread clientThread : clientThreads) {
             clientThread.writeToClient(message);
         }
@@ -133,8 +134,14 @@ public class Server implements Runnable {
      */
     public void changeTurn() throws IOException {
         clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.WAITING);
+        System.out.println("Turn over");
+        System.out.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
         theModel.getGame().getNextPlayer();
         clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
+        System.err.println("turn starting");
+        System.err.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
+        System.out.println();
+
     }
 
     /**
@@ -146,6 +153,8 @@ public class Server implements Runnable {
             createPlayerList();
             startGame();
             writeToAllClients(playerList);
+            System.err.println("turn starting");
+            System.err.println(clientThreads.get(theModel.getGame().getCurPlayer().getID()).getClientName());
             clientThreads.get(theModel.getGame().getCurPlayer().getID()).writeToClient(TurnState.IN_TURN);
         } catch (IOException e) {
             e.printStackTrace();
@@ -160,17 +169,16 @@ public class Server implements Runnable {
         theView = new MainView(theModel);
         theController = new MainController(theModel, theView);
 
-        /*theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
-            try {
-                System.out.println("HELLO");
-                changeTurn();
-                theModel.endTurn();
-                theView.endTurn();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
+
     }
 
+    public void update(MonopolyModel theModel) {
+        this.theModel = theModel;
+        //theModel.testPropertyOwner(theModel.getGame().getBoard().getBoard().get(6));
+        this.log = theModel.getLog();
+    }
 
+    public MonopolyModel getTheModel() {
+        return theModel;
+    }
 }

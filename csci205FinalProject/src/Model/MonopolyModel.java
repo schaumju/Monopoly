@@ -5,6 +5,7 @@ import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -236,6 +237,17 @@ public class MonopolyModel implements Serializable {
         log.addToLog("Their new balance is $" + getCurPlayer().getBalance());
     }
 
+    public void testPropertyOwner(Space space) {
+        if (space instanceof Property) {
+
+            Character temp = new Character("temp", Color.GREEN);
+            temp.setID(-7);
+            ((Property) space).buyProperty(temp);
+        }
+
+    }
+
+
     /**
      * Determines whether the space is buyable or not
      *
@@ -275,4 +287,5 @@ public class MonopolyModel implements Serializable {
     public void setLog(GameLog log) {
         this.log = log;
     }
+
 }

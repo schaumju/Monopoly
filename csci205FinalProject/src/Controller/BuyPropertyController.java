@@ -42,7 +42,17 @@ public class BuyPropertyController {
         theView.getPropertyView().getBuyPropertyButton().setOnMouseClicked(mouseEvent -> {
             theModel.buyProperty(theModel.getGame().getBoard().getBoard().get(theModel.getCurPlayer().getPosition()));
             theView.getPropertyView().turnButtonOff();
+            theView.getLogView().updateLog();
         });
         theController.getBoardController().update();
+    }
+
+    /**
+     * Updates the model
+     *
+     * @param theModel the new Model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
     }
 }

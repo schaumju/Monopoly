@@ -62,4 +62,12 @@ public class PropertyView {
     public void turnButtonOff() {
         buyPropertyButton.setDisable(true);
     }
+
+    /**
+     * Updates the model
+     * @param theModel the new model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+    }
 }

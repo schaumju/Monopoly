@@ -54,6 +54,7 @@ public class EndTurnController {
         theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
             try {
                 theModel.endTurn();
+                theView.getLogView().updateLog();
                 if(client != null) {
                     client.writeToServer();
                 }
@@ -62,5 +63,14 @@ public class EndTurnController {
             }
             theView.endTurn();
         });
+    }
+
+    /**
+     * Updates the model
+     *
+     * @param theModel the new Model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
     }
 }
