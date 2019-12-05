@@ -47,7 +47,7 @@ public class DiceController {
 
     /**
      * handles rolling the dice
-     * @author justin & kerri
+     * @author justin, kerri, ashlyn
      */
     private void handleRollDice() {
         theView.getDiceView().getRollDiceBtn().setOnAction(event -> {
@@ -55,8 +55,15 @@ public class DiceController {
             dice.rollDice();
             theView.getDiceView().getDice1().roll(dice.getDie1());
             theView.getDiceView().getDice2().roll(dice.getDie2());
-            theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
             int totalRoll = dice.getDie1() + dice.getDie2();
+            // If the player isn't in jail, move forward the number rolled
+            if (!theModel.getCurPlayer().isInJail()){
+                theModel.getCurPlayer().move(dice.getDie1()+dice.getDie2());
+            }
+            // If the player is in jail and the roll is a double, move forward
+            else if (theModel.getCurPlayer().isInJail() && dice.isDoubles()){
+                theModel.getCurPlayer().move(dice.getDie1()+dice.getDie2());
+            }
             theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled a " + totalRoll);
             theView.getCharacterView().updateCharacters();
             try {
@@ -82,8 +89,8 @@ public class DiceController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-            } else {
+            }
+            else {
                 theView.getEndTurnView().turnButtonOn();
             }
         });
