@@ -55,14 +55,38 @@ public class DiceController {
             dice.rollDice();
             theView.getDiceView().getDice1().roll(dice.getDie1());
             theView.getDiceView().getDice2().roll(dice.getDie2());
+
+            //Player in jail and did not roll doubles
+            if (theModel.getCurPlayer().isInJail() && !dice.isDoubles())
+            {
+                //They just had their 3rd attempt at getting out of jail
+                if (theModel.getCurPlayer().getTurnsInJail() == 2)
+                {
+                    System.out.println("You have served your time! Pay the $50 fine and leave!");
+                    theModel.getCurPlayer().subtractFromBalance(50);
+                    theModel.getCurPlayer().leaveJail();
+                }
+                //Not 3rd attempt, so still in jail
+                else
+                {
+                    System.out.println("Did not roll doubles! Stay in jail!");
+                    theModel.getCurPlayer().incrementTurnsInJail();
+                }
+
+            }
+
+            //They have rolled doubles and are now out of jail but still have the jail status
+            if (theModel.getCurPlayer().isInJail())
+            {
+                System.out.println("Congrats! You rolled doubles and are now out of jail!");
+                theModel.getCurPlayer().leaveJail();
+            }
             theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
             int totalRoll = dice.getDie1() + dice.getDie2();
             theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled a " + totalRoll);
             theView.getCharacterView().updateCharacters();
             try {
                 theModel.interactSpace(dice.getDie1() + dice.getDie2());
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -73,9 +97,7 @@ public class DiceController {
             } else {
                 theView.getPropertyView().turnButtonOff();
             }
-
             theView.getDiceView().getRollDiceBtn().setDisable(true);
-
             if (dice.isDoubles()) {
                 try {
                     theView.doubles();
@@ -87,7 +109,6 @@ public class DiceController {
                 theView.getEndTurnView().turnButtonOn();
             }
         });
-
     }
 
 }

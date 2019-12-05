@@ -83,7 +83,7 @@ public class CharacterView {
         {
             mainView.getRoot().getChildren().add(boardPlayerList.get(i));
             //Staggering the player circles
-            boardPlayerList.get(i).setTranslateY(translateAmount*i);
+            boardPlayerList.get(i).setTranslateX(35);
         }
     }
 
@@ -101,10 +101,10 @@ public class CharacterView {
             int playerMoves = 35 + (70 * (playerList[i].getPosition()%10));
 
             //Amount to move horizontally
-            double translateX = 50;
+            double translateX;
 
             //Amount to move vertically
-            double translateY = 50;
+            double translateY;
 
             //If player is on the top row
             if (playerList[i].getPosition() < 10) {
@@ -115,7 +115,7 @@ public class CharacterView {
             //If player is on the right row
             else if (playerList[i].getPosition() >= 10 && playerList[i].getPosition() < 20)
             {
-                translateY = playerMoves; //Since its going down down down down
+                translateY = playerMoves - 35;
                 translateX = 735;
             }
 
@@ -133,6 +133,10 @@ public class CharacterView {
                 translateY = 700-playerMoves;
             }
 
+            if (playerList[i].isInJail())
+            {
+                System.out.println("Public Safety caught you drinking! ...for the fourth time! Go to Jail!");
+            }
             boardPlayerList.get(i).setTranslateX(translateX);
             boardPlayerList.get(i).setTranslateY(translateY);
 
