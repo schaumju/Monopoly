@@ -141,6 +141,10 @@ public class MainView {
         return endTurnView;
     }
 
+    public LogView getLogView() {
+        return logView;
+    }
+
     /**
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
@@ -160,4 +164,21 @@ public class MainView {
         endTurnView.getEndTurnButton().setDisable(true);
         propertyView.turnButtonOff();
     }
+
+    /**
+     * Updates the model
+     * @param theModel the new model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        boardView.updateModel(theModel);
+        cardsView.updateModel(theModel);
+        characterView.updateModel(theModel);
+        diceView.updateModel(theModel);
+        endTurnView.updateModel(theModel);
+        logView.updateModel(theModel);
+        propertyView.updateModel(theModel);
+    }
+
+
 }

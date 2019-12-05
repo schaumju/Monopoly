@@ -98,7 +98,9 @@ public class CharacterView {
             mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
 
             //Non-vector amount to move
+            //System.out.println(playerList[i].getPosition());
             int playerMoves = 35 + (70 * (playerList[i].getPosition()%10));
+            //System.out.println(playerMoves);
 
             //Amount to move horizontally
             double translateX;
@@ -150,5 +152,23 @@ public class CharacterView {
      */
     public Character[] getPlayerList() {
         return playerList;
+    }
+
+    /**
+     * Updates the model
+     * @param theModel the new model
+     */
+    public void updateModel(MonopolyModel theModel) {
+        this.theModel = theModel;
+        this.playerList = theModel.getPlayerList();
+        for (int i = 0; i < boardPlayerList.size(); i++) {
+            mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+        }
+        this.boardPlayerList = new ArrayList<>();
+
+
+        convertPlayers();
+        addCharacters();
+
     }
 }
