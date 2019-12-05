@@ -19,8 +19,6 @@
 package Controller;
 
 import Game.Dice;
-import Game.Spaces.Chance;
-import Game.Spaces.CommunityChest;
 import Model.MonopolyModel;
 import View.MainView;
 
@@ -49,7 +47,7 @@ public class DiceController {
 
     /**
      * handles rolling the dice
-     * @author justin, kerri, ashlyn
+     * @author justin & kerri
      */
     private void handleRollDice() {
         theView.getDiceView().getRollDiceBtn().setOnAction(event -> {
@@ -85,14 +83,6 @@ public class DiceController {
             }
             theModel.getCurPlayer().move(dice.getDie1() + dice.getDie2());
             int totalRoll = dice.getDie1() + dice.getDie2();
-            // If the player isn't in jail, move forward the number rolled
-            if (!theModel.getCurPlayer().isInJail()){
-                theModel.getCurPlayer().move(dice.getDie1()+dice.getDie2());
-            }
-            // If the player is in jail and the roll is a double, move forward
-            else if (theModel.getCurPlayer().isInJail() && dice.isDoubles()){
-                theModel.getCurPlayer().move(dice.getDie1()+dice.getDie2());
-            }
             theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled a " + totalRoll);
             theView.getLogView().updateLog();
             theView.getCharacterView().updateCharacters();
@@ -110,15 +100,17 @@ public class DiceController {
             } else {
                 theView.getPropertyView().turnButtonOff();
             }
+
             theView.getDiceView().getRollDiceBtn().setDisable(true);
+
             if (dice.isDoubles()) {
                 try {
                     theView.doubles();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            else {
+
+            } else {
                 theView.getEndTurnView().turnButtonOn();
             }
             theView.getLogView().updateLog();
