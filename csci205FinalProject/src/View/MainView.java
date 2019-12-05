@@ -149,7 +149,10 @@ public class MainView {
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
     public void doubles() {
-        diceView.getRollDiceBtn().setDisable(false);
+        if (!theModel.getCurPlayer().isInJail())
+        {
+            diceView.getRollDiceBtn().setDisable(false);
+        }
 
     }
 
