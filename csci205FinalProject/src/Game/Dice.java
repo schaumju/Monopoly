@@ -49,8 +49,8 @@ public class Dice implements Serializable {
      */
     public Integer rollDice() {
         Random rand = new Random();
-        die1 = 15; //rand.nextInt(6) + 1;
-        die2 = 15; //rand.nextInt(6) + 1;
+        die1 = rand.nextInt(6) + 1;
+        die2 = rand.nextInt(6) + 1;
         return die1 + die2;
     }
 
