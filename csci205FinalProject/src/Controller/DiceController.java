@@ -56,19 +56,33 @@ public class DiceController {
             theView.getDiceView().getDice1().roll(dice.getDie1());
             theView.getDiceView().getDice2().roll(dice.getDie2());
 
+            if (dice.isDoubles()) {
+                theModel.getCurPlayer().setNumRollsInRow(theModel.getCurPlayer().getNumRollsInRow() + 1);
+                if (theModel.getCurPlayer().getNumRollsInRow() == 3) {
+                    theView.getPropertyView().turnButtonOff();
+                    theView.getEndTurnView().turnButtonOn();
+                    theView.getDiceView().getRollDiceBtn().setDisable(true);
+                    theModel.getCurPlayer().goToJail();
+                    theModel.getLog().addToLog(theModel.getCurPlayer().getName() + " rolled 3 doubles in a row and got sent to jail");
+                    theView.getLogView().updateLog();
+                    theView.getCharacterView().updateCharacters();
+                    return;
+                }
+            } else {
+                theModel.getCurPlayer().setNumRollsInRow(0);
+            }
+
+
             //Player in jail and did not roll doubles
-            if (theModel.getCurPlayer().isInJail() && !dice.isDoubles())
-            {
+            if (theModel.getCurPlayer().isInJail() && !dice.isDoubles()) {
                 //They just had their 3rd attempt at getting out of jail
-                if (theModel.getCurPlayer().getTurnsInJail() == 2)
-                {
+                if (theModel.getCurPlayer().getTurnsInJail() == 2) {
                     System.out.println("You have served your time! Pay the $50 fine and leave!");
                     theModel.getCurPlayer().subtractFromBalance(50);
                     theModel.getCurPlayer().leaveJail();
                 }
                 //Not 3rd attempt, so still in jail
-                else
-                {
+                else {
                     System.out.println("Did not roll doubles! Stay in jail!");
                     theModel.getCurPlayer().incrementTurnsInJail();
                 }

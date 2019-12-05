@@ -72,6 +72,8 @@ public class Character implements Serializable {
 
     //ArrayList of property objects that the player owns
     private ArrayList<Property> ownedProperties;
+    // number of rolls in a row
+    private int numRollsInRow;
 
     public Character(String name, Color color)
     {
@@ -80,6 +82,7 @@ public class Character implements Serializable {
         this.position = 0;
         this.numRailroads = 0;
         this.numUtilities = 0;
+        this.numRollsInRow = 0;
         this.balance = STARTING_BALANCE;
         this.numHouses = 0;
         this.isInJail = false;
@@ -326,5 +329,11 @@ public class Character implements Serializable {
         return count == propertyColor.getNumberOfProperties();
     }
 
+    public int getNumRollsInRow() {
+        return numRollsInRow;
+    }
 
+    public void setNumRollsInRow(int numRollsInRow) {
+        this.numRollsInRow = numRollsInRow;
+    }
 }

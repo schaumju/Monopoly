@@ -30,6 +30,8 @@ public class Main extends Application {
         theController = new MainController(theModel, theView);
         primaryStage.setTitle("Monopoly");
         primaryStage.setScene(new Scene(theView.getRoot()));
+        primaryStage.setWidth(1100);
+        primaryStage.setHeight(800);
         primaryStage.show();
 
     }

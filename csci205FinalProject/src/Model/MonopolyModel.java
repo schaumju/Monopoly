@@ -213,24 +213,32 @@ public class MonopolyModel implements Serializable {
      * @param space the space that is being bought
      */
     public void buyProperty(Space space) {
-
+        space = game.getBoard().getBoard().get(getCurPlayer().getPosition());
+        System.out.println("CURRENT PLAYER: " + getCurPlayer().getName());
+        System.out.println("player position: " + getCurPlayer().getPosition());
+        System.out.println("Current space " + space.getName());
+        System.out.println("Current space position " + space.getPosition());
         if (space instanceof Property) {
 
             ((Property) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Property) space).getCost());
+            System.out.println("HERE1");
 
         } else if (space instanceof Railroads) {
             ((Railroads) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Railroads) space).getCost());
             getCurPlayer().buyRailroad();
+            System.out.println("HERE2");
 
         } else if (space instanceof Utilities) {
             ((Utilities) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Utilities) space).getCost());
             getCurPlayer().buyUtility();
+            System.out.println("HERE3");
 
         }
 
+        System.err.println("FIXING BUG");
         System.out.println("You have bought this property from the bank");
         log.addToLog(getCurPlayer().getName() + " has bought this property from the bank");
         System.out.println("Your new balance is $" + getCurPlayer().getBalance());

@@ -147,8 +147,11 @@ public class ClientApplication extends Application {
                         /* Change the scene of the primaryStage */
                         primaryStage.close();
                         primaryStage.setScene(setUpPlayingScene());
+                        primaryStage.setWidth(1100);
+                        primaryStage.setHeight(800);
                         // For testing rn
                         primaryStage.setTitle(nameField.getText());
+                        primaryStage.setResizable(false);
                         primaryStage.show();
                     } catch (Exception e) {
                         e.printStackTrace();
