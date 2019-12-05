@@ -10,12 +10,13 @@ import javafx.application.Platform;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
 /**
  * Class to represent the client in a server-client protocol
  */
-public class Client implements Runnable {
+public class Client implements Runnable, Serializable {
     /**
      * The socket of the client
      */
@@ -62,6 +63,7 @@ public class Client implements Runnable {
      * @throws IOException
      */
     public Client(String hostName, int portNumber, String name) throws IOException {
+        System.err.println(name);
         turnState = TurnState.WAITING;
         graphicsReady = false;
         /* Try to establish a connection to the server */
@@ -85,8 +87,11 @@ public class Client implements Runnable {
         /* Infinite loop to update the chat log from the server */
 
         while (true) {
+            System.out.println("HERE");
+            System.out.println(theView != null);
             if (theView != null) {
-                if (turnState != TurnState.IN_TURN) {
+                System.out.println(turnState.name());
+                if (turnState == TurnState.IN_TURN) {
                     theView.getDiceView().getRollDiceBtn().setDisable(false);
                 } else {
                     theView.getDiceView().getRollDiceBtn().setDisable(true);
@@ -103,11 +108,21 @@ public class Client implements Runnable {
                             initiateGame(inputFromServer);
                         } else if (inputFromServer instanceof MonopolyModel) {
                             theModel = (MonopolyModel) inputFromServer;
+                            theView.getCharacterView().updateCharacters();
                         }
                         // If you receive a TurnState from the server that means your turn is over so update the server with your model
                         else if (inputFromServer instanceof TurnState) {
                             System.out.println("HERE WE GO");
+
                             turnState = (TurnState) inputFromServer;
+                            System.out.println("TURN STATE " + turnState.name());
+                            if (theView != null) {
+                                if (turnState != TurnState.IN_TURN) {
+                                    theView.getDiceView().getRollDiceBtn().setDisable(false);
+                                } else {
+                                    theView.getDiceView().getRollDiceBtn().setDisable(true);
+                                }
+                            }
                             try {
                                 writeToServer();
                             } catch (IOException e) {
@@ -117,6 +132,7 @@ public class Client implements Runnable {
                         }
                     }
                 });
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -143,7 +159,8 @@ public class Client implements Runnable {
     private void initiateGame(Object inputFromServer) {
         theModel = new MonopolyModel((Game.Character[]) inputFromServer);
         theView = new MainView(theModel);
-        theController = new MainController(theModel, theView);
+        theController = new MainController(theModel, theView, this);
+        System.out.println("HERE WORKNG WHY THE FUCK");
         graphicsReady = true;
 
     }

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -49,6 +50,10 @@ public class Server implements Runnable {
         socket = new ServerSocket(portNumber);
         //For testing purposes because choosing port
         System.out.println(socket.getLocalPort());
+        InetAddress address = InetAddress.getLocalHost();
+        String hostIP = address.getHostAddress();
+
+        System.out.println("Your IP is: " + hostIP);
     }
 
     public void run() {
@@ -154,13 +159,17 @@ public class Server implements Runnable {
         theModel = new MonopolyModel(playerList);
         theView = new MainView(theModel);
         theController = new MainController(theModel, theView);
-        theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
+
+        /*theView.getEndTurnView().getEndTurnButton().setOnMouseClicked(mouseEvent -> {
             try {
+                System.out.println("HELLO");
                 changeTurn();
+                theModel.endTurn();
+                theView.endTurn();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        });*/
     }
 
 

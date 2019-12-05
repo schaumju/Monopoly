@@ -1,10 +1,12 @@
 package Model;
 
+import Controller.BoardController;
 import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 public class MonopolyModel implements Serializable {
@@ -23,6 +25,7 @@ public class MonopolyModel implements Serializable {
     private GameLog log;
 
 
+
     /**
      * Constructor
      * @param playerList the list of player's in the game
@@ -34,6 +37,7 @@ public class MonopolyModel implements Serializable {
         log.addToLog(game.getCurPlayer().getName() + " is starting their turn");
 
     }
+
 
     /**
      * Getter Method
@@ -118,6 +122,7 @@ public class MonopolyModel implements Serializable {
     private void interactChance(Chance space) throws Exception {
         Card card = game.getBoard().getChanceDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
+        BoardController.cardPopUp("You drew the Chance card\n" + card.getDescription());
         System.out.println("You drew the Chance card " + card.getDescription());
         log.addToLog(getCurPlayer().getName() + "drew the Chance card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
@@ -136,6 +141,7 @@ public class MonopolyModel implements Serializable {
     private void interactCommunityChest(CommunityChest space) throws Exception {
         Card card = game.getBoard().getCommunityChestDeck().draw();
         int beforePosition = getCurPlayer().getPosition();
+        BoardController.cardPopUp("You drew the Community Chest card\n" + card.getDescription());
         System.out.println("You drew the Community Chest card " + card.getDescription());
         log.addToLog(getCurPlayer().getName() + "drew the Community Chest card " + card.getDescription());
         card.preformAction(getCurPlayer(), playerList);
@@ -256,8 +262,9 @@ public class MonopolyModel implements Serializable {
     /**
      * Ends the turn by switching the current player to the next player (changes the turn)
      */
-    public void endTurn() {
+    public void endTurn() throws IOException {
         log.addToLog(game.getCurPlayer().getName() + " ended their turn");
+        //client.writeToServer();
         //game.getNextPlayer();
     }
 

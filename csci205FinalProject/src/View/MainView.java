@@ -145,7 +145,10 @@ public class MainView {
      * Updates the scene for the player if the player rolled doubles (roll again)
      */
     public void doubles() {
-        diceView.getRollDiceBtn().setDisable(false);
+        if (!theModel.getCurPlayer().isInJail())
+        {
+            diceView.getRollDiceBtn().setDisable(false);
+        }
 
     }
 
@@ -153,7 +156,7 @@ public class MainView {
      * Resets the buttons for the next turn
      */
     public void endTurn() {
-        diceView.getRollDiceBtn().setDisable(false);
+        diceView.getRollDiceBtn().setDisable(true);
         endTurnView.getEndTurnButton().setDisable(true);
         propertyView.turnButtonOff();
     }
