@@ -9,20 +9,23 @@
  * Time: 11:35 AM
  *
  * Project: csci205FinalProject
- * Package: View
+ * Package: MVC.View
  * Class: DiceView
  *
  * Description:
  *
  * ****************************************
  */
-package View;
+package MVC.View;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
+/**
+ * View for the dice roll
+ */
 public class DiceView {
 
     private SimpleIntegerProperty target = new SimpleIntegerProperty();
@@ -96,7 +99,7 @@ public class DiceView {
         mainView.getRoot().getChildren().addAll(dice1, dice2, rollDiceBtn);
     }
 
-    // Getter methods
+    /* Getter methods */
     public Button getRollDiceBtn() {
         return rollDiceBtn;
     }

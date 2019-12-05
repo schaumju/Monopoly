@@ -32,7 +32,7 @@ public enum PropertyColor implements Serializable {
     /**
      * Gets Color
      *
-     * @return
+     * @return the color
      */
     public Paint getColor() {
         return color;
@@ -41,7 +41,7 @@ public enum PropertyColor implements Serializable {
     /**
      * Gets the number of properties in the monopoly
      *
-     * @return
+     * @return the number of properties in the monopoly
      */
     public int getNumberOfProperties() {
         return numberOfProperties;

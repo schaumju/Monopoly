@@ -9,19 +9,22 @@
  * Time: 8:30 PM
  *
  * Project: csci205FinalProject
- * Package: Controller
+ * Package: MVC.Controller
  * Class: DiceController
  *
  * Description:
  *
  * ****************************************
  */
-package Controller;
+package MVC.Controller;
 
 import Game.Dice;
-import Model.MonopolyModel;
-import View.MainView;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 
+/**
+ * Controller for the dice
+ */
 public class DiceController {
 
     /**
@@ -90,8 +93,7 @@ public class DiceController {
             }
 
             //They have rolled doubles and are now out of jail but still have the jail status
-            if (theModel.getCurPlayer().isInJail())
-            {
+            if (theModel.getCurPlayer().isInJail()) {
                 System.out.println("Congrats! You rolled doubles and are now out of jail!");
                 theModel.getCurPlayer().leaveJail();
             }
@@ -135,7 +137,7 @@ public class DiceController {
     /**
      * Updates the model
      *
-     * @param theModel the new Model
+     * @param theModel the new MVC.Model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;

@@ -116,7 +116,7 @@ public class Card implements Serializable {
      * Finds the closest space of a certain type
      * @param curPosition the position of the player currently
      * @param spaceArray the array containing the spaces of the specified type
-     * @return
+     * @return the integer value of the closest space of the given type
      */
     private int findClosest(int curPosition, int[] spaceArray) {
         int closestPosition = Math.abs(curPosition-spaceArray[0])%40;

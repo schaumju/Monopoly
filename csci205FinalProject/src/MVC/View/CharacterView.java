@@ -9,17 +9,17 @@
  * Time: 11:42 AM
  *
  * Project: csci205FinalProject
- * Package: View
+ * Package: MVC.View
  * Class: CharacterView
  *
  * Description:
  *
  * ****************************************
  */
-package View;
+package MVC.View;
 
 import Game.Character;
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class CharacterView {
      * Constructor
      *
      * @param theModel model object
-     * @param mainView
+     * @param mainView the game view
      */
     public CharacterView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
@@ -78,12 +78,11 @@ public class CharacterView {
     {
         //Amount to stagger the individual circles by
         int translateAmount = 8;
-        
-        for (int i = 0; i < boardPlayerList.size(); i++)
-        {
-            mainView.getRoot().getChildren().add(boardPlayerList.get(i));
+
+        for (Circle circle : boardPlayerList) {
+            mainView.getRoot().getChildren().add(circle);
             //Staggering the player circles
-            boardPlayerList.get(i).setTranslateX(35);
+            circle.setTranslateX(35);
         }
     }
 
@@ -98,9 +97,7 @@ public class CharacterView {
             mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
 
             //Non-vector amount to move
-            //System.out.println(playerList[i].getPosition());
             int playerMoves = 35 + (70 * (playerList[i].getPosition()%10));
-            //System.out.println(playerMoves);
 
             //Amount to move horizontally
             double translateX;
@@ -161,8 +158,8 @@ public class CharacterView {
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;
         this.playerList = theModel.getPlayerList();
-        for (int i = 0; i < boardPlayerList.size(); i++) {
-            mainView.getRoot().getChildren().remove(boardPlayerList.get(i));
+        for (Circle circle : boardPlayerList) {
+            mainView.getRoot().getChildren().remove(circle);
         }
         this.boardPlayerList = new ArrayList<>();
 

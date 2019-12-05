@@ -20,10 +20,15 @@ package Game.Spaces;
 
 import java.io.Serializable;
 
+/**
+ * Representation of a Free Parking Space
+ */
 public class FreeParkingSpace extends Space implements Serializable
 {
-    public FreeParkingSpace()
-    {
+    /**
+     * Default Constructor
+     */
+    public FreeParkingSpace() {
         super(19, "FREE PARKING");
     }
 }

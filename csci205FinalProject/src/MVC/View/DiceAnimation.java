@@ -1,4 +1,4 @@
-package View;
+package MVC.View;
 
 import javafx.animation.RotateTransition;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -49,9 +49,7 @@ public class DiceAnimation extends StackPane {
         RotateTransition rt = new RotateTransition(Duration.seconds(.9), this);
         rt.setFromAngle(0);
         rt.setToAngle(360);
-        rt.setOnFinished(event -> {
-            valueProperty.set((roll));
-        });
+        rt.setOnFinished(event -> valueProperty.set((roll)));
         rt.play();
     }
 

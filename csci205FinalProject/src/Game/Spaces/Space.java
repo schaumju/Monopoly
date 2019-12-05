@@ -25,15 +25,27 @@ import java.io.Serializable;
  * @author Ashlyn Ramos
  */
 public abstract class Space implements Serializable {
-
+    /**
+     * The position of the space
+     */
     protected int position;
+    /**
+     * The name of the spaces
+     */
     protected String name;
 
+    /**
+     * Constructor
+     *
+     * @param position int value of the position of space
+     * @param name     the name of the space
+     */
     public Space(int position, String name) {
         this.position = position;
         this.name = name;
     }
 
+    /*Getter methods */
     public int getPosition() {
         return position;
     }

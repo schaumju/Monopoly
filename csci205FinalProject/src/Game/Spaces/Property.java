@@ -116,7 +116,7 @@ public class Property extends Space implements Buyable, Serializable {
     /**
      * If the property has an owner the userID of the owner is returned,
      * otherwise returns -1.
-     * @return
+     * @return the owner
      */
     @Override
     public int getOwner() {
@@ -133,8 +133,12 @@ public class Property extends Space implements Buyable, Serializable {
         System.out.println("RAN");
     }
 
-    public void buyProperty(int playerID)
-    {
+    /**
+     * Sets the property to unowned
+     *
+     * @param playerID the id coming in (doesn't matter)
+     */
+    public void buyProperty(int playerID) {
 
         owner = -1;
     }

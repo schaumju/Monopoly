@@ -31,9 +31,17 @@ public class Utilities extends Space implements Buyable, Serializable {
      * The ID of the person who owns the Railroad
      */
     private int ownerID;
-
+    /**
+     * The cost of a utility space to buy
+     */
     private final int UTILITY_COST=150;
 
+    /**
+     * Constructor
+     *
+     * @param position position of the space
+     * @param name     the name of teh space
+     */
     public Utilities(int position, String name) {
         super(position, name);
         ownerID=-1;

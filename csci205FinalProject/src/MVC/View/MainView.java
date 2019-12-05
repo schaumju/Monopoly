@@ -9,16 +9,16 @@
  * Time: 11:37 AM
  *
  * Project: csci205FinalProject
- * Package: View
+ * Package: MVC.View
  * Class: MainView
  *
  * Description:
  *
  * ****************************************
  */
-package View;
+package MVC.View;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
@@ -109,11 +109,7 @@ public class MainView {
     }
 
 
-    /**
-     * Getter Methods
-     */
-
-
+    /* Getter methods*/
     public MonopolyModel getTheModel() {
         return theModel;
     }

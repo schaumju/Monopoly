@@ -9,20 +9,20 @@
  * Time: 4:14 PM
  *
  * Project: csci205FinalProject
- * Package: Controller
+ * Package: MVC.Controller
  * Class: BoardControl
  *
  * Description:
  *
  * ****************************************
  */
-package Controller;
+package MVC.Controller;
 
 
 import Game.Board;
 import Game.Spaces.*;
-import Model.MonopolyModel;
-import View.BoardView;
+import MVC.Model.MonopolyModel;
+import MVC.View.BoardView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -31,17 +31,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Controller class for the Board
+ * Controller for the Board
  */
 public class BoardController
 {
     /**
-     * Model for the game
+     * The game model
      */
     private MonopolyModel theModel;
 
     /**
-     * View for the Board
+     * The game view
      */
     private BoardView boardView;
     public static Stage card;
@@ -134,6 +134,11 @@ public class BoardController
         });
     }
 
+    /**
+     * Pop up screen for the Community Chest and Chance space
+     *
+     * @param popUpText the text on the card
+     */
     public static void cardPopUp(String popUpText) {
 
         card = new Stage();
@@ -159,12 +164,8 @@ public class BoardController
     private String getPropertyOwners(Board theBoard, int i) {
         int owner = ((Buyable) theBoard.getBoard().get(i)).getOwner();
         if (owner == -1) {
-            //Testing
-            //System.out.println("RAN_PROPERTY_OWNERS_UNOWNED");
             return " None";
         } else {
-            //Testing
-            //System.out.println("RAN_PROPERTY_OWNERS_OWNED");
             return theModel.getGame().getPlayerList()[owner].getName();
         }
     }

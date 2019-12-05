@@ -1,10 +1,10 @@
 package Networking.client;
 
-import Controller.MainController;
 import Game.Character;
-import Model.MonopolyModel;
+import MVC.Controller.MainController;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 import Networking.TurnState;
-import View.MainView;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class Client implements Runnable, Serializable {
     /**
      * Constructor
      *
-     * @param hostName
+     * @param hostName the IP address of the host
      * @param portNumber the port number
      * @param name       the name of the player
      * @throws IOException
@@ -86,7 +86,7 @@ public class Client implements Runnable, Serializable {
     public void run() {
         /* Infinite loop to update the chat log from the server */
 
-        while (true) {
+        do {
             if (theView != null) {
 
                 if (turnState != TurnState.IN_TURN) {
@@ -106,29 +106,26 @@ public class Client implements Runnable, Serializable {
                     }
                 }
 
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (inputFromServer instanceof Character[]) {
-                            initiateGame(inputFromServer);
-                        } else if (inputFromServer instanceof MonopolyModel) {
-                            theModel = (MonopolyModel) inputFromServer;
-                            updateModel();
-                            theView.getCharacterView().updateCharacters();
+                Platform.runLater(() -> {
+                    if (inputFromServer instanceof Character[]) {
+                        initiateGame(inputFromServer);
+                    } else if (inputFromServer instanceof MonopolyModel) {
+                        theModel = (MonopolyModel) inputFromServer;
+                        updateModel();
+                        theView.getCharacterView().updateCharacters();
 
+                    }
+                    // If you receive a TurnState from the server that means your turn is over so update the server with your model
+                    else if (inputFromServer instanceof TurnState) {
+
+                        turnState = (TurnState) inputFromServer;
+                        if (turnState != TurnState.IN_TURN) {
+                            theView.getDiceView().getRollDiceBtn().setDisable(true);
+                        } else {
+                            theView.getDiceView().getRollDiceBtn().setDisable(false);
                         }
-                        // If you receive a TurnState from the server that means your turn is over so update the server with your model
-                        else if (inputFromServer instanceof TurnState) {
-
-                            turnState = (TurnState) inputFromServer;
-                                if (turnState != TurnState.IN_TURN) {
-                                    theView.getDiceView().getRollDiceBtn().setDisable(true);
-                                } else {
-                                    theView.getDiceView().getRollDiceBtn().setDisable(false);
-                                }
 
 
-                        }
                     }
                 });
 
@@ -138,11 +135,11 @@ public class Client implements Runnable, Serializable {
                 e.printStackTrace();
             }
 
-        }
+        } while (true);
     }
 
     /**
-     * Updates the MonopolyModel object in the View and Controller
+     * Updates the MonopolyModel object in the MVC.View and MVC.Controller
      */
     private void updateModel() {
         theView.updateModel(theModel);
@@ -186,6 +183,9 @@ public class Client implements Runnable, Serializable {
         return theView;
     }
 
+    /**
+     * Getter method
+     */
     public MonopolyModel getTheModel() {
         return theModel;
     }

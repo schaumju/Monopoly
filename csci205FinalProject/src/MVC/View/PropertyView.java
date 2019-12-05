@@ -1,6 +1,6 @@
-package View;
+package MVC.View;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.scene.control.Button;
 
 public class PropertyView {
@@ -21,7 +21,7 @@ public class PropertyView {
      * Constructor
      *
      * @param theModel the game model
-     * @param mainView
+     * @param mainView the Game View
      */
     public PropertyView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;

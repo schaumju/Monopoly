@@ -1,4 +1,4 @@
-package Model;
+package MVC.Model;
 
 import Networking.SerializableObservableList;
 import javafx.collections.FXCollections;
@@ -12,7 +12,9 @@ import java.io.Serializable;
  * @author Justin
  */
 public class GameLog implements Serializable {
-
+    /**
+     * The log
+     */
     private SerializableObservableList log;
 
     /**

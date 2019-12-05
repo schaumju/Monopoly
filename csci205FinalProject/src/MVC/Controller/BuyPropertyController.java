@@ -1,7 +1,7 @@
-package Controller;
+package MVC.Controller;
 
-import Model.MonopolyModel;
-import View.MainView;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 
 /**
  * Controller for buying properties
@@ -13,7 +13,7 @@ public class BuyPropertyController {
      */
     private MonopolyModel theModel;
     /**
-     * View class for the graphics of the game
+     * The game view
      */
     private MainView theView;
     /**
@@ -40,7 +40,7 @@ public class BuyPropertyController {
      */
     private void handleBuyProperty() {
         theView.getPropertyView().getBuyPropertyButton().setOnMouseClicked(mouseEvent -> {
-            theController.getEndTurnController().getClient().getTheModel().buyProperty(theModel.getGame().getBoard().getBoard().get(theModel.getCurPlayer().getPosition()));
+            theController.getEndTurnController().getClient().getTheModel().buyProperty();
             theView.getPropertyView().turnButtonOff();
             theView.getLogView().updateLog();
         });
@@ -50,7 +50,7 @@ public class BuyPropertyController {
     /**
      * Updates the model
      *
-     * @param theModel the new Model
+     * @param theModel the new model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;

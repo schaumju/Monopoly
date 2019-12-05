@@ -9,17 +9,17 @@
  * Time: 4:05 PM
  *
  * Project: csci205FinalProject
- * Package: View
+ * Package: MVC.View
  * Class: BoardView
  *
  * Description:
  *
  * ****************************************
  */
-package View;
+package MVC.View;
 
 import Game.Spaces.Space;
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -57,7 +57,7 @@ public class BoardView {
      * Constructor
      *
      * @param theModel the model for the game
-     * @param mainView
+     * @param mainView the game view
      */
     public BoardView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
@@ -226,7 +226,7 @@ public class BoardView {
         else  { colorRectangle.setFill(Color.WHITE); }
     }
 
-    //Getters
+    /*Getter methods */
 
     public ArrayList<Label> getListOfLabels() {
         return listOfLabels;

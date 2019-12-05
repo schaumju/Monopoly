@@ -1,6 +1,6 @@
-package View;
+package MVC.View;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.scene.control.Button;
 
 public class EndTurnView {
@@ -21,7 +21,7 @@ public class EndTurnView {
      * Constructor
      *
      * @param theModel game model
-     * @param mainView
+     * @param mainView the Game view
      */
     public EndTurnView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;

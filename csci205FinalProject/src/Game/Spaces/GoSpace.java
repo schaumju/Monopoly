@@ -22,23 +22,30 @@ import Game.Character;
 
 import java.io.Serializable;
 
+/**
+ * Representation of a Go Space
+ */
 public class GoSpace extends Space implements Serializable
 {
-    //Money you get for passing GO
+    /**
+     * Amount of money you get for passing go
+     */
     private static final double CASH_MONEY = 200.00;
 
-    //Reward money for passing go
-    private double rewardMoney;
-
-    public GoSpace()
-    {
+    /**
+     * Default constructor
+     */
+    public GoSpace() {
         super(0, "GO");
-        this.rewardMoney = CASH_MONEY;
     }
 
-    public void rewardCash(Character thisChar)
-    {
-        thisChar.addToBalance(this.rewardMoney);
+    /**
+     * Rewards the player cash for passing go
+     *
+     * @param thisChar the Character passing go
+     */
+    public void rewardCash(Character thisChar) {
+        thisChar.addToBalance(CASH_MONEY);
     }
 
 }

@@ -20,9 +20,14 @@ package Game.Spaces;
 
 import java.io.Serializable;
 
+/**
+ * Representation of a Jail Space
+ */
 public class GoToJailSpace extends Space implements Serializable
 {
-
+    /**
+     * Default Constructor
+     */
     public GoToJailSpace() {
         super(30, "GO TO JAIL!");
     }

@@ -1,8 +1,8 @@
-package Controller;
+package MVC.Controller;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 import Networking.client.Client;
-import View.MainView;
 
 import java.io.IOException;
 
@@ -65,6 +65,11 @@ public class EndTurnController {
         });
     }
 
+    /**
+     * Getter method for the client
+     *
+     * @return the client
+     */
     public Client getClient() {
         return client;
     }
@@ -72,7 +77,7 @@ public class EndTurnController {
     /**
      * Updates the model
      *
-     * @param theModel the new Model
+     * @param theModel the new MVC.Model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;

@@ -1,11 +1,11 @@
 package Networking.server;
 
-import Controller.MainController;
 import Game.Character;
-import Model.GameLog;
-import Model.MonopolyModel;
+import MVC.Controller.MainController;
+import MVC.Model.GameLog;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 import Networking.TurnState;
-import View.MainView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,18 +18,57 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server implements Runnable {
-    public final int NUM_PLAYERS;
+    /**
+     * Number of players in the game
+     */
+    protected final int NUM_PLAYERS;
+    /**
+     * Array of the possible colors for the players
+     */
     private final Color[] playerColors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
-    public ObservableList<String> serverLog;
-    public ObservableList<String> clientNames;
-    public GameLog log;
+    /**
+     * List of client names
+     */
+    protected ObservableList<String> clientNames;
+    /**
+     * the game log
+     */
+    protected GameLog log;
+    /**
+     * The server log
+     */
+    private ObservableList<String> serverLog;
+    /**
+     * The port number being used for the server
+     */
     private int portNumber;
+    /**
+     * The server socket
+     */
     private ServerSocket socket;
+    /**
+     * List of client sockets
+     */
     private ArrayList<Socket> clients;
+    /**
+     * List of client threads
+     */
     private ArrayList<ClientThread> clientThreads;
+    /**
+     * List of players
+     */
     private Character[] playerList;
+    /**
+     * The game model
+     */
     private MonopolyModel theModel;
+    /**
+     * The game view
+     */
     private MainView theView;
+    /**
+     * The game controller
+     */
     private MainController theController;
 
     /**
@@ -45,8 +84,8 @@ public class Server implements Runnable {
         NUM_PLAYERS = numberOfPlayers;
         serverLog = FXCollections.observableArrayList();
         clientNames = FXCollections.observableArrayList();
-        clients = new ArrayList<Socket>();
-        clientThreads = new ArrayList<ClientThread>();
+        clients = new ArrayList<>();
+        clientThreads = new ArrayList<>();
         socket = new ServerSocket(portNumber);
         //For testing purposes because choosing port
         System.out.println(socket.getLocalPort());
@@ -56,6 +95,9 @@ public class Server implements Runnable {
         System.out.println("Your IP is: " + hostIP);
     }
 
+    /**
+     * Runs continuously to allow clients to join the server
+     */
     public void run() {
 
         try {
@@ -69,14 +111,7 @@ public class Server implements Runnable {
                 /* Add the incoming socket connection to the list of clients */
                 clients.add(clientSocket);
                 /* Add to log that a client connected */
-                Platform.runLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        serverLog.add("Client " + clientSocket.getRemoteSocketAddress() + " connected");
-
-                    }
-                });
+                Platform.runLater(() -> serverLog.add("Client " + clientSocket.getRemoteSocketAddress() + " connected"));
 
                 ClientThread clientThreadHolderClass = new ClientThread(clientSocket, this);
                 Thread clientThread = new Thread(clientThreadHolderClass);
@@ -95,6 +130,9 @@ public class Server implements Runnable {
 
     }
 
+    /**
+     * Creates a list of players with colors
+     */
     private void createPlayerList() {
         playerList = new Character[NUM_PLAYERS];
         for (int i = 0; i < NUM_PLAYERS; i++) {
@@ -103,25 +141,31 @@ public class Server implements Runnable {
         }
     }
 
-
+    /**
+     * disconnects the clientthread from the server
+     *
+     * @param client the client thread being disconnected
+     */
     public void clientDisconnected(ClientThread client) {
 
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                serverLog.add("Client "
-                        + client.getClientSocket().getRemoteSocketAddress()
-                        + " disconnected");
-                clients.remove(clientThreads.indexOf(client));
-                clientNames.remove(clientThreads.indexOf(client));
-                clientThreads.remove(client);
-            }
+        Platform.runLater(() -> {
+            serverLog.add("Client "
+                    + client.getClientSocket().getRemoteSocketAddress()
+                    + " disconnected");
+            clients.remove(clientThreads.indexOf(client));
+            clientNames.remove(clientThreads.indexOf(client));
+            clientThreads.remove(client);
         });
 
 
     }
 
+    /**
+     * Writes to all the client threads
+     *
+     * @param message the message being sents
+     * @throws IOException
+     */
     public void writeToAllClients(Object message) throws IOException {
 
         for (ClientThread clientThread : clientThreads) {
@@ -172,12 +216,21 @@ public class Server implements Runnable {
 
     }
 
+    /**
+     * Updates the model
+     *
+     * @param theModel the new model
+     */
     public void update(MonopolyModel theModel) {
         this.theModel = theModel;
         //theModel.testPropertyOwner(theModel.getGame().getBoard().getBoard().get(6));
         this.log = theModel.getLog();
     }
 
+    /**
+     * Getter method for the model
+     * @return the game model
+     */
     public MonopolyModel getTheModel() {
         return theModel;
     }

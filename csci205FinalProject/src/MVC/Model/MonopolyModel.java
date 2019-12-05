@@ -1,13 +1,11 @@
-package Model;
+package MVC.Model;
 
-import Controller.BoardController;
 import Game.Cards.Card;
 import Game.Character;
 import Game.Game;
 import Game.Spaces.*;
-import javafx.scene.paint.Color;
+import MVC.Controller.BoardController;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 public class MonopolyModel implements Serializable {
@@ -210,10 +208,9 @@ public class MonopolyModel implements Serializable {
     /**
      * Allows the user to buy the space
      *
-     * @param space the space that is being bought
      */
-    public void buyProperty(Space space) {
-        space = game.getBoard().getBoard().get(getCurPlayer().getPosition());
+    public void buyProperty() {
+        Space space = game.getBoard().getBoard().get(getCurPlayer().getPosition());
         System.out.println("CURRENT PLAYER: " + getCurPlayer().getName());
         System.out.println("player position: " + getCurPlayer().getPosition());
         System.out.println("Current space " + space.getName());
@@ -222,38 +219,25 @@ public class MonopolyModel implements Serializable {
 
             ((Property) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Property) space).getCost());
-            System.out.println("HERE1");
 
         } else if (space instanceof Railroads) {
             ((Railroads) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Railroads) space).getCost());
             getCurPlayer().buyRailroad();
-            System.out.println("HERE2");
 
         } else if (space instanceof Utilities) {
             ((Utilities) space).buyProperty(getCurPlayer());
             getCurPlayer().subtractFromBalance(((Utilities) space).getCost());
             getCurPlayer().buyUtility();
-            System.out.println("HERE3");
 
         }
 
-        System.err.println("FIXING BUG");
         System.out.println("You have bought this property from the bank");
         log.addToLog(getCurPlayer().getName() + " has bought this property from the bank");
         System.out.println("Your new balance is $" + getCurPlayer().getBalance());
         log.addToLog("Their new balance is $" + getCurPlayer().getBalance());
     }
 
-    public void testPropertyOwner(Space space) {
-        if (space instanceof Property) {
-
-            Character temp = new Character("temp", Color.GREEN);
-            temp.setID(-7);
-            ((Property) space).buyProperty(temp);
-        }
-
-    }
 
 
     /**
@@ -282,18 +266,18 @@ public class MonopolyModel implements Serializable {
     /**
      * Ends the turn by switching the current player to the next player (changes the turn)
      */
-    public void endTurn() throws IOException {
+    public void endTurn() {
         log.addToLog(game.getCurPlayer().getName() + " ended their turn");
-        //client.writeToServer();
-        //game.getNextPlayer();
     }
 
+    /**
+     * Getter method for the log
+     *
+     * @return the game log
+     */
     public GameLog getLog() {
         return log;
     }
 
-    public void setLog(GameLog log) {
-        this.log = log;
-    }
 
 }

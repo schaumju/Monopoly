@@ -37,6 +37,9 @@ public class Dice implements Serializable {
      */
     private int die2;
 
+    /**
+     * Default constructor
+     */
     public Dice() {
         die1 = 0;
         die2 = 0;
@@ -51,8 +54,6 @@ public class Dice implements Serializable {
         Random rand = new Random();
         die1 = rand.nextInt(6) + 1;
         die2 = rand.nextInt(6) + 1;
-        die1 = 3;
-        die2 = 3;
         return die1 + die2;
     }
 
@@ -65,6 +66,7 @@ public class Dice implements Serializable {
         return getDie1() == getDie2();
     }
 
+    /*Getter methods */
     public int getDie1() {
         return die1;
     }

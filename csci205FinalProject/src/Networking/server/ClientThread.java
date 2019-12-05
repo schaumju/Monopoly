@@ -1,6 +1,6 @@
 package Networking.server;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import Networking.TurnState;
 import javafx.application.Platform;
 
@@ -68,26 +68,19 @@ public class ClientThread implements Runnable {
     public void run() {
         try {
             this.clientName = getClientNameFromNetwork();
-            Platform.runLater(new Runnable() {
+            Platform.runLater(() -> {
+                baseServer.clientNames.add(clientName + " - "
+                        + clientSocket.getRemoteSocketAddress());
 
-                @Override
-                public void run() {
-                    baseServer.clientNames.add(clientName + " - "
-                            + clientSocket.getRemoteSocketAddress());
-
-                    if (baseServer.clientNames.size() == baseServer.NUM_PLAYERS) {
-                        baseServer.closeSocket();
-                    }
-
-
+                if (baseServer.clientNames.size() == baseServer.NUM_PLAYERS) {
+                    baseServer.closeSocket();
                 }
 
+
             });
-            /**
-             * Reads input and determines what to do with it
-             */
+            /* Reads the input and determines what to do with it */
             Object inputToServer;
-            while (true) {
+            do {
                 inputToServer = incomingMessageReader.readObject();
                 //System.err.println(inputToServer);
                 if (inputToServer instanceof MonopolyModel) {
@@ -100,7 +93,7 @@ public class ClientThread implements Runnable {
                     writeToClient(inputToServer);
                 }
 
-            }
+            } while (true);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -100,27 +100,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * Main method
-     *
-     * @param args array of string
+     * Gets the list of players
+     * @return the player list
      */
-    public static void main(String[] args) {
-        /*Character[] playerList = new Character[]{new Character("Player1", Color.RED), new Character("Player2", Color.BLUE)};
-
-        //Add characters to the board
-
-
-        Game game = new Game(playerList);
-        Character curPlayer = playerList[0];
-        do {
-            Turn turn = new Turn(curPlayer, game.getBoard(), playerList);
-            curPlayer = game.getNextPlayer();
-
-        } while (!game.gameOver());
-
-        System.out.println(game.getWinner().getName() + " won the game");*/
-    }
-
     public Character[] getPlayerList() {
         return playerList;
     }

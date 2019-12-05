@@ -9,18 +9,18 @@
  * Time: 8:28 PM
  *
  * Project: csci205FinalProject
- * Package: Controller
+ * Package: MVC.Controller
  * Class: MainController
  *
  * Description:
  *
  * ****************************************
  */
-package Controller;
+package MVC.Controller;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
+import MVC.View.MainView;
 import Networking.client.Client;
-import View.MainView;
 
 public class MainController {
 
@@ -68,6 +68,13 @@ public class MainController {
 
     }
 
+    /**
+     * Constructor
+     *
+     * @param theModel the game model
+     * @param theView  view class for the graphics of the game
+     * @param client   the client of the game
+     */
     public MainController(MonopolyModel theModel, MainView theView, Client client) {
         this.theModel = theModel;
         this.theView = theView;
@@ -81,7 +88,7 @@ public class MainController {
 
     }
 
-
+    /*Getter methods */
     public MainView getTheView() {
         return theView;
     }
@@ -105,7 +112,7 @@ public class MainController {
     /**
      * Updates the model
      *
-     * @param theModel the new Model
+     * @param theModel the new MVC.Model
      */
     public void updateModel(MonopolyModel theModel) {
         this.theModel = theModel;

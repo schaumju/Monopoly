@@ -9,17 +9,17 @@
  * Time: 11:13 AM
  *
  * Project: csci205FinalProject
- * Package: View
+ * Package: MVC.View
  * Class: CommunityChestChanceCardsView
  *
  * Description:
  *
  * ****************************************
  */
-package View;
+package MVC.View;
 
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -27,7 +27,7 @@ import javafx.scene.text.TextAlignment;
 
 public class CardsView {
     /**
-     * model for the game
+     * Model for the game
      */
     private MonopolyModel theModel;
     /**
@@ -39,7 +39,7 @@ public class CardsView {
      * Constructor
      *
      * @param theModel model for the game
-     * @param mainView
+     * @param mainView the game view
      */
     public CardsView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;

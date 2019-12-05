@@ -34,49 +34,82 @@ import java.util.ArrayList;
  *  isBankrupt() - self explanatory
  */
 public class Character implements Serializable {
-    //Balance of the character
+    /**
+     * Starting balance of the player
+     */
     private static final int STARTING_BALANCE = 1500;
 
-    //Total board spaces
+    /**
+     * Total spaces on the board
+     */
     private static final int TOTAL_BOARD_SPACES = 40;
 
-    //Name of the character
+    /**
+     * Name of the character
+     */
     private String name;
 
-    //Color of their character
+    /**
+     * Color of the character
+     */
     private SerializableColor color;
 
-    //Place on board
+    /**
+     * Position on the board
+     */
     private int position;
 
-    //Railroads owned
+    /**
+     * Number of railroads owned
+     */
     private int numRailroads;
 
-    //Balance of the character
+    /**
+     * Balance of the player
+     */
     private int balance;
 
-    //Utilities owned
+    /**
+     * Number of utilities
+     */
     private int numUtilities;
 
-    //Num houses
+    /**
+     * Number of houses
+     */
     private int numHouses;
 
-    //Jailed?
+    /**
+     * Boolean if the player is in jail
+     */
     private boolean isInJail;
 
-    //Player id
+    /**
+     * Player id
+     */
     private int iD;
 
-    //Turns the player has been in jail for
+    /**
+     * Number of turns the player has been in jail
+     */
     private int turnsInJail;
 
-    //ArrayList of property objects that the player owns
+    /**
+     * ArrayList of property objects that the player owns
+     */
     private ArrayList<Property> ownedProperties;
-    // number of rolls in a row
+    /**
+     * Number of rolls in a row
+     */
     private int numRollsInRow;
 
-    public Character(String name, Color color)
-    {
+    /**
+     * Constructor
+     *
+     * @param name  the name of the player
+     * @param color the color of the player
+     */
+    public Character(String name, Color color) {
         this.name = name;
         this.color = new SerializableColor(color);
         this.position = 0;
@@ -123,7 +156,7 @@ public class Character implements Serializable {
     /**
      * Resets turnsInJail attribute to 0
      */
-    public void resetJailTurn()
+    private void resetJailTurn()
     {
         turnsInJail = 0;
     }
@@ -182,6 +215,7 @@ public class Character implements Serializable {
 
     /**
      * Adds a property
+     * @param prop The property
      */
     public void addProperty(Property prop)
     {
@@ -190,9 +224,9 @@ public class Character implements Serializable {
 
     /**
      * Remove a property
+     * @param prop The property
      */
-    public void removeProperty(Property prop)
-    {
+    public void removeProperty(Property prop) {
         if (ownedProperties.contains(prop)) {
             this.ownedProperties.remove(prop);
         } else {
@@ -200,7 +234,39 @@ public class Character implements Serializable {
         }
     }
 
-    //Add more methods here as needed
+    /**
+     * Allows a player to pay another player a set amount of monye
+     *
+     * @param player the player receiving the money
+     * @param amount the amount of money that is owed
+     */
+    public void payPlayer(Character player, int amount) {
+        if (this.getBalance() < amount) {
+            player.addToBalance(this.getBalance());
+            subtractFromBalance(this.getBalance());
+        } else {
+            player.addToBalance(amount);
+            subtractFromBalance(amount);
+        }
+
+    }
+
+    /**
+     * Checks to see if the Player has a Monopoly in the specific color
+     *
+     * @param propertyColor the color of the property being checked
+     * @return true if the player has a monopoly in the color and false otherwise
+     */
+    public boolean isMonopoly(PropertyColor propertyColor) {
+
+        int count = 0;
+        for (Property property : ownedProperties) {
+            if (property.getPropertyColor() == propertyColor) {
+                count++;
+            }
+        }
+        return count == propertyColor.getNumberOfProperties();
+    }
 
     /**
      * Setter methods
@@ -210,14 +276,27 @@ public class Character implements Serializable {
         this.position = position;
     }
 
-
     /**
      * Getter methods
      */
+
+    public int getNumRollsInRow() {
+        return numRollsInRow;
+    }
+
+    public void setNumRollsInRow(int numRollsInRow) {
+        this.numRollsInRow = numRollsInRow;
+    }
+
+    public int getID() {
+        return iD;
+    }
+
     public ArrayList<Property> getOwnedProperties()
     {
         return ownedProperties;
     }
+
     public int getTurnsInJail() {
         return turnsInJail;
     }
@@ -256,8 +335,16 @@ public class Character implements Serializable {
         return balance;
     }
 
-    public int getNumHouses()
-    {
+    /**
+     * Sets the id
+     *
+     * @param id the player's id
+     */
+    public void setID(int id) {
+        this.iD = id;
+    }
+
+    public int getNumHouses() {
         return numHouses;
     }
 
@@ -282,58 +369,5 @@ public class Character implements Serializable {
         this.numHouses += 1;
     }
 
-    /**
-     * Allows a player to pay another player a set amount of monye
-     *
-     * @param player the player receiving the money
-     * @param amount the amount of money that is owed
-     */
-    public void payPlayer(Character player, int amount) {
-        if (this.getBalance() < amount) {
-            player.addToBalance(this.getBalance());
-            subtractFromBalance(this.getBalance());
-        } else {
-            player.addToBalance(amount);
-            subtractFromBalance(amount);
-        }
 
-    }
-
-    public int getID() {
-        return iD;
-    }
-
-    /**
-     * Sets the id
-     *
-     * @param id the player's id
-     */
-    public void setID(int id) {
-        this.iD = id;
-    }
-
-    /**
-     * Checks to see if the Player has a Monopoly in the specific color
-     *
-     * @param propertyColor the color of the property being checked
-     * @return true if the player has a monopoly in the color and false otherwise
-     */
-    public boolean isMonopoly(PropertyColor propertyColor) {
-
-        int count = 0;
-        for (Property property : ownedProperties) {
-            if (property.getPropertyColor() == propertyColor) {
-                count++;
-            }
-        }
-        return count == propertyColor.getNumberOfProperties();
-    }
-
-    public int getNumRollsInRow() {
-        return numRollsInRow;
-    }
-
-    public void setNumRollsInRow(int numRollsInRow) {
-        this.numRollsInRow = numRollsInRow;
-    }
 }

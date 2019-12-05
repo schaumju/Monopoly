@@ -6,7 +6,6 @@ import Game.Spaces.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -37,9 +36,9 @@ public class Board implements Serializable {
      */
     private void sort() {
         // This may need to be reversed we will see
-        Comparator<Space> positionSort = (s1, s2) -> Integer.compare(s1.getPosition(),s2.getPosition());
-        Collections.sort(board, positionSort);
-        Collections.sort(buyableProperties,positionSort);
+        Comparator<Space> positionSort = Comparator.comparingInt(Space::getPosition);
+        board.sort(positionSort);
+        buyableProperties.sort(positionSort);
 
 
     }
@@ -205,14 +204,11 @@ public class Board implements Serializable {
          board.add(space);
     }
 
+    /* Getter methods */
     public ArrayList<Space> getBuyableProperties() {
         return buyableProperties;
     }
 
-    public static void main(String[] args) {
-        Board board = new Board();
-        board.getChanceDeck().draw();
-    }
 
     public ArrayList<Space> getBoard() {
         return board;

@@ -1,13 +1,13 @@
-package View;
+package MVC.View;
 
-import Model.MonopolyModel;
+import MVC.Model.MonopolyModel;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 
 /**
- * View for the GameLog
+ * MVC.View for the GameLog
  */
 public class LogView {
 
@@ -19,10 +19,21 @@ public class LogView {
      * The Main View
      */
     private MainView mainView;
-
+    /**
+     * The column number where the log is located on the screen
+     */
     private int column;
+    /**
+     * The label of the log
+     */
     private Label logLabel;
+    /**
+     * List of things in the log
+     */
     private ListView<String> logView;
+    /**
+     * Observable list of the log
+     */
     private ObservableList<String> logList;
 
 
@@ -30,7 +41,7 @@ public class LogView {
      * Constructor
      *
      * @param theModel the model of the game
-     * @param mainView
+     * @param mainView the game view
      */
     public LogView(MonopolyModel theModel, MainView mainView) {
         this.theModel = theModel;
@@ -59,5 +70,8 @@ public class LogView {
     public void updateLog() {
         logList = theModel.getLog().getLog();
         logView.setItems(logList);
+        logView.scrollTo(logList.get(logList.size() - 1));
     }
+
+
 }
