@@ -65,6 +65,10 @@ public class EndTurnController {
         });
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     /**
      * Updates the model
      *

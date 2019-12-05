@@ -40,7 +40,7 @@ public class BuyPropertyController {
      */
     private void handleBuyProperty() {
         theView.getPropertyView().getBuyPropertyButton().setOnMouseClicked(mouseEvent -> {
-            theController.getTheView().getTheModel().buyProperty(theModel.getGame().getBoard().getBoard().get(theModel.getCurPlayer().getPosition()));
+            theController.getEndTurnController().getClient().getTheModel().buyProperty(theModel.getGame().getBoard().getBoard().get(theModel.getCurPlayer().getPosition()));
             theView.getPropertyView().turnButtonOff();
             theView.getLogView().updateLog();
         });

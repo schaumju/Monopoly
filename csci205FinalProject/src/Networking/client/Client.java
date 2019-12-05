@@ -185,4 +185,8 @@ public class Client implements Runnable, Serializable {
     public MainView getTheView() {
         return theView;
     }
+
+    public MonopolyModel getTheModel() {
+        return theModel;
+    }
 }
