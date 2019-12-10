@@ -6,4 +6,5 @@ module csci205FinalProject {
 
     opens Networking.client;
     opens Networking.server;
+    opens Main;
 }
