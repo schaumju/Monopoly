@@ -109,7 +109,7 @@ public class Board implements Serializable {
         property = new Property(27, "Trax", PropertyColor.YELLOW, 260, new int[]{22, 110, 330, 800, 975, 1150}, 150);
         board.add(property);
         buyableProperties.add(property);
-        property = new Property(29, "Roberts", PropertyColor.YELLOW, 280, new int[]{24, 120, 360, 850, 1025, 1200}, 150);
+        property = new Property(29, "Robecrts", PropertyColor.YELLOW, 280, new int[]{24, 120, 360, 850, 1025, 1200}, 150);
         board.add(property);
         buyableProperties.add(property);
         property = new Property(31, "Off-campus housing", PropertyColor.GREEN, 300, new int[]{26, 130, 390, 900, 1100, 1275}, 200);
