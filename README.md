@@ -38,9 +38,7 @@ Package Structure:
             Board - Contains the constructor method for the Board object containing all the different property spaces (utilities, tax, properties, railraods, etc.)
             Character - Contains the constructor method for the Character object containing all the attributes of a player (numHouses, balance, position, name, etc.)
             Dice - Contains the constructor method for the Dice containing the ability to roll the dice and get the rolls
-            Game - Contains the constructor method for the Game object containing a list of players (Character objects), the Board object, and current player.
-            
-        MVC:
+            Game - Contains the constructor method for the Game object containing a list of players (Character objects), the Board object, and current playerMVC:
             Controller:
                 BoardController - Class that creates board popups and buttons
                 BuyPropertyController - Class that handles buying a property and updating the board 
