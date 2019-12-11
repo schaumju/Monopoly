@@ -135,7 +135,6 @@ public class Main extends Application {
             ClientApplication application = new ClientApplication();
             try {
                 primaryStage.close();
-                application.init();
                 application.start(primaryStage);
 
             } catch (Exception e) {
@@ -146,7 +145,7 @@ public class Main extends Application {
             ServerApplication application = new ServerApplication();
             try {
                 primaryStage.close();
-                application.init();
+
                 application.start(primaryStage);
             } catch (Exception e) {
                 e.printStackTrace();
